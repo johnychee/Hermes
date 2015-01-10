@@ -1,0 +1,53 @@
+﻿@using TestWebApp.Models;
+@using System.Collections;
+@model Dealer
+@{
+    ViewBag.Title = "Customer Group Details";
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Details</h4>
+    </div>
+    <div class="panel-body">
+        @using (@Html.BeginForm("Edit" + @Model.id, "Dealer", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label for="name_" class="col-md-1 control-label ui-sortable">Name:</label>
+                <div class="col-md-2 ui-sortable">
+                    @Html.TextBox("Name", Model.name_, new { @class = "form-control", disabled = "true" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="customersCount" class="col-md-1 control-label ui-sortable">Retailers:</label>
+                <div class="col-md-2 ui-sortable">
+                    <div class="list-group list-group-minor">
+                        @foreach (Retailer retailer in @Model.Retailers.OrderBy(r => r.name))
+                        {
+                            <div class="list-group-item">
+                                @Html.ActionLink(retailer.name, "Details", "User", new { @id = retailer.userId }, null)
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-1 control-label ui-sortable">Actions:</label>
+                <div class="col-md-4 ui-sortable">
+                    @if (current_user.webpages_Roles.SingleOrDefault(r => r.RoleName == "SuperUser") != null)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { @id = Model.id }, new { @class = "btn btn-primary" }) <span></span>
+                          @Html.ActionLink("Delete", "Delete", new { @id = Model.id }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure?');" })
+
+                    }
+                    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        }
+    </div>
+</div>

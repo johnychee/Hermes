@@ -1,0 +1,126 @@
+﻿@using TestWebApp.Models
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Ticket List";
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">@ViewBag.SubTitle</h4>
+    </div>
+  
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ticket Id</th>
+                        <th>Subject</th>
+                        <th>Status</th>
+                        <th>Response Time Remaining</th>
+                        <th>Fix Time Remote Remaining</th>
+                        <th>Fix Time Onsite Remaining</th>
+                        <th>Created at</th>
+                        <th>Created by</th>
+                        <th>Customer</th>
+                        <th>Group</th>
+                        <th>Solutionist</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "id", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "id", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "subject", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "subject", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "status", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "status", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "RT", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "RT", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "FT_remote", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "FT_remote", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "FT_onsite", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "FT_onsite", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "createdAt", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "createdAt", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "createdBy", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "createdBy", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "customer", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "customer", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "group", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "group", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                        <th>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "solutionist", "order", "asc")"><i class="fa fa-2x fa-angle-up"></i></a>
+                            <a href="@MyUrl.currentUrlChange(Request.QueryString, "order_by", "solutionist", "order", "desc")"><i class="fa fa-2x fa-angle-down"></i></a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Ticket ticket in (IPagedList<Ticket>)ViewBag.Tickets)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(ticket.ticketId, "Details", new { @id = ticket.id })</td>
+                            <td>@Html.ActionLink(ticket.subject, "Details", new { @id = ticket.id })</td>
+                            <td>@ticket.Status.name</td>
+                            <td>@(ticket.TicketSla.RT_realCompletedAt == null ? ticket.TicketSla.RTremaining_toString() : "Done")</td>
+                            <td>@(ticket.TicketSla.FT_realCompletedAt == null ? ticket.TicketSla.FTremaining_toString() : "Done")</td>
+                            <td>@(ticket.TicketSla.FT3lvl_realCompletedAt == null ? ticket.TicketSla.FT3lvlRemaining_toString() : "Done")</td>
+                            <td>@ticket.TimeAgo(@ticket.createdAt)</td>
+                            @if (ticket.CreatedBy_ == null)
+                            {
+                                <td>@Html.ActionLink(@ticket.Author.fullName, "Details/" + ticket.Author.id, "User", null, new { target = "_blank" })</td>
+                            }
+                            else
+                            {
+                                <td>@Html.ActionLink(@ticket.CreatedBy_.fullName, "Details/" + ticket.CreatedBy_.id, "User", null, new { target = "_blank" })</td>
+                            }
+                            <td>@Html.ActionLink(ticket.User.fullName, "Details/" + ticket.authorId, "User",null,new{target="_blank"})</td>
+                            @if(ticket.Group != null)
+                            { 
+                                <td>@Html.ActionLink(ticket.Group.name,"Details/"+ticket.groupId,"Group",null,new{target="_blank"})</td>
+                            }
+                            else
+                            { 
+                                <td>None</td>
+                            }
+                            @if (ticket.Solutionist_ != null)
+                            {
+                                <td>@Html.ActionLink(ticket.Solutionist_.fullName, "Details/" + ticket.solutionistId, "User",null,new{target="_blank"})</td>
+                            }
+                            else
+                            {
+                                <td>None</td>
+                            }
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <hr class="divider">
+
+            @Html.PagedListPager((IPagedList<Ticket>)ViewBag.Tickets, page => MyUrl.currentUrlChange(Request.QueryString, "page", page.ToString()))
+
+        </div>
+    </div>
+</div>

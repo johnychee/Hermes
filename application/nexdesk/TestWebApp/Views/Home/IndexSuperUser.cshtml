@@ -1,0 +1,87 @@
+﻿@using TestWebApp.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model HelpDeskEntities
+
+@{
+    ViewBag.Title = "Overview";
+    
+}
+<div class="row">
+    <div class="col-md-4">
+        <div class="widget widget-stats bg-green">
+            <div class="stats-icon"><i class="fa fa-file-text-o"></i></div>
+            <div class="stats-info">
+                <h4>New Tickets</h4>
+                <p>(@ViewBag.NewIssuesCount)</p>
+            </div>
+            <div class="stats-link">
+                <a href="@Url.Action("List_New", "Ticket")">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+            </div>
+
+            <ul class="list-group">
+                @foreach (Ticket ticket in (IPagedList<Ticket>)ViewBag.NewIssues)
+                {
+                    <li class="list-group-item">@Html.ActionLink(String.Format("{0} | {1} | {2}", ticket.ticketId, ticket.subject, ticket.TimeAgo(ticket.createdAt)), "Details/" + ticket.id, "Ticket")</li>
+                }
+            </ul>
+            @if (ViewBag.NewIssuesCount > 10)
+            {
+                @Html.PagedListPager((IPagedList<Ticket>)ViewBag.NewIssues, pageNew => Url.Action("Index/", new { pageNew, pageNotSolved = Request.QueryString["pageNotSolved"], pageAll = Request.QueryString["pageAll"] }))
+            }
+
+
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="widget widget-stats bg-blue">
+            <div class="stats-icon"><i class="fa fa-file-text-o"></i></div>
+            <div class="stats-info">
+                <h4>Not Solved Tickets</h4>
+                <p>(@ViewBag.NotSolvedCount)</p>
+            </div>
+            <div class="stats-link">
+                <a href="@Url.Action("List_notDone", "Ticket")">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+            </div>
+
+            <ul class="list-group">
+                @foreach (Ticket ticket in (IPagedList<Ticket>)ViewBag.NotSolved)
+                {
+                    <li class="list-group-item">@Html.ActionLink(String.Format("{0} | {1} | {2}", ticket.ticketId, ticket.subject, ticket.TimeAgo(ticket.createdAt)), "Details/" + ticket.id, "Ticket")</li>
+                }
+            </ul>
+            @if (ViewBag.NotSolvedCount > 10)
+            {
+                @Html.PagedListPager((IPagedList<Ticket>)ViewBag.NotSolved, pageNotDone => Url.Action("Index/", new { pageNotDone, pageNew = Request.QueryString["pageNew"], pageAll = Request.QueryString["pageAll"] }))
+            }
+
+
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="widget widget-stats bg-grey">
+            <div class="stats-icon"><i class="fa fa-file-text-o"></i></div>
+            <div class="stats-info">
+                <h4>All Tickets</h4>
+                <p>@ViewBag.allCount</p>
+            </div>
+            <div class="stats-link">
+                <a href="@Url.Action("Index", "Ticket")">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+            </div>
+
+            <ul class="list-group">
+                @foreach (Ticket ticket in (IPagedList<Ticket>)ViewBag.all)
+                {
+                    <li class="list-group-item">@Html.ActionLink(String.Format("{0} | {1} | {2}",ticket.ticketId, ticket.subject, ticket.TimeAgo(ticket.createdAt)), "Details/" + ticket.id, "Ticket")</li>
+                }
+            </ul>
+            @if (ViewBag.allCount > 10)
+            {
+                @Html.PagedListPager((IPagedList<Ticket>)ViewBag.all, pageAll => Url.Action("Index/", new { pageAll, pageNew = Request.QueryString["pageNew"], pageNotDone = Request.QueryString["pageNotDone"] }))
+            }
+
+        </div>
+    </div>
+</div>

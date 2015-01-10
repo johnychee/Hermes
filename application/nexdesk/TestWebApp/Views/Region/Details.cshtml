@@ -1,0 +1,56 @@
+﻿@using TestWebApp.Models;
+@using System.Collections;
+@model Region
+@{
+    ViewBag.Title = "Region Details";
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Details</h4>
+    </div>
+    <div class="panel-body">
+        @using (@Html.BeginForm("Edit"+@Model.id, "Region", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label for="name" class="col-md-2 control-label ui-sortable">Name:</label>
+                <div class="col-md-4 ui-sortable">
+                    @Html.TextBox("Name", Model.name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label ui-sortable">Response time in minutes:</label>
+                <div class="col-md-4 ui-sortable">
+                    @Html.TextBox("ResponseTimeInMinutes",Model.RT_minutes, new { type = "number", @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label ui-sortable">Fix time in minutes:</label>
+                <div class="col-md-4 ui-sortable">
+                    @Html.TextBox("FixedTimeInMinutes",Model.FT_minutes, new { type = "number", @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label ui-sortable">Utc time difference:</label>
+                <div class="col-md-4 ui-sortable">
+                    @Html.TextBox("UtcTimeDifference", Model.UTCtimeShift, new { type = "number", @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label ui-sortable">Actions:</label>
+                <div class="col-md-4 ui-sortable">
+                    @if (current_user.webpages_Roles.SingleOrDefault(r => r.RoleName == "SuperUser") != null)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { @id = Model.id }, new { @class = "btn btn-primary" })
+                        @(" ")
+                        @Html.ActionLink("Remove", "Remove", new { @id = Model.id }, new { @class = "btn btn-danger" })
+                    }
+                    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        }
+    </div>
+</div>

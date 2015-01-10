@@ -1,0 +1,255 @@
+﻿@*begin sidebar nav*@
+@using TestWebApp.Models
+@{
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
+}
+
+
+<ul class="nav">
+    <li class="nav-header">Navigation</li>
+    <li>
+        <a href="/"><i class="fa fa-newspaper-o"></i> <span>Overview</span></a>
+    </li>
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "TicketController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-file-o"></i>
+            <b class="caret pull-right"></b>
+            <span>Tickets</span>
+        </a>
+
+        <ul class="sub-menu">
+            <li>@Html.ActionLink("Create Tickets", "Create", "Ticket")</li>
+            @if(current_user.Retailer == null)
+            { 
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret pull-right"></b>
+                    Ticket Repository
+                </a>
+                <ul class="sub-menu">
+                    <li>@Html.ActionLink("All Tickets", "Index", "Ticket")</li>
+                    <li>@Html.ActionLink("Refused Tickets", "List_Refused", "Ticket")</li>
+                    <li>@Html.ActionLink("In Progress Tickets", "List_notDone", "Ticket")</li>
+                    <li>@Html.ActionLink("Solved Tickets", "List_Done", "Ticket")</li>
+                </ul>
+            </li>
+            }
+           
+            @if(Roles.IsUserInRole("Support") && current_user.webpages_Roles.FirstOrDefault(r=> r.level ==1) != null)
+            { 
+                <li>@Html.ActionLink("New Tickets", "List_New", "Ticket")</li>
+            }
+
+            @if (Roles.IsUserInRole("Support"))
+            { 
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret pull-right"></b>
+                    My Tickets
+                </a>
+                <ul class="sub-menu">
+                    <li>@Html.ActionLink("Accepted", "List_Accepted", "Ticket")</li>
+                    <li>@Html.ActionLink("Assigned to me", "List_Assigned_To_User", "Ticket")</li>
+                    <li>@Html.ActionLink("Solved by me", "List_Solved_By_Me", "Ticket")</li>
+                </ul>
+            </li>
+            }
+            @if (Roles.IsUserInRole("Support"))
+            { 
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret pull-right"></b>
+                    Groups Tickets
+                </a>
+                <ul class="sub-menu">
+                    <li>@Html.ActionLink("Assigned Tickets", "List_Assigned_To_Group", "Ticket")</li>
+                    <li>@Html.ActionLink("Accepted Tickets", "List_Assigned_To_Group_Accepted", "Ticket")</li>
+                    <li>@Html.ActionLink("Done Tickets", "List_Assigned_To_Group_Done", "Ticket")</li>
+                </ul>
+            </li>
+            }
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret pull-right"></b>
+                    Own Tickets
+                </a>
+                <ul class="sub-menu">
+                    @if(!Roles.IsUserInRole("Retailer"))
+                    { 
+                    <li>@Html.ActionLink("Created Tickets For Others", "List_Created_by", "Ticket")</li>
+                    }
+                    <li>@Html.ActionLink("My Requests", "List_Own_Created", "Ticket")</li>
+                    <li>@Html.ActionLink("My Solved Tickets", "List_My_Done", "Ticket")</li>
+                </ul>
+            </li>
+        </ul>
+
+@if (Roles.IsUserInRole("Support"))
+{
+
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "GroupController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-group"></i>
+            <b class="caret pull-right"></b>
+            <span>Groups</span>
+        </a>
+        <ul class="sub-menu">
+            <li>@Html.ActionLink("My Groups", "List_My_Groups", "Group")</li>
+            <li>@Html.ActionLink("All Groups", "Index", "Group")</li>
+               
+        </ul>
+    </li>
+}
+@if (Roles.IsUserInRole("SuperUser"))
+{ 
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "GroupController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-group"></i>
+            <b class="caret pull-right"></b>
+            <span>Groups</span>
+        </a>
+        <ul class="sub-menu">
+            
+            <li>@Html.ActionLink("Create Groups", "Create", "Group")</li>
+            <li>@Html.ActionLink("All Groups", "Index", "Group")</li>
+               
+        </ul>
+    </li>
+}
+
+@if (Roles.IsUserInRole("Support"))
+{
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "UserController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-user"></i>
+            <b class="caret pull-right"></b>
+            <span>Users</span>
+        </a>
+        <ul class="sub-menu">
+            <li>@Html.ActionLink("All Users", "Index", "User")</li>
+        </ul>
+    </li>
+}
+@if (Roles.IsUserInRole("SuperUser"))
+{
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "UserController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-user"></i>
+            <b class="caret pull-right"></b>
+            <span>Users</span>
+        </a>
+        <ul class="sub-menu">
+            <li>@Html.ActionLink("All Users", "Index", "User")</li>
+            <li>@Html.ActionLink("Create Users", "Create", "User")</li>
+
+        </ul>
+    </li>
+}
+
+
+    @if (Roles.IsUserInRole("SuperUser"))
+    {
+        <li class="has-sub @(ViewContext.Controller.GetType().Name == "ProductController" ? "active" : "")">
+            <a href="javascript:;">
+                <i class="fa fa-suitcase"></i>
+                <b class="caret pull-right"></b>
+                <span>Catalog</span>
+            </a>
+            <ul class="sub-menu">
+                <li>@Html.ActionLink("All Products", "Index", "Product")</li>
+                <li>@Html.ActionLink("Create Products", "Create", "Product")</li>
+            </ul>
+        </li>
+
+    }
+    else
+    {
+        <li class="has-sub @(ViewContext.Controller.GetType().Name == "ProductController" ? "active" : "")">
+            <a href="javascript:;">
+                <i class="fa fa-suitcase"></i>
+                <b class="caret pull-right"></b>
+                <span>Catalog</span>
+            </a>
+            <ul class="sub-menu">
+                <li>@Html.ActionLink("All Products", "Index", "Product")</li>
+            </ul>
+        </li>
+    }
+
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "RegionController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-circle"></i>
+            <b class="caret pull-right"></b>
+            <span>Regions</span>
+        </a>
+        <ul class="sub-menu">
+
+            <li>@Html.ActionLink("All Regions", "Index", "Region")</li>
+            @if(Roles.IsUserInRole("SuperUser"))
+            { 
+            <li>@Html.ActionLink("Create Regions", "Create", "Region")</li>
+            }
+        </ul>
+    </li>
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "WorkstationController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-laptop"></i>
+            <b class="caret pull-right"></b>
+            <span>Workstations</span>
+        </a>
+        <ul class="sub-menu">
+
+            <li>@Html.ActionLink("All Workstations", "Index", "Workstation")</li>
+            @if (Roles.IsUserInRole("SuperUser"))
+            {
+                <li>@Html.ActionLink("Create Workstations", "Create", "Workstation")</li>
+            }
+        </ul>
+    </li>
+
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "DealerController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-group"></i>
+            <b class="caret pull-right"></b>
+            <span>Customer Groups</span>
+        </a>
+        <ul class="sub-menu">
+            <li>@Html.ActionLink("All C.Groups", "Index", "Dealer")</li>
+            @if (Roles.IsUserInRole("SuperUser"))
+            {
+                <li>@Html.ActionLink("Create C.Groups", "Create", "Dealer")</li>
+            }
+        </ul>
+    </li>
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "ContactPersonController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-male"></i>
+            <b class="caret pull-right"></b>
+            <span>Contact Persons</span>
+        </a>
+        <ul class="sub-menu">
+            <li>@Html.ActionLink("All C.Persons", "Index", "ContactPerson")</li>
+            @if (Roles.IsUserInRole("SuperUser"))
+            {
+                <li>@Html.ActionLink("Create C.Person", "Create", "ContactPerson")</li>
+            }
+        </ul>
+    </li>
+
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "KnowledgeController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-book"></i>
+            <b class="caret pull-right"></b>
+            <span>Knowledge Base</span>
+        </a>
+        <ul class="sub-menu">
+
+            <li><a href="javascript:;">Known Issues</a></li>
+
+        </ul>
+    </li>
+
+    <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+</ul>
+@*end sidebar nav*@ 

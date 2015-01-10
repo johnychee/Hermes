@@ -1,0 +1,312 @@
+Template - New ticket created
+--------------------------------
+
+Subject: New ticket was created
+-------------------------------
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+or accept directly as request: {AcceptDirectlyAsRequestUrl}<![CDATA[<br/>]]>
+or as incident: {AcceptDirectlyAsIncidentUrl}
+
+-------------------------------------------
+
+Template - Accepted
+--------------------------------
+
+Subject: Ticket state change - Accepted
+-------------------------------
+You just accepted ticket with ID {TicketID}<![CDATA[<br/>]]>
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+
+-------------------------------------------
+
+Template - Assigned to group
+--------------------------------
+
+Subject: Ticket state change - Assigned to group
+-------------------------------
+To your group {GroupName} was assigned ticket with ID {TicketID}<![CDATA[<br/>]]>
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+or accept directly: {UrlToAcceptDirectly}<![CDATA[<br/>]]>
+-------------------------------------------
+
+Template - Assigned to user
+--------------------------------
+
+Subject: Ticket state change - Assigned to user
+-------------------------------
+Ticket with ID {TicketID}<![CDATA[<br/>]]> was assigned directly to You.
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+or accept directly: {UrlToAcceptDirectly}<![CDATA[<br/>]]>
+-------------------------------------------
+
+Template - Complaint
+--------------------------------
+
+Subject: Ticket state change - Complaint
+-------------------------------
+Ticket with ID {TicketID}<![CDATA[<br/>]]> was determined as bad solved by customer and was assigned to You
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+or accept directly: {UrlToAcceptDirectly}<![CDATA[<br/>]]>
+-------------------------------------------
+
+Template - Solved
+--------------------------------
+
+Subject: Ticket state change - Solved
+-------------------------------
+Ticket with ID {TicketID}<![CDATA[<br/>]]> was marked by You as solved
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Classification: {X}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+
+-------------------------------------------
+
+Template - New event
+--------------------------------
+
+Subject: New event on ticket ID {TicketID}
+-------------------------------
+New event happened on ticket ID {TicketID}<![CDATA[<br/>]]>
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+Type of event: {X}<![CDATA[<br/>]]>
+Aditional information: {X}<![CDATA[<br/>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+
+-------------------------------------------
+
+Template - SLA violation - RT
+--------------------------------
+
+Subject: SLA violation (RT) in {ResponseTime} hours - ID {TicketID}  
+-------------------------------
+Ticket with ID {TicketID} has only {RemainingHours} hours to SLA violation for Response Time
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+
+-------------------------------------------
+
+Template - SLA violation - RFT
+--------------------------------
+
+Subject: SLA violation (RFT) in {RemainingHours} hours - ID {TicketID}  
+-------------------------------
+Ticket with ID {TicketID} has only {RemainingHours} hours to SLA violation for Remote Fix Time
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+
+-------------------------------------------
+
+Template - SLA violation - OFT
+--------------------------------
+
+Subject: SLA violation (OFT) in {RemainingHours} hours - ID {TicketID}  
+-------------------------------
+Ticket with ID {TicketID} has only {RemainingHours} hours to SLA violation for Onsite Fix Time
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+HD time: {HDTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+
+-------------------------------------------
+
+Template - New ticket created for customer
+--------------------------------
+
+Subject: New ticket was created
+-------------------------------
+New ticket was created for issue You have recently reported. It was assigned with ID {TicketID}<![CDATA[<br/>]]>
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+
+-------------------------------------------
+
+Template - Ticket solved report
+--------------------------------
+
+Subject: ID {TicketID} - Your ticket was marked by solved
+-------------------------------
+Your ticket with ID {TicketID} was marked by solved by solutionist name {SolutionistName}
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+Solutionist: {Solutionist}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Classification: {X}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+
+-------------------------------------------
+
+Template - Ticket not solved
+--------------------------------
+
+Subject: ID {TicketID} - Your ticket expired without solution
+-------------------------------
+Your ticket's SLA with ID {TicketID} expired without solution
+
+ID:  {TicketID}<![CDATA[<br/>]]>
+Type: {Type}<![CDATA[<br/>]]>
+Solutionist: {Solutionist}<![CDATA[<br/>]]>
+Group: {Group}<![CDATA[<br/>]]>
+State: {State}<![CDATA[<br/>]]>
+Region: {Region}<![CDATA[<br/>]]>
+Local time: {LocalTime}<![CDATA[<br/>]]>
+Customer: {Customer}<![CDATA[<br/>]]>
+Product: {Product}<![CDATA[<br/>]]>
+Title: {Title}<![CDATA[<br/>]]>
+Description:<![CDATA[<br/>]]>
+<![CDATA[<p>{Description}</p>]]>
+
+For details click on following link: {DetailsUrl}<![CDATA[<br/>]]>
+
+-------------------------------------------

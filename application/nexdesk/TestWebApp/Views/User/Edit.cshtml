@@ -1,0 +1,346 @@
+﻿@using TestWebApp.Models;
+@using TestWebApp.Views.User.UserViewModel
+@model EditViewModel
+@{
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    //find user we r editing from Viewbag
+    int userId = Convert.ToInt32(ViewBag.userId);
+    User userEditing = hDesk.Users.SingleOrDefault(u => u.id == userId);
+    ViewBag.Title = "Edit User";
+
+    ViewBag.Parents = new LinkedList<KeyValuePair<string, string>>();
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("Users", "/User"));
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>(userEditing.username, "/User/Details/" + userEditing.id));
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("Edit", null));
+    User current_user = hDesk.Users.SingleOrDefault(u => u.username == WebSecurity.CurrentUserName);
+    bool isCurrentUserSuperUser;
+    if (current_user.webpages_Roles.SingleOrDefault(r => r.RoleName == "SuperUser") != null)
+    {
+        isCurrentUserSuperUser = true;
+    }
+    else
+    {
+        isCurrentUserSuperUser = false;
+    }
+    
+
+
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#groups').modalSelection({
+            'url': '@Url.Action("getFiltered", "Group")',
+            'filters': {
+                'level': [{ 'id': '1', 'name': 'Level 1' },
+                          { 'id': '2', 'name': 'Level 2' },
+                          { 'id': '3', 'name': 'Level 3' },
+                          { 'id': '4', 'name': 'Level 4' }]
+            },
+            'resultTitle': 'Support groups',
+            'resultName': 'groups',
+            'multipleSelect': true,
+            'startValue': [@foreach(Group group in userEditing.Groups)
+                           {
+                               @Html.Raw(string.Format("['{0}', '{1}'], ", group.id, group.name))
+                           }
+                          ]
+        });
+    });
+</script>
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">@userEditing.username</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+        @if(userEditing.Solutionist != null)//if current user is a solutionist ==> SHOW THIS
+        { 
+        using (@Html.BeginForm("Edit", "User", new { @id = userEditing.id }, FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">First Name:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(model => model.eSolutionistViewModel.FirstName, new {@Value = userEditing.Solutionist.FirstName,@class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">Last Name:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(model => model.eSolutionistViewModel.LastName, new { @Value = userEditing.Solutionist.LastName,@class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">Company:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.DropDownListFor(model => model.eSolutionistViewModel.companyId, Company.toSelectList(userEditing), "Choose Company", new { @Value = userEditing.Solutionist.companyId,@class = "form-control" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">Username:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(model => model.eSolutionistViewModel.username, new { @Value = userEditing.username,@class = "form-control" })
+                </div>
+            </div>
+            if (Roles.IsUserInRole("SuperUser") && userEditing.webpages_Roles.SingleOrDefault(r=>r.RoleName == "SuperUser") == null)
+            {
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label ui-sortable">Generate Password:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.ActionLink("Generate Password Token", "GeneratePassToken", "User", new { @UserName = userEditing.username}, new { @class = "btn btn-success" })
+                    </div>
+                </div>
+           }
+           else
+           {
+            <div class="form-group">
+                <label for="OldPasswod" class="col-md-3 control-label ui-sortable">Old Password:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.PasswordFor(model => model.eSolutionistViewModel.OldPassword, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="NewPasswod" class="col-md-3 control-label ui-sortable">New Password:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.PasswordFor(model => model.eSolutionistViewModel.NewPassword, new { @class = "form-control" })
+                </div>
+            </div>
+           }
+
+
+            <div class="form-group">
+                <label for="role" class="col-md-3 control-label ui-sortable">Role:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBox("role", userEditing.webpages_Roles.First().fullname, new { @class = "form-control", @disabled = "true" })
+                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="regionId" class="col-md-3 control-label ui-sortable">Region:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.DropDownListFor(model => model.eSolutionistViewModel.regionId, Region.toSelectList(hDesk,userEditing), "Choose Region", new {@class = "form-control" })
+                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="regionId" class="col-md-3 control-label ui-sortable">TeamViewer Id:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(model => model.eSolutionistViewModel.teamViewerId, new { @Value = userEditing.Solutionist.teamviewerID,@class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">Phone:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(model => model.eSolutionistViewModel.phone, new { @Value = userEditing.phone,@class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">Email:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(model => model.eSolutionistViewModel.email, new { @Value = userEditing.email,@class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="profilePictureUrl" class="col-md-3 control-label ui-sortable">Avatar:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBox("attachedFile", "", new { @class = "form-control", type = "file" })
+                </div>
+            </div>
+
+            if (isCurrentUserSuperUser)//we check if the current user is SUperUser,because only superuser can assign user to groups
+            {
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">Support Groups:</label>
+                <div class="col-md-9 ui-sortable" id="groups">
+                </div>
+            </div>
+            }//End if
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">Actions:</label>
+                <div class="col-md-9 ui-sortable">
+                    <button class="btn btn-primary" name="Submit" value="UpdateSolutionist">Update</button>
+                    @Html.ActionLink("Back", "Details", new { @id = userEditing.id }, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        }
+        }
+        else //if user is a retailer show this
+        {
+            using (@Html.BeginForm("Edit", "User", new { @id = userEditing.id }, FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label ui-sortable">Name:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.TextBoxFor(model => model.eRetailerViewModel.Name, new { @Value = userEditing.Retailer.name, @class = "form-control" })
+                    </div>
+                </div>
+
+            
+            
+              <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">Username:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(model => model.eRetailerViewModel.username, new { @Value = userEditing.username,@class = "form-control" })
+                </div>
+            </div>
+
+                if (Roles.IsUserInRole("SuperUser") && userEditing.webpages_Roles.SingleOrDefault(r=>r.RoleName == "SuperUser") == null)
+                {
+                    <div class="form-group">
+                        <label for="name" class="col-md-3 control-label ui-sortable">Generate Password:</label>
+                        <div class="col-md-9 ui-sortable">
+                            @Html.ActionLink("Generate Password Token", "GeneratePassToken", "User",  new { @UserName = userEditing.username}, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                }
+                else
+                {
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">Old Password:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.PasswordFor(model => model.eRetailerViewModel.OldPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label ui-sortable">New Password:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.PasswordFor(model => model.eRetailerViewModel.NewPassword, new { @class = "form-control" })
+                </div>
+            </div>
+           }
+                <div class="form-group">
+                    <label for="role" class="col-md-3 control-label ui-sortable">Role:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.TextBox("role", userEditing.webpages_Roles.First().RoleName, new { @class = "form-control", @disabled = "true" })
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label ui-sortable">Customer Group:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.DropDownListFor(model => model.eRetailerViewModel.dealerId, Dealer.toSelectList(userEditing), "Choose C.Group", new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label ui-sortable">Workstation:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.DropDownListFor(model => model.eRetailerViewModel.workStationId, Workstation.toSelectList(userEditing), "Choose Workstation", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                
+
+                <div class="form-group">
+                    <label for="regionId" class="col-md-3 control-label ui-sortable">Region:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.DropDownListFor(model => model.eRetailerViewModel.regionId, Region.toSelectList(hDesk, userEditing), "Choose Region", new { @class = "form-control" })
+                    </div>
+                </div>
+              
+                  <div class="form-group">
+                    <label for="regionId" class="col-md-3 control-label ui-sortable">City:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.TextBoxFor(model => model.eRetailerViewModel.City, new { @Value = userEditing.Retailer.city, @class = "form-control" })
+                    </div>
+                </div>
+            
+                  <div class="form-group">
+                    <label for="address" class="col-md-3 control-label ui-sortable">Address:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.TextBoxFor(model => model.eRetailerViewModel.address, new { @Value = userEditing.Retailer.adress, @class = "form-control" })
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="zipcode" class="col-md-3 control-label ui-sortable">Zip Code:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.TextBoxFor(model => model.eRetailerViewModel.zipcode, new { @Value = userEditing.Retailer.zipcode, @class = "form-control" })
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label ui-sortable">Contact Person:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.DropDownListFor(model => model.eRetailerViewModel.contactId, Contact.toSelectList(userEditing), "Choose Person", new { @class = "form-control" })
+                    </div>
+                </div>
+            
+                  <div class="form-group">
+                    <label for="phone" class="col-md-3 control-label ui-sortable">Phone:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.TextBoxFor(model => model.eRetailerViewModel.phone, new { @Value = userEditing.phone, @class = "form-control" })
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="email" class="col-md-3 control-label ui-sortable">Email:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.TextBoxFor(model => model.eRetailerViewModel.email, new { @Value = userEditing.email, @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="profilePictureUrl" class="col-md-3 control-label ui-sortable">Avatar:</label>
+                    <div class="col-md-9 ui-sortable">
+                        @Html.TextBox("attachedFile", "", new { @class = "form-control", type = "file" })
+                    </div>
+                </div>
+
+                if (isCurrentUserSuperUser && userEditing.Solutionist != null)//we check if the current user is SUperUser,because only superuser can assign user to groups
+                {
+                    <div class="form-group">
+                        <label for="name" class="col-md-3 control-label ui-sortable">Support Groups:</label>
+                        <div class="col-md-9 ui-sortable">
+                            <table id="new-group" class="table">
+                                <tr>
+                                    <td>@Html.TextBox("Groups", "", new { id = "txtGroups", @class = "form-control" })</td>
+                                    <td><div id="btn-add" class="btn btn-primary">Add Group</div></td>
+                                </tr>
+                                @foreach (Group group in userEditing.Groups)
+                                {
+                                    <tr id="tr-@group.name.Replace(' ', '_')">
+                                        <td>@group.name</td>
+                                        <td><div class="btn btn-danger">Remove</div><input type="hidden" name="group_@group.name.Replace(' ', '_')" value="@group.name.Replace(' ', '_')" /></td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                }//End if
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label ui-sortable">Actions:</label>
+                    <div class="col-md-9 ui-sortable">
+
+                        <button class="btn btn-primary" name="Submit" value="UpdateRetailer">Update</button>
+                        @Html.ActionLink("Back", "Details", new { @id = userEditing.id }, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            }
+        }
+         </div>
+
+            <div class="col-md-6" style="margin-left:auto;margin-right:auto; text-align:center; margin-top:60px">
+                @if(userEditing.profilePictureUrl != null)
+                { 
+               <img class="img-thumbnail img-responsive" src="@userEditing.profilePictureUrl" width="300" height="300" />
+                }
+                else
+                {
+                    <img class="img-thumbnail img-responsive" src="~/assets/img/user-default.png" width="300" height="300" />
+
+                }
+            </div>
+            </div>
+    </div>
+</div>

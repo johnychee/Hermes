@@ -1,0 +1,65 @@
+﻿@using System.Collections
+@using TestWebApp.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Founded Tickets</h4>
+    </div>
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Status</th>
+                        <th>Response Time Remaining</th>
+                        <th>Fix Time Remote Remaining</th>
+                        <th>Fix Time Onsite Remaining</th>
+                        <th>Created at</th>
+                        <th>Author</th>
+                        <th>Group</th>
+                        <th>Solutionist</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Ticket ticket in ViewBag.FoundedTickets)
+                    {
+                        TicketSla tSla = ticket.TicketSlas.FirstOrDefault();
+                        <tr>
+                            <td>@Html.ActionLink(ticket.subject, "Details/"+ticket.id, "Ticket")</td>
+                            <td>@ticket.Status.name</td>
+                            <td>@(tSla.RT_realCompletedAt == null ? tSla.RTremaining_toString() : "Done")</td>
+                            <td>@(tSla.FT_realCompletedAt == null ? tSla.FTremaining_toString() : "Done")</td>
+                            <td>@(tSla.FT3lvl_realCompletedAt == null ? tSla.FT3lvlRemaining_toString() : "Done")</td>
+                            <td>@ticket.createdAt.ToLocalTime().ToShortTimeString()</td>
+                            <td>@Html.ActionLink(ticket.User.username, "Details/" + ticket.authorId, "User", null, new { target = "_blank" })</td>
+                            @if (ticket.Group != null)
+                            {
+                                <td>@Html.ActionLink(ticket.Group.name, "Details/" + ticket.groupId, "Group", null, new { target = "_blank" })</td>
+                            }
+                            else
+                            {
+                                <td>None</td>
+                            }
+                            @if (ticket.Solutionist_ != null)
+                            {
+                                <td>@Html.ActionLink(ticket.Solutionist_.username, "Details/" + ticket.solutionistId, "User", null, new { target = "_blank" })</td>
+                            }
+                            else
+                            {
+                                <td>None</td>
+                            }
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

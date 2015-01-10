@@ -1,0 +1,67 @@
+﻿@using TestWebApp.Models
+@model Ticket
+<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+ //Autocomplete jquery.
+    $(function(){
+        $("#txtUser").autocomplete({
+            source: '@Url.Action("GetSupportersInGroup")'
+        });
+
+    });
+</script>
+@{
+    ViewBag.Title = "Transmit ticket";
+}
+@if (ViewBag.IsError == true) //if there is error => then show this panel
+{
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Message</h4>
+        </div>
+        <div class="panel-body">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Actions</h4>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            
+            <table class="table">
+                <tr>
+                    <td>
+                        <label>Send this ticket to: </label>
+                    </td>
+                    <td>
+                        @Html.TextBox("UserName", null, new { id= "txtUser"})
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Reason: </label>
+                    </td>
+                    <td>
+                        
+                        @Html.TextArea("Reason", "", 3, 2, new { @class = "form-control"})
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="btn btn-success">Send ticket</button>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+     

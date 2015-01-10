@@ -1,0 +1,78 @@
+﻿@using TestWebApp.Models;
+@model Product
+@{
+    ViewBag.Title = "Create New Product";
+
+    ViewBag.Parents = new LinkedList<KeyValuePair<string, string>>();
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("List", "/Product"));
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("New", null));
+    
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    List<SelectListItem> categories = new List<SelectListItem>();
+    foreach(ProductCategory category in hDesk.ProductCategories)
+    {
+        categories.Add(new SelectListItem() { Text = category.name, Value = category.id.ToString() });
+    }
+}
+@if (ViewBag.IsError == true) //if there is error => then show this panel
+{
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Message</h4>
+        </div>
+        <div class="panel-body">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+}
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">New Product</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+        <div class="col-md-6">
+        @using (@Html.BeginForm("Create", "Product", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label for="name_" class="col-md-3 control-label ui-sortable">Name:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(p => p.name_, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="CategoryId_" class="col-md-3 control-label ui-sortable">Category:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.DropDownListFor(p => p.CategoryId_, categories, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description_" class="col-md-3 control-label ui-sortable">Description:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextAreaFor(p => p.description_, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Garant_" class="col-md-3 control-label ui-sortable">Garant:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(p => p.garant_, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Supplier_" class="col-md-3 control-label ui-sortable">Supplier:</label>
+                <div class="col-md-9 ui-sortable">
+                    @Html.TextBoxFor(p => p.supplier_, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label ui-sortable">Action:</label>
+                <div class="col-md-9 ui-sortable">
+                    <button class="btn btn-primary">Create</button>
+                    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        }
+            </div>
+        </div>
+    </div>
+</div>

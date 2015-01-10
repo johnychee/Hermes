@@ -1,2 +1,4 @@
-# Hermes
-škola
+Hermes
+=======
+
+Simple repository

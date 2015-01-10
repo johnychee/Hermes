@@ -1,0 +1,50 @@
+﻿@using TestWebApp.Models
+@model Ticket
+@{
+    ViewBag.Title = "Change Ticket Type";
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Change type</h4>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table">
+                @using(Html.BeginForm("ChangeType","Ticket",new{id = Model.id},FormMethod.Post))
+                { 
+                <tr>
+                    <td>
+                        <label>Ticket Id</label>
+                    </td>
+                    <td>@Html.ActionLink(@Model.ticketId,"Details/"+@Model.id,"Ticket")</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Change to: </label>
+                    </td>
+                    <td>
+                        @Html.DropDownList("Type", TicketType.all_toSelectList(Model, hDesk), "Choose type", new { @class = "form-control" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Reason: </label>
+                    </td>
+                    <td>
+
+                        @Html.TextArea("Reason", "", 3, 2, new { @class = "form-control" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="btn btn-success">Change type</button>
+                    </td>
+                    <td></td>
+                </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

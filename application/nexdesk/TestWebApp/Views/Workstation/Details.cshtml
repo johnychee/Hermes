@@ -1,0 +1,55 @@
+﻿@using TestWebApp.Models;
+@using System.Collections;
+@model Workstation
+@{
+    ViewBag.Title = "Workstation Details";
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Details</h4>
+    </div>
+    <div class="panel-body">
+        @using (@Html.BeginForm("Edit" + @Model.id, "Workstation", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label for="name" class="col-md-1 control-label ui-sortable">Name:</label>
+                <div class="col-md-2 ui-sortable">
+                    @Html.TextBox("Name", Model.wsName, new { @class = "form-control",disabled="true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label ui-sortable">Owner:</label>
+                <div class="col-md-2 ui-sortable">
+                    @Html.TextBox("Owner", Model.wsOwner, new { @class = "form-control", disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label ui-sortable">Manufacturer:</label>
+                <div class="col-md-2 ui-sortable">
+                    @Html.TextBox("Manufacturer", Model.wsManufacturer, new { @class = "form-control", disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label ui-sortable">Operating System:</label>
+                <div class="col-md-2 ui-sortable">
+                    @Html.TextBox("OS", Model.osType, new { @class = "form-control", disabled = "true" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-1 control-label ui-sortable">Actions:</label>
+                <div class="col-md-4 ui-sortable">
+                    @if (current_user.webpages_Roles.SingleOrDefault(r => r.RoleName == "SuperUser") != null)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { @id = Model.id }, new { @class = "btn btn-primary" })<span></span>
+                        @Html.ActionLink("Delete", "Delete", new { @id = Model.id }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure?');"})
+                    }
+                    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        }
+    </div>
+</div>

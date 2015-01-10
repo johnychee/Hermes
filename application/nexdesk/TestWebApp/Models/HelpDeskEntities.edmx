@@ -1,0 +1,2107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="nexDeskDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ticketId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="500" />
+          <Property Name="url" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="isVisible" Type="bit" />
+          <Property Name="uploader_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="500" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CustomPreSlaExpirationNotificationsTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userSettingsId" Type="int" Nullable="false" />
+          <Property Name="minutesBeforeSlaExpires" Type="int" Nullable="false" />
+          <Property Name="notificationTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dealers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="level" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups_Users">
+          <Key>
+            <PropertyRef Name="groupId" />
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="groupId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HistoryActions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="OwnerId" Type="int" Nullable="false" />
+          <Property Name="CreatorId" Type="int" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="TicketId" Type="int" />
+          <Property Name="Readed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationsTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductCategories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="topId" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="garant" Type="nvarchar" MaxLength="50" />
+          <Property Name="supplier" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RT_minutes" Type="int" Nullable="false" />
+          <Property Name="FT_minutes" Type="int" Nullable="false" />
+          <Property Name="UTCtimeShift" Type="float" Nullable="false" />
+          <Property Name="timeZoneId" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Retailers">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="dealerId" Type="int" />
+          <Property Name="wsId" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="adress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="zipcode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="contactId" Type="int" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="emailNotification" Type="bit" Nullable="false" />
+          <Property Name="regularEmailsNotification" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Solutionists">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="companyId" Type="int" />
+          <Property Name="teamviewerID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketHistories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ticketId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="actionId" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="300" />
+          <Property Name="reason" Type="nchar" MaxLength="700" />
+        </EntityType>
+        <EntityType Name="TicketPosts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ticketId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" Nullable="false" />
+          <Property Name="isVisible" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ticketId" Type="nvarchar" MaxLength="20" />
+          <Property Name="authorId" Type="int" Nullable="false" />
+          <Property Name="createdByUserId" Type="int" Nullable="false" />
+          <Property Name="solutionistId" Type="int" />
+          <Property Name="groupId" Type="int" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="int" />
+          <Property Name="subject" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="1000" />
+          <Property Name="createdAt" Type="datetime" Nullable="false" />
+          <Property Name="completedAt" Type="datetime" />
+          <Property Name="typeId" Type="int" />
+        </EntityType>
+        <EntityType Name="TicketSla">
+          <Key>
+            <PropertyRef Name="ticketId" />
+          </Key>
+          <Property Name="ticketId" Type="int" Nullable="false" />
+          <Property Name="startAt" Type="datetime" />
+          <Property Name="RT_expiresAt" Type="datetime" />
+          <Property Name="RT_realCompletedAt" Type="datetime" />
+          <Property Name="FT_expiresAt" Type="datetime" />
+          <Property Name="FT_realCompletedAt" Type="datetime" />
+          <Property Name="FT_fakeCompletedAt" Type="datetime" />
+          <Property Name="FT_remainingSec" Type="int" />
+          <Property Name="FT3lvl_expiresAt" Type="datetime" />
+          <Property Name="FT3lvl_realCompletedAt" Type="datetime" />
+          <Property Name="FT3lvl_fakeCompletedAt" Type="datetime" />
+          <Property Name="FT3lvl_remainingSec" Type="int" />
+        </EntityType>
+        <EntityType Name="TicketTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="regionId" Type="int" Nullable="false" />
+          <Property Name="profilePictureUrl" Type="nvarchar" MaxLength="300" />
+          <Property Name="isSolutionist" Type="bit" Nullable="false" />
+          <Property Name="isSystem" Type="bit" Nullable="false" />
+          <Property Name="isPasswordConfirmed" Type="bit" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" Nullable="false" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="level" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workstations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wsName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="wsOwner" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="wsManufacturer" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="osType" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Attachments_ToTickets">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="1" />
+          <End Role="Attachments" Type="Self.Attachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attachments">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attachments_ToUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Attachments" Type="Self.Attachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attachments">
+              <PropertyRef Name="uploader_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomPreSlaExpirationNotifications_to_UserSetting">
+          <End Role="Settings" Type="Self.Settings" Multiplicity="1" />
+          <End Role="CustomPreSlaExpirationNotificationsTable" Type="Self.CustomPreSlaExpirationNotificationsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Settings">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="CustomPreSlaExpirationNotificationsTable">
+              <PropertyRef Name="userSettingsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Solutionists_ToGroups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Groups_Users" Type="Self.Groups_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Groups_Users">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Solutionists_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Groups_Users" Type="Self.Groups_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Groups_Users">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_To_Creator">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_To_NotificationType">
+          <End Role="NotificationsTypes" Type="Self.NotificationsTypes" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotificationsTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="NotificationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_To_Owner">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_To_Ticket">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategories_ToItself">
+          <End Role="ProductCategories" Type="Self.ProductCategories" Multiplicity="0..1" />
+          <End Role="ProductCategories1" Type="Self.ProductCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductCategories1">
+              <PropertyRef Name="topId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ToProductCategories">
+          <End Role="ProductCategories" Type="Self.ProductCategories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retailers_Contacts">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="0..1" />
+          <End Role="Retailers" Type="Self.Retailers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Retailers">
+              <PropertyRef Name="contactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retailers_Dealers">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1" />
+          <End Role="Retailers" Type="Self.Retailers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Retailers">
+              <PropertyRef Name="dealerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retailers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Retailers" Type="Self.Retailers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Retailers">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retailers_Workstations">
+          <End Role="Workstations" Type="Self.Workstations" Multiplicity="0..1" />
+          <End Role="Retailers" Type="Self.Retailers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workstations">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Retailers">
+              <PropertyRef Name="wsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settings_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Settings" Type="Self.Settings" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Settings">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solutionists_ToCompanies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="0..1" />
+          <End Role="Solutionists" Type="Self.Solutionists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Solutionists">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solutionists_ToUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Solutionists" Type="Self.Solutionists" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Solutionists">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketHistories_ToHistoryActions">
+          <End Role="HistoryActions" Type="Self.HistoryActions" Multiplicity="1" />
+          <End Role="TicketHistories" Type="Self.TicketHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HistoryActions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketHistories">
+              <PropertyRef Name="actionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketHistories_ToTickets">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="1" />
+          <End Role="TicketHistories" Type="Self.TicketHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketHistories">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketHistories_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="TicketHistories" Type="Self.TicketHistories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketHistories">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPosts_ToTickets">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="1" />
+          <End Role="TicketPosts" Type="Self.TicketPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketPosts">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPosts_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="TicketPosts" Type="Self.TicketPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketPosts">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToAuthor">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="authorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToCreatedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="createdByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToGroups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToSolutionist">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="solutionistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToStatus">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToTicketTypes">
+          <End Role="TicketTypes" Type="Self.TicketTypes" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketSla_ToTickets">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="1" />
+          <End Role="TicketSla" Type="Self.TicketSla" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketSla">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_ToRegions">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="regionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_Membership_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="webpages_Membership" Type="Self.webpages_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="webpages_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="nexDeskDbModelStoreContainer">
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomPreSlaExpirationNotificationsTable" EntityType="Self.CustomPreSlaExpirationNotificationsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dealers" EntityType="Self.Dealers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups_Users" EntityType="Self.Groups_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryActions" EntityType="Self.HistoryActions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotificationsTypes" EntityType="Self.NotificationsTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Retailers" EntityType="Self.Retailers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solutionists" EntityType="Self.Solutionists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketHistories" EntityType="Self.TicketHistories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketPosts" EntityType="Self.TicketPosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketSla" EntityType="Self.TicketSla" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketTypes" EntityType="Self.TicketTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workstations" EntityType="Self.Workstations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Attachments_ToTickets" Association="Self.FK_Attachments_ToTickets">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="Attachments" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attachments_ToUser" Association="Self.FK_Attachments_ToUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Attachments" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomPreSlaExpirationNotifications_to_UserSetting" Association="Self.FK_CustomPreSlaExpirationNotifications_to_UserSetting">
+            <End Role="Settings" EntitySet="Settings" />
+            <End Role="CustomPreSlaExpirationNotificationsTable" EntitySet="CustomPreSlaExpirationNotificationsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Solutionists_ToGroups" Association="Self.FK_Groups_Solutionists_ToGroups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Groups_Users" EntitySet="Groups_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Solutionists_ToUsers" Association="Self.FK_Groups_Solutionists_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Groups_Users" EntitySet="Groups_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_To_Creator" Association="Self.FK_Notifications_To_Creator">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_To_NotificationType" Association="Self.FK_Notifications_To_NotificationType">
+            <End Role="NotificationsTypes" EntitySet="NotificationsTypes" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_To_Owner" Association="Self.FK_Notifications_To_Owner">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_To_Ticket" Association="Self.FK_Notifications_To_Ticket">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategories_ToItself" Association="Self.FK_ProductCategories_ToItself">
+            <End Role="ProductCategories" EntitySet="ProductCategories" />
+            <End Role="ProductCategories1" EntitySet="ProductCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ToProductCategories" Association="Self.FK_Products_ToProductCategories">
+            <End Role="ProductCategories" EntitySet="ProductCategories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retailers_Contacts" Association="Self.FK_Retailers_Contacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Retailers" EntitySet="Retailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retailers_Dealers" Association="Self.FK_Retailers_Dealers">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Retailers" EntitySet="Retailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retailers_Users" Association="Self.FK_Retailers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Retailers" EntitySet="Retailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retailers_Workstations" Association="Self.FK_Retailers_Workstations">
+            <End Role="Workstations" EntitySet="Workstations" />
+            <End Role="Retailers" EntitySet="Retailers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settings_ToUsers" Association="Self.FK_Settings_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Settings" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solutionists_ToCompanies" Association="Self.FK_Solutionists_ToCompanies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Solutionists" EntitySet="Solutionists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solutionists_ToUser" Association="Self.FK_Solutionists_ToUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Solutionists" EntitySet="Solutionists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketHistories_ToHistoryActions" Association="Self.FK_TicketHistories_ToHistoryActions">
+            <End Role="HistoryActions" EntitySet="HistoryActions" />
+            <End Role="TicketHistories" EntitySet="TicketHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketHistories_ToTickets" Association="Self.FK_TicketHistories_ToTickets">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="TicketHistories" EntitySet="TicketHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketHistories_ToUsers" Association="Self.FK_TicketHistories_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TicketHistories" EntitySet="TicketHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPosts_ToTickets" Association="Self.FK_TicketPosts_ToTickets">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="TicketPosts" EntitySet="TicketPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPosts_ToUsers" Association="Self.FK_TicketPosts_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TicketPosts" EntitySet="TicketPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToAuthor" Association="Self.FK_Tickets_ToAuthor">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToCreatedBy" Association="Self.FK_Tickets_ToCreatedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToGroups" Association="Self.FK_Tickets_ToGroups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToProducts" Association="Self.FK_Tickets_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToSolutionist" Association="Self.FK_Tickets_ToSolutionist">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToStatus" Association="Self.FK_Tickets_ToStatus">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToTicketTypes" Association="Self.FK_Tickets_ToTicketTypes">
+            <End Role="TicketTypes" EntitySet="TicketTypes" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketSla_ToTickets" Association="Self.FK_TicketSla_ToTickets">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="TicketSla" EntitySet="TicketSla" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_ToRegions" Association="Self.FK_Users_ToRegions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_Membership_ToUsers" Association="Self.FK_webpages_Membership_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="webpages_Membership" EntitySet="webpages_Membership" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="nexDeskDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HelpDeskEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attachments" EntityType="nexDeskDbModel.Attachment" />
+          <EntitySet Name="Companies" EntityType="nexDeskDbModel.Company" />
+          <EntitySet Name="Contacts" EntityType="nexDeskDbModel.Contact" />
+          <EntitySet Name="CustomPreSlaExpirationNotificationsTables" EntityType="nexDeskDbModel.CustomPreSlaExpirationNotificationsTable" />
+          <EntitySet Name="Dealers" EntityType="nexDeskDbModel.Dealer" />
+          <EntitySet Name="Groups" EntityType="nexDeskDbModel.Group" />
+          <EntitySet Name="HistoryActions" EntityType="nexDeskDbModel.HistoryAction" />
+          <EntitySet Name="Notifications" EntityType="nexDeskDbModel.Notification" />
+          <EntitySet Name="NotificationsTypes" EntityType="nexDeskDbModel.NotificationsType" />
+          <EntitySet Name="ProductCategories" EntityType="nexDeskDbModel.ProductCategory" />
+          <EntitySet Name="Products" EntityType="nexDeskDbModel.Product" />
+          <EntitySet Name="Regions" EntityType="nexDeskDbModel.Region" />
+          <EntitySet Name="Retailers" EntityType="nexDeskDbModel.Retailer" />
+          <EntitySet Name="Settings" EntityType="nexDeskDbModel.Setting" />
+          <EntitySet Name="Solutionists" EntityType="nexDeskDbModel.Solutionist" />
+          <EntitySet Name="Status" EntityType="nexDeskDbModel.Status" />
+          <EntitySet Name="TicketHistories" EntityType="nexDeskDbModel.TicketHistory" />
+          <EntitySet Name="TicketPosts" EntityType="nexDeskDbModel.TicketPost" />
+          <EntitySet Name="Tickets" EntityType="nexDeskDbModel.Ticket" />
+          <EntitySet Name="TicketSlas" EntityType="nexDeskDbModel.TicketSla" />
+          <EntitySet Name="TicketTypes" EntityType="nexDeskDbModel.TicketType" />
+          <EntitySet Name="Users" EntityType="nexDeskDbModel.User" />
+          <EntitySet Name="webpages_Membership" EntityType="nexDeskDbModel.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="nexDeskDbModel.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="nexDeskDbModel.webpages_Roles" />
+          <EntitySet Name="Workstations" EntityType="nexDeskDbModel.Workstation" />
+          <AssociationSet Name="FK_Attachments_ToTickets" Association="nexDeskDbModel.FK_Attachments_ToTickets">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="Attachment" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attachments_ToUser" Association="nexDeskDbModel.FK_Attachments_ToUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Attachment" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solutionists_ToCompanies" Association="nexDeskDbModel.FK_Solutionists_ToCompanies">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Solutionist" EntitySet="Solutionists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retailers_Contacts" Association="nexDeskDbModel.FK_Retailers_Contacts">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Retailer" EntitySet="Retailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomPreSlaExpirationNotifications_to_UserSetting" Association="nexDeskDbModel.FK_CustomPreSlaExpirationNotifications_to_UserSetting">
+            <End Role="Setting" EntitySet="Settings" />
+            <End Role="CustomPreSlaExpirationNotificationsTable" EntitySet="CustomPreSlaExpirationNotificationsTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retailers_Dealers" Association="nexDeskDbModel.FK_Retailers_Dealers">
+            <End Role="Dealer" EntitySet="Dealers" />
+            <End Role="Retailer" EntitySet="Retailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToGroups" Association="nexDeskDbModel.FK_Tickets_ToGroups">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketHistories_ToHistoryActions" Association="nexDeskDbModel.FK_TicketHistories_ToHistoryActions">
+            <End Role="HistoryAction" EntitySet="HistoryActions" />
+            <End Role="TicketHistory" EntitySet="TicketHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_To_Creator" Association="nexDeskDbModel.FK_Notifications_To_Creator">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_To_NotificationType" Association="nexDeskDbModel.FK_Notifications_To_NotificationType">
+            <End Role="NotificationsType" EntitySet="NotificationsTypes" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_To_Owner" Association="nexDeskDbModel.FK_Notifications_To_Owner">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_To_Ticket" Association="nexDeskDbModel.FK_Notifications_To_Ticket">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategories_ToItself" Association="nexDeskDbModel.FK_ProductCategories_ToItself">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="ProductCategory1" EntitySet="ProductCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ToProductCategories" Association="nexDeskDbModel.FK_Products_ToProductCategories">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToProducts" Association="nexDeskDbModel.FK_Tickets_ToProducts">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_ToRegions" Association="nexDeskDbModel.FK_Users_ToRegions">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retailers_Users" Association="nexDeskDbModel.FK_Retailers_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Retailer" EntitySet="Retailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retailers_Workstations" Association="nexDeskDbModel.FK_Retailers_Workstations">
+            <End Role="Workstation" EntitySet="Workstations" />
+            <End Role="Retailer" EntitySet="Retailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settings_ToUsers" Association="nexDeskDbModel.FK_Settings_ToUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Setting" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solutionists_ToUser" Association="nexDeskDbModel.FK_Solutionists_ToUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Solutionist" EntitySet="Solutionists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToStatus" Association="nexDeskDbModel.FK_Tickets_ToStatus">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketHistories_ToTickets" Association="nexDeskDbModel.FK_TicketHistories_ToTickets">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="TicketHistory" EntitySet="TicketHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketHistories_ToUsers" Association="nexDeskDbModel.FK_TicketHistories_ToUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TicketHistory" EntitySet="TicketHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPosts_ToTickets" Association="nexDeskDbModel.FK_TicketPosts_ToTickets">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="TicketPost" EntitySet="TicketPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketPosts_ToUsers" Association="nexDeskDbModel.FK_TicketPosts_ToUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TicketPost" EntitySet="TicketPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToAuthor" Association="nexDeskDbModel.FK_Tickets_ToAuthor">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToCreatedBy" Association="nexDeskDbModel.FK_Tickets_ToCreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToSolutionist" Association="nexDeskDbModel.FK_Tickets_ToSolutionist">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_ToTicketTypes" Association="nexDeskDbModel.FK_Tickets_ToTicketTypes">
+            <End Role="TicketType" EntitySet="TicketTypes" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketSla_ToTickets" Association="nexDeskDbModel.FK_TicketSla_ToTickets">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="TicketSla" EntitySet="TicketSlas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_Membership_ToUsers" Association="nexDeskDbModel.FK_webpages_Membership_ToUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="webpages_Membership" EntitySet="webpages_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="Groups_Users" Association="nexDeskDbModel.Groups_Users">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="nexDeskDbModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ticketId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="isVisible" Type="Boolean" />
+          <Property Name="uploader_id" Type="Int32" />
+          <NavigationProperty Name="Ticket" Relationship="nexDeskDbModel.FK_Attachments_ToTickets" FromRole="Attachment" ToRole="Ticket" />
+          <NavigationProperty Name="User" Relationship="nexDeskDbModel.FK_Attachments_ToUser" FromRole="Attachment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Solutionists" Relationship="nexDeskDbModel.FK_Solutionists_ToCompanies" FromRole="Company" ToRole="Solutionist" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Retailers" Relationship="nexDeskDbModel.FK_Retailers_Contacts" FromRole="Contact" ToRole="Retailer" />
+        </EntityType>
+        <EntityType Name="CustomPreSlaExpirationNotificationsTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userSettingsId" Type="Int32" Nullable="false" />
+          <Property Name="minutesBeforeSlaExpires" Type="Int32" Nullable="false" />
+          <Property Name="notificationTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Setting" Relationship="nexDeskDbModel.FK_CustomPreSlaExpirationNotifications_to_UserSetting" FromRole="CustomPreSlaExpirationNotificationsTable" ToRole="Setting" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Retailers" Relationship="nexDeskDbModel.FK_Retailers_Dealers" FromRole="Dealer" ToRole="Retailer" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="level" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Tickets" Relationship="nexDeskDbModel.FK_Tickets_ToGroups" FromRole="Group" ToRole="Ticket" />
+          <NavigationProperty Name="Users" Relationship="nexDeskDbModel.Groups_Users" FromRole="Group" ToRole="User" />
+        </EntityType>
+        <EntityType Name="HistoryAction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TicketHistories" Relationship="nexDeskDbModel.FK_TicketHistories_ToHistoryActions" FromRole="HistoryAction" ToRole="TicketHistory" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TicketId" Type="Int32" />
+          <Property Name="Readed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="nexDeskDbModel.FK_Notifications_To_Creator" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="NotificationsType" Relationship="nexDeskDbModel.FK_Notifications_To_NotificationType" FromRole="Notification" ToRole="NotificationsType" />
+          <NavigationProperty Name="User1" Relationship="nexDeskDbModel.FK_Notifications_To_Owner" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="Ticket" Relationship="nexDeskDbModel.FK_Notifications_To_Ticket" FromRole="Notification" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="NotificationsType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Notifications" Relationship="nexDeskDbModel.FK_Notifications_To_NotificationType" FromRole="NotificationsType" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="topId" Type="Int32" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductCategories1" Relationship="nexDeskDbModel.FK_ProductCategories_ToItself" FromRole="ProductCategory" ToRole="ProductCategory1" />
+          <NavigationProperty Name="ProductCategory1" Relationship="nexDeskDbModel.FK_ProductCategories_ToItself" FromRole="ProductCategory1" ToRole="ProductCategory" />
+          <NavigationProperty Name="Products" Relationship="nexDeskDbModel.FK_Products_ToProductCategories" FromRole="ProductCategory" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="garant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductCategory" Relationship="nexDeskDbModel.FK_Products_ToProductCategories" FromRole="Product" ToRole="ProductCategory" />
+          <NavigationProperty Name="Tickets" Relationship="nexDeskDbModel.FK_Tickets_ToProducts" FromRole="Product" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RT_minutes" Type="Int32" Nullable="false" />
+          <Property Name="FT_minutes" Type="Int32" Nullable="false" />
+          <Property Name="UTCtimeShift" Type="Double" Nullable="false" />
+          <Property Name="timeZoneId" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="nexDeskDbModel.FK_Users_ToRegions" FromRole="Region" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Retailer">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="dealerId" Type="Int32" />
+          <Property Name="wsId" Type="Int32" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="adress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="zipcode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contactId" Type="Int32" />
+          <NavigationProperty Name="Contact" Relationship="nexDeskDbModel.FK_Retailers_Contacts" FromRole="Retailer" ToRole="Contact" />
+          <NavigationProperty Name="Dealer" Relationship="nexDeskDbModel.FK_Retailers_Dealers" FromRole="Retailer" ToRole="Dealer" />
+          <NavigationProperty Name="User" Relationship="nexDeskDbModel.FK_Retailers_Users" FromRole="Retailer" ToRole="User" />
+          <NavigationProperty Name="Workstation" Relationship="nexDeskDbModel.FK_Retailers_Workstations" FromRole="Retailer" ToRole="Workstation" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="emailNotification" Type="Boolean" Nullable="false" />
+          <Property Name="regularEmailsNotification" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CustomPreSlaExpirationNotificationsTables" Relationship="nexDeskDbModel.FK_CustomPreSlaExpirationNotifications_to_UserSetting" FromRole="Setting" ToRole="CustomPreSlaExpirationNotificationsTable" />
+          <NavigationProperty Name="User" Relationship="nexDeskDbModel.FK_Settings_ToUsers" FromRole="Setting" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Solutionist">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="companyId" Type="Int32" />
+          <Property Name="teamviewerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="nexDeskDbModel.FK_Solutionists_ToCompanies" FromRole="Solutionist" ToRole="Company" />
+          <NavigationProperty Name="User" Relationship="nexDeskDbModel.FK_Solutionists_ToUser" FromRole="Solutionist" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tickets" Relationship="nexDeskDbModel.FK_Tickets_ToStatus" FromRole="Status" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="TicketHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ticketId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="actionId" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="text" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="reason" Type="String" MaxLength="700" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="HistoryAction" Relationship="nexDeskDbModel.FK_TicketHistories_ToHistoryActions" FromRole="TicketHistory" ToRole="HistoryAction" />
+          <NavigationProperty Name="Ticket" Relationship="nexDeskDbModel.FK_TicketHistories_ToTickets" FromRole="TicketHistory" ToRole="Ticket" />
+          <NavigationProperty Name="User" Relationship="nexDeskDbModel.FK_TicketHistories_ToUsers" FromRole="TicketHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TicketPost">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ticketId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isVisible" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Ticket" Relationship="nexDeskDbModel.FK_TicketPosts_ToTickets" FromRole="TicketPost" ToRole="Ticket" />
+          <NavigationProperty Name="User" Relationship="nexDeskDbModel.FK_TicketPosts_ToUsers" FromRole="TicketPost" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ticketId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="authorId" Type="Int32" Nullable="false" />
+          <Property Name="createdByUserId" Type="Int32" Nullable="false" />
+          <Property Name="solutionistId" Type="Int32" />
+          <Property Name="groupId" Type="Int32" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="Int32" />
+          <Property Name="subject" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="text" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="completedAt" Type="DateTime" Precision="3" />
+          <Property Name="typeId" Type="Int32" />
+          <NavigationProperty Name="Attachments" Relationship="nexDeskDbModel.FK_Attachments_ToTickets" FromRole="Ticket" ToRole="Attachment" />
+          <NavigationProperty Name="Group" Relationship="nexDeskDbModel.FK_Tickets_ToGroups" FromRole="Ticket" ToRole="Group" />
+          <NavigationProperty Name="Notifications" Relationship="nexDeskDbModel.FK_Notifications_To_Ticket" FromRole="Ticket" ToRole="Notification" />
+          <NavigationProperty Name="Product" Relationship="nexDeskDbModel.FK_Tickets_ToProducts" FromRole="Ticket" ToRole="Product" />
+          <NavigationProperty Name="Status" Relationship="nexDeskDbModel.FK_Tickets_ToStatus" FromRole="Ticket" ToRole="Status" />
+          <NavigationProperty Name="TicketHistories" Relationship="nexDeskDbModel.FK_TicketHistories_ToTickets" FromRole="Ticket" ToRole="TicketHistory" />
+          <NavigationProperty Name="TicketPosts" Relationship="nexDeskDbModel.FK_TicketPosts_ToTickets" FromRole="Ticket" ToRole="TicketPost" />
+          <NavigationProperty Name="User" Relationship="nexDeskDbModel.FK_Tickets_ToAuthor" FromRole="Ticket" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="nexDeskDbModel.FK_Tickets_ToCreatedBy" FromRole="Ticket" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="nexDeskDbModel.FK_Tickets_ToSolutionist" FromRole="Ticket" ToRole="User" />
+          <NavigationProperty Name="TicketType" Relationship="nexDeskDbModel.FK_Tickets_ToTicketTypes" FromRole="Ticket" ToRole="TicketType" />
+          <NavigationProperty Name="TicketSla" Relationship="nexDeskDbModel.FK_TicketSla_ToTickets" FromRole="Ticket" ToRole="TicketSla" />
+        </EntityType>
+        <EntityType Name="TicketSla">
+          <Key>
+            <PropertyRef Name="ticketId" />
+          </Key>
+          <Property Name="ticketId" Type="Int32" Nullable="false" />
+          <Property Name="startAt" Type="DateTime" Precision="3" />
+          <Property Name="RT_expiresAt" Type="DateTime" Precision="3" />
+          <Property Name="RT_realCompletedAt" Type="DateTime" Precision="3" />
+          <Property Name="FT_expiresAt" Type="DateTime" Precision="3" />
+          <Property Name="FT_realCompletedAt" Type="DateTime" Precision="3" />
+          <Property Name="FT_fakeCompletedAt" Type="DateTime" Precision="3" />
+          <Property Name="FT_remainingSec" Type="Int32" />
+          <Property Name="FT3lvl_expiresAt" Type="DateTime" Precision="3" />
+          <Property Name="FT3lvl_realCompletedAt" Type="DateTime" Precision="3" />
+          <Property Name="FT3lvl_fakeCompletedAt" Type="DateTime" Precision="3" />
+          <Property Name="FT3lvl_remainingSec" Type="Int32" />
+          <NavigationProperty Name="Ticket" Relationship="nexDeskDbModel.FK_TicketSla_ToTickets" FromRole="TicketSla" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="TicketType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tickets" Relationship="nexDeskDbModel.FK_Tickets_ToTicketTypes" FromRole="TicketType" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="regionId" Type="Int32" Nullable="false" />
+          <Property Name="profilePictureUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="isSolutionist" Type="Boolean" Nullable="false" />
+          <Property Name="isSystem" Type="Boolean" Nullable="false" />
+          <Property Name="isPasswordConfirmed" Type="Boolean" />
+          <NavigationProperty Name="Attachments" Relationship="nexDeskDbModel.FK_Attachments_ToUser" FromRole="User" ToRole="Attachment" />
+          <NavigationProperty Name="Notifications" Relationship="nexDeskDbModel.FK_Notifications_To_Creator" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="Notifications1" Relationship="nexDeskDbModel.FK_Notifications_To_Owner" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="Region" Relationship="nexDeskDbModel.FK_Users_ToRegions" FromRole="User" ToRole="Region" />
+          <NavigationProperty Name="Retailer" Relationship="nexDeskDbModel.FK_Retailers_Users" FromRole="User" ToRole="Retailer" />
+          <NavigationProperty Name="Setting" Relationship="nexDeskDbModel.FK_Settings_ToUsers" FromRole="User" ToRole="Setting" />
+          <NavigationProperty Name="Solutionist" Relationship="nexDeskDbModel.FK_Solutionists_ToUser" FromRole="User" ToRole="Solutionist" />
+          <NavigationProperty Name="TicketHistories" Relationship="nexDeskDbModel.FK_TicketHistories_ToUsers" FromRole="User" ToRole="TicketHistory" />
+          <NavigationProperty Name="TicketPosts" Relationship="nexDeskDbModel.FK_TicketPosts_ToUsers" FromRole="User" ToRole="TicketPost" />
+          <NavigationProperty Name="Tickets" Relationship="nexDeskDbModel.FK_Tickets_ToAuthor" FromRole="User" ToRole="Ticket" />
+          <NavigationProperty Name="Tickets1" Relationship="nexDeskDbModel.FK_Tickets_ToCreatedBy" FromRole="User" ToRole="Ticket" />
+          <NavigationProperty Name="Tickets2" Relationship="nexDeskDbModel.FK_Tickets_ToSolutionist" FromRole="User" ToRole="Ticket" />
+          <NavigationProperty Name="webpages_Membership" Relationship="nexDeskDbModel.FK_webpages_Membership_ToUsers" FromRole="User" ToRole="webpages_Membership" />
+          <NavigationProperty Name="Groups" Relationship="nexDeskDbModel.Groups_Users" FromRole="User" ToRole="Group" />
+          <NavigationProperty Name="webpages_Roles" Relationship="nexDeskDbModel.webpages_UsersInRoles" FromRole="User" ToRole="webpages_Roles" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="nexDeskDbModel.FK_webpages_Membership_ToUsers" FromRole="webpages_Membership" ToRole="User" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="level" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="nexDeskDbModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Workstation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wsName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="wsOwner" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="wsManufacturer" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="osType" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Retailers" Relationship="nexDeskDbModel.FK_Retailers_Workstations" FromRole="Workstation" ToRole="Retailer" />
+        </EntityType>
+        <Association Name="FK_Attachments_ToTickets">
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Attachment" Role="Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attachments_ToUser">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Attachment" Role="Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="uploader_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solutionists_ToCompanies">
+          <End Type="nexDeskDbModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Solutionist" Role="Solutionist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Solutionist">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retailers_Contacts">
+          <End Type="nexDeskDbModel.Contact" Role="Contact" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Retailer" Role="Retailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Retailer">
+              <PropertyRef Name="contactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomPreSlaExpirationNotifications_to_UserSetting">
+          <End Type="nexDeskDbModel.Setting" Role="Setting" Multiplicity="1" />
+          <End Type="nexDeskDbModel.CustomPreSlaExpirationNotificationsTable" Role="CustomPreSlaExpirationNotificationsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setting">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="CustomPreSlaExpirationNotificationsTable">
+              <PropertyRef Name="userSettingsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retailers_Dealers">
+          <End Type="nexDeskDbModel.Dealer" Role="Dealer" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Retailer" Role="Retailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Retailer">
+              <PropertyRef Name="dealerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToGroups">
+          <End Type="nexDeskDbModel.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketHistories_ToHistoryActions">
+          <End Type="nexDeskDbModel.HistoryAction" Role="HistoryAction" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TicketHistory" Role="TicketHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HistoryAction">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketHistory">
+              <PropertyRef Name="actionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_To_Creator">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_To_NotificationType">
+          <End Type="nexDeskDbModel.NotificationsType" Role="NotificationsType" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotificationsType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="NotificationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_To_Owner">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_To_Ticket">
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategories_ToItself">
+          <End Type="nexDeskDbModel.ProductCategory" Role="ProductCategory" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.ProductCategory" Role="ProductCategory1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductCategory1">
+              <PropertyRef Name="topId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ToProductCategories">
+          <End Type="nexDeskDbModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToProducts">
+          <End Type="nexDeskDbModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_ToRegions">
+          <End Type="nexDeskDbModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="regionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retailers_Users">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Retailer" Role="Retailer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Retailer">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retailers_Workstations">
+          <End Type="nexDeskDbModel.Workstation" Role="Workstation" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Retailer" Role="Retailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workstation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Retailer">
+              <PropertyRef Name="wsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settings_ToUsers">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Setting" Role="Setting" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Setting">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solutionists_ToUser">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Solutionist" Role="Solutionist" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Solutionist">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToStatus">
+          <End Type="nexDeskDbModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketHistories_ToTickets">
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TicketHistory" Role="TicketHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketHistory">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketHistories_ToUsers">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TicketHistory" Role="TicketHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPosts_ToTickets">
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TicketPost" Role="TicketPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketPost">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketPosts_ToUsers">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TicketPost" Role="TicketPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketPost">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToAuthor">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="authorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToCreatedBy">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="createdByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToSolutionist">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="solutionistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_ToTicketTypes">
+          <End Type="nexDeskDbModel.TicketType" Role="TicketType" Multiplicity="0..1" />
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketSla_ToTickets">
+          <End Type="nexDeskDbModel.Ticket" Role="Ticket" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TicketSla" Role="TicketSla" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TicketSla">
+              <PropertyRef Name="ticketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_Membership_ToUsers">
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="nexDeskDbModel.webpages_Membership" Role="webpages_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="webpages_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Groups_Users">
+          <End Type="nexDeskDbModel.Group" Role="Group" Multiplicity="*" />
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Type="nexDeskDbModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+          <End Type="nexDeskDbModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="nexDeskDbModelStoreContainer" CdmEntityContainer="HelpDeskEntities">
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="uploader_id" ColumnName="uploader_id" />
+                <ScalarProperty Name="isVisible" ColumnName="isVisible" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Contact">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomPreSlaExpirationNotificationsTables">
+            <EntityTypeMapping TypeName="nexDeskDbModel.CustomPreSlaExpirationNotificationsTable">
+              <MappingFragment StoreEntitySet="CustomPreSlaExpirationNotificationsTable">
+                <ScalarProperty Name="notificationTypeId" ColumnName="notificationTypeId" />
+                <ScalarProperty Name="minutesBeforeSlaExpires" ColumnName="minutesBeforeSlaExpires" />
+                <ScalarProperty Name="userSettingsId" ColumnName="userSettingsId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dealers">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Dealer">
+              <MappingFragment StoreEntitySet="Dealers">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryActions">
+            <EntityTypeMapping TypeName="nexDeskDbModel.HistoryAction">
+              <MappingFragment StoreEntitySet="HistoryActions">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Readed" ColumnName="Readed" />
+                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="NotificationTypeId" ColumnName="NotificationTypeId" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationsTypes">
+            <EntityTypeMapping TypeName="nexDeskDbModel.NotificationsType">
+              <MappingFragment StoreEntitySet="NotificationsTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="nexDeskDbModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategories">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="topId" ColumnName="topId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="supplier" ColumnName="supplier" />
+                <ScalarProperty Name="garant" ColumnName="garant" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Region">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="timeZoneId" ColumnName="timeZoneId" />
+                <ScalarProperty Name="UTCtimeShift" ColumnName="UTCtimeShift" />
+                <ScalarProperty Name="FT_minutes" ColumnName="FT_minutes" />
+                <ScalarProperty Name="RT_minutes" ColumnName="RT_minutes" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Retailers">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Retailer">
+              <MappingFragment StoreEntitySet="Retailers">
+                <ScalarProperty Name="contactId" ColumnName="contactId" />
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="wsId" ColumnName="wsId" />
+                <ScalarProperty Name="dealerId" ColumnName="dealerId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="regularEmailsNotification" ColumnName="regularEmailsNotification" />
+                <ScalarProperty Name="emailNotification" ColumnName="emailNotification" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solutionists">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Solutionist">
+              <MappingFragment StoreEntitySet="Solutionists">
+                <ScalarProperty Name="teamviewerID" ColumnName="teamviewerID" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketHistories">
+            <EntityTypeMapping TypeName="nexDeskDbModel.TicketHistory">
+              <MappingFragment StoreEntitySet="TicketHistories">
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="actionId" ColumnName="actionId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketPosts">
+            <EntityTypeMapping TypeName="nexDeskDbModel.TicketPost">
+              <MappingFragment StoreEntitySet="TicketPosts">
+                <ScalarProperty Name="isVisible" ColumnName="isVisible" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Ticket">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="completedAt" ColumnName="completedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="solutionistId" ColumnName="solutionistId" />
+                <ScalarProperty Name="createdByUserId" ColumnName="createdByUserId" />
+                <ScalarProperty Name="authorId" ColumnName="authorId" />
+                <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketSlas">
+            <EntityTypeMapping TypeName="nexDeskDbModel.TicketSla">
+              <MappingFragment StoreEntitySet="TicketSla">
+                <ScalarProperty Name="FT3lvl_remainingSec" ColumnName="FT3lvl_remainingSec" />
+                <ScalarProperty Name="FT3lvl_fakeCompletedAt" ColumnName="FT3lvl_fakeCompletedAt" />
+                <ScalarProperty Name="FT3lvl_realCompletedAt" ColumnName="FT3lvl_realCompletedAt" />
+                <ScalarProperty Name="FT3lvl_expiresAt" ColumnName="FT3lvl_expiresAt" />
+                <ScalarProperty Name="FT_remainingSec" ColumnName="FT_remainingSec" />
+                <ScalarProperty Name="FT_fakeCompletedAt" ColumnName="FT_fakeCompletedAt" />
+                <ScalarProperty Name="FT_realCompletedAt" ColumnName="FT_realCompletedAt" />
+                <ScalarProperty Name="FT_expiresAt" ColumnName="FT_expiresAt" />
+                <ScalarProperty Name="RT_realCompletedAt" ColumnName="RT_realCompletedAt" />
+                <ScalarProperty Name="RT_expiresAt" ColumnName="RT_expiresAt" />
+                <ScalarProperty Name="startAt" ColumnName="startAt" />
+                <ScalarProperty Name="ticketId" ColumnName="ticketId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketTypes">
+            <EntityTypeMapping TypeName="nexDeskDbModel.TicketType">
+              <MappingFragment StoreEntitySet="TicketTypes">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="nexDeskDbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="isPasswordConfirmed" ColumnName="isPasswordConfirmed" />
+                <ScalarProperty Name="isSystem" ColumnName="isSystem" />
+                <ScalarProperty Name="isSolutionist" ColumnName="isSolutionist" />
+                <ScalarProperty Name="profilePictureUrl" ColumnName="profilePictureUrl" />
+                <ScalarProperty Name="regionId" ColumnName="regionId" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="nexDeskDbModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="nexDeskDbModel.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="nexDeskDbModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workstations">
+            <EntityTypeMapping TypeName="nexDeskDbModel.Workstation">
+              <MappingFragment StoreEntitySet="Workstations">
+                <ScalarProperty Name="osType" ColumnName="osType" />
+                <ScalarProperty Name="wsManufacturer" ColumnName="wsManufacturer" />
+                <ScalarProperty Name="wsOwner" ColumnName="wsOwner" />
+                <ScalarProperty Name="wsName" ColumnName="wsName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Groups_Users" TypeName="nexDeskDbModel.Groups_Users" StoreEntitySet="Groups_Users">
+            <EndProperty Name="User">
+              <ScalarProperty Name="id" ColumnName="userId" />
+            </EndProperty>
+            <EndProperty Name="Group">
+              <ScalarProperty Name="id" ColumnName="groupId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="nexDeskDbModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="User">
+              <ScalarProperty Name="id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

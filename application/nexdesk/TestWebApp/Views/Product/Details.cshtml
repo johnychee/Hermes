@@ -1,0 +1,52 @@
+﻿@using TestWebApp.Models;
+@model Product
+@{
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
+    ViewBag.Title = "Product Details";
+
+    ViewBag.Parents = new LinkedList<KeyValuePair<string, string>>();
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("List", "/Product"));
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("Details", null));
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">@Model.name</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tr>
+                <td>Name:</td>
+                <td>@Model.name</td>
+            </tr>
+            <tr>
+                <td>Category:</td>
+                <td>@Model.ProductCategory.name</td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td>@Model.description</td>
+            </tr>
+            <tr>
+                <td>Garant:</td>
+                <td>@Model.garant</td>
+            </tr>
+            <tr>
+                <td>Supplier</td>
+                <td>@Model.supplier</td>
+            </tr>
+            <tr>
+                <td>Actions:</td>
+                <td>
+                    @if(current_user.webpages_Roles.SingleOrDefault(r=>r.RoleName == "SuperUser")!=null)
+                    {
+                    @Html.ActionLink("Edit", "Edit", new { @id = Model.id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Destroy", new { @id = Model.id }, new { @class = "btn btn-danger" })
+                    }
+                    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

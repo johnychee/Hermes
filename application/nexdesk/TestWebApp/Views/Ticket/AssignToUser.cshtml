@@ -1,0 +1,185 @@
+﻿@using TestWebApp.Models
+@model Ticket
+@{
+    ViewBag.Title = "Assign Ticket To User";
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    List<SelectListItem> groups = new List<SelectListItem>(); //all groups
+    List<SelectListItem> supporters = new List<SelectListItem>(); //all supporters
+
+    //load groups
+        
+    
+    if (Request.QueryString["group_id"] == null)
+    {
+        foreach (Group sg in hDesk.Groups)
+        {
+            SelectListItem sli = new SelectListItem { Text = sg.name + " (Level: " + sg.level + ") ", Value = sg.id.ToString() };
+            groups.Add(sli);
+        }
+    }
+    else
+    {
+        int groupId = Convert.ToInt32(Request.QueryString["group_id"]);
+        Group group = hDesk.Groups.SingleOrDefault(g => g.id == groupId);
+        foreach (Group sg in hDesk.Groups)
+        {
+            if (group != null && group.id == sg.id)
+            {
+                SelectListItem sli = new SelectListItem { Text = sg.name + " (Level: " + sg.level + ") ", Value = sg.id.ToString() ,Selected=true};
+                groups.Add(sli);
+            }
+            else
+            {
+                SelectListItem sli = new SelectListItem { Text = sg.name + " (Level: " + sg.level + ") ", Value = sg.id.ToString() };
+                groups.Add(sli);
+            }
+        }
+     
+    }
+
+    if (Request.QueryString["group_id"] != null)
+    { 
+      int groupId = Convert.ToInt32(Request.QueryString["group_id"]);
+      Group group = hDesk.Groups.SingleOrDefault(g => g.id == groupId);
+      if (group != null)
+      {
+          foreach (User u in group.Users)
+          {
+              SelectListItem sli = new SelectListItem { Text = u.fullName, Value = u.id.ToString() };
+              supporters.Add(sli);
+          }
+      }
+    }
+}
+
+<div class="col-md-6">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Ticket Details</h4>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Ticket Id:</th>
+                        <td>@Model.ticketId</td>
+                    </tr>
+                    <tr>
+                        <th>Created by:</th>
+                        @if (@Model.CreatedBy_ == null)
+                        {
+                            <td>@Html.ActionLink(@Model.Author.fullName, "Details/" + @Model.Author.id, "User", null, new { target = "_blank" })</td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink(@Model.CreatedBy_.fullName, "Details/" + @Model.CreatedBy_.id, "User", null, new { target = "_blank" })</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>Customer:</th>
+                        <td>@Html.ActionLink(@Model.Author.fullName, "Details/" + @Model.authorId, "User", null, new { target = "_blank" })</td>
+                    </tr>
+                    @if (Model.isAccepted() || Model.Status.name == "AssignedToUser" || Model.Status.name == "Done") //if the ticket is accepted then show the solutionist name ^^
+                    {
+                        <tr>
+                            <th>Solutionist:</th>
+                            <td>@Html.ActionLink(@Model.Solutionist_.fullName, "Details/" + @Model.solutionistId, "User", null, new { target = "_blank" })</td>
+                        </tr>
+                        if (Model.Group != null || Model.Status.name == "Done")
+                        {
+                            <tr>
+                                <th>Group</th>
+                                <td>@Html.ActionLink(@Model.Group.name, "Details/" + @Model.groupId, "Group", null, new { target = "_blank" })</td>
+                            </tr>
+                        }
+                    }
+                    else if (Model.Status.name == "AssignedToGroup" || Model.Status.name == "AssignedToUser")
+                    {
+                        <tr>
+                            <th>Group</th>
+                            <td>@Html.ActionLink(@Model.Group.name, "Details/" + @Model.Group.id, "Group", null, new { target = "_blank" })</td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <th>Status:</th>
+                        <td>@Model.Status.name</td>
+                    </tr>
+                    <tr>
+                        <th>Response time remaining:</th>
+                        <td>@(Model.TicketSla.RT_realCompletedAt == null ? Model.TicketSla.RTremaining_toString() : "Done")</td>
+                    </tr>
+                    <tr>
+                        <th>Fix time Remote remaining:</th>
+                        <td>@(Model.TicketSla.FT_realCompletedAt == null ? Model.TicketSla.FTremaining_toString() : "Done")</td>
+                    </tr>
+                    <tr>
+                        <th>Fix time Onsite remaining:</th>
+                        <td>@(Model.TicketSla.FT3lvl_realCompletedAt == null ? Model.TicketSla.FT3lvlRemaining_toString() : "Done")</td>
+                    </tr>
+                    @if (@Model.TicketType != null)
+                    {
+                        <tr>
+                            <th>Type:</th>
+                            <td>@Model.TicketType.name</td>
+                        </tr>
+                    }
+                    <tr>
+                        <th>Subject:</th>
+                        <td>@Model.subject</td>
+                    </tr>
+                    <tr>
+                        <th>Product:</th>
+                        <td>@Html.ActionLink(@Model.Product.name, "Details/" + @Model.productId, "Product", null, new { target = "_blank" })</td>
+                    <tr>
+                        <th>Issue:</th>
+                        <td>@Model.text</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Assign - @(Request.QueryString["step"] == "1" || Request.QueryString["step"] == null ? "Step 1" : "Step 2")</h4>
+        </div>
+        <div class="panel-body">
+            @using(@Html.BeginForm())
+            { 
+             if(Request.QueryString["group_id"] == null || Request.QueryString["step"] == "1")
+             { 
+                <p>@Html.DropDownList("groups", groups, "Choose Group", new { @class = "form-control" })</p>
+                  <button class="btn btn-primary" name="Submit" value="Next">Next >> </button>
+             }
+             else
+             {
+               
+               <div class="row">
+                   <div class="col-md-2">
+                       <p>User: </p>
+                   </div>
+                   <div class="col-md-10">
+                       @Html.DropDownList("supporters", supporters, "Choose User", new { @class = "form-control" })
+                   </div>
+                   <br /><br /><br />
+
+                   <div class="col-md-2">
+                       <p>Reason: </p>
+                   </div>
+                   <div class="col-md-10">
+                       @Html.TextArea("reason", new { @class= "form-control"})
+                   </div>
+               </div>
+                         
+                <br />
+                
+                <button class="btn btn-danger pull-left" name="Submit" value="Back">Back</button><span></span>
+             <button class="btn btn-success pull-right" name="Submit" value="Assign">Assign</button>
+
+             }
+            }
+        </div>
+    </div>
+</div>

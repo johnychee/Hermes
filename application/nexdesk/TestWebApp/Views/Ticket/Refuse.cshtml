@@ -1,0 +1,122 @@
+﻿@using TestWebApp.Models
+@model Ticket
+@{
+    ViewBag.Title = "Refuse Ticket";
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+
+
+}
+
+<div class="col-md-6">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Ticket Details</h4>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Ticket Id:</th>
+                        <td>@Model.ticketId</td>
+                    </tr>
+                    <tr>
+                        <th>Created by:</th>
+                        @if (@Model.CreatedBy_ == null)
+                        {
+                            <td>@Html.ActionLink(@Model.Author.fullName, "Details/" + @Model.Author.id, "User", null, new { target = "_blank" })</td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink(@Model.CreatedBy_.fullName, "Details/" + @Model.CreatedBy_.id, "User", null, new { target = "_blank" })</td>
+                        }
+                    </tr>
+                    <tr>
+                        <th>Customer:</th>
+                        <td>@Html.ActionLink(@Model.Author.fullName, "Details/" + @Model.authorId, "User", null, new { target = "_blank" })</td>
+                    </tr>
+                    @if (Model.isAccepted() || Model.Status.name == "AssignedToUser" || Model.Status.name == "Done") //if the ticket is accepted then show the solutionist name ^^
+                    {
+                        <tr>
+                            <th>Solutionist:</th>
+                            <td>@Html.ActionLink(@Model.Solutionist_.fullName, "Details/" + @Model.solutionistId, "User", null, new { target = "_blank" })</td>
+                        </tr>
+                        if (Model.Group != null || Model.Status.name == "Done")
+                        {
+                            <tr>
+                                <th>Group</th>
+                                <td>@Html.ActionLink(@Model.Group.name, "Details/" + @Model.groupId, "Group", null, new { target = "_blank" })</td>
+                            </tr>
+                        }
+                    }
+                    else if (Model.Status.name == "AssignedToGroup" || Model.Status.name == "AssignedToUser")
+                    {
+                        <tr>
+                            <th>Group</th>
+                            <td>@Html.ActionLink(@Model.Group.name, "Details/" + @Model.Group.id, "Group", null, new { target = "_blank" })</td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <th>Status:</th>
+                        <td>@Model.Status.name</td>
+                    </tr>
+                    <tr>
+                        <th>Response time remaining:</th>
+                        <td>@(Model.TicketSla.RT_realCompletedAt == null ? Model.TicketSla.RTremaining_toString() : "Done")</td>
+                    </tr>
+                    <tr>
+                        <th>Fix time Remote remaining:</th>
+                        <td>@(Model.TicketSla.FT_realCompletedAt == null ? Model.TicketSla.FTremaining_toString() : "Done")</td>
+                    </tr>
+                    <tr>
+                        <th>Fix time Onsite remaining:</th>
+                        <td>@(Model.TicketSla.FT3lvl_realCompletedAt == null ? Model.TicketSla.FT3lvlRemaining_toString() : "Done")</td>
+                    </tr>
+                    @if (@Model.TicketType != null)
+                    {
+                        <tr>
+                            <th>Type:</th>
+                            <td>@Model.TicketType.name</td>
+                        </tr>
+                    }
+                    <tr>
+                        <th>Subject:</th>
+                        <td>@Model.subject</td>
+                    </tr>
+                    <tr>
+                        <th>Product:</th>
+                        <td>@Html.ActionLink(@Model.Product.name, "Details/" + @Model.productId, "Product", null, new { target = "_blank" })</td>
+                    <tr>
+                        <th>Issue:</th>
+                        <td>@Model.text</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Refuse</h4>
+        </div>
+        <div class="panel-body">
+            @using (@Html.BeginForm())
+            {
+                <table class="table">
+                    <tr>
+                        <td class="col-md-1">
+                            <label>Reason: </label>
+                        </td>
+                        <td class="col-md-11">
+
+                            @Html.TextArea("Reason", "", 7, 6, new { @class = "form-control" })
+                        </td>
+                   </tr>
+                </table>
+    <button class="btn btn-success pull-right">Refuse</button>
+
+            }
+        </div>
+    </div>
+</div>

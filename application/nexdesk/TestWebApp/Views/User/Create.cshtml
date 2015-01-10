@@ -1,0 +1,248 @@
+﻿@using TestWebApp.Views.User.UserViewModel
+@using TestWebApp.Models
+@model RegisterViewModel
+@{
+    ViewBag.Title = "Create User";
+
+    ViewBag.Parents = new LinkedList<KeyValuePair<string, string>>();
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("Users", "/User"));
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("Create", null));
+
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#groups').modalSelection({
+            'url': '@Url.Action("getFiltered", "Group")',
+            'filters': {
+                'level': [{ 'id': '1', 'name': 'Level 1' },
+                          { 'id': '2', 'name': 'Level 2' },
+                          { 'id': '3', 'name': 'Level 3' },
+                          { 'id': '4', 'name': 'Level 4' }]
+                },
+            'resultTitle': 'Support groups',
+            'resultName': 'groups',
+            'multipleSelect' : true
+        });
+    });
+</script>
+
+<div class="col-md-12">
+    <ul class="nav nav-tabs nav-tabs-inverse nav-justified nav-justified-mobile">
+        <li class="@(ViewBag.Solutionist == null && @ViewBag.FormStart == null ? "" : "active")"><a href="#nav-pills-tab-1" data-toggle="tab">Solutionist</a></li>
+        <li class="@(ViewBag.Solutionist == null && ViewBag.FormStart == null ? "active" : "")"><a href="#nav-pills-tab-2" data-toggle="tab">Retailer</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade@(ViewBag.Solutionist == null && @ViewBag.FormStart == null ? "" : " in active")" id="nav-pills-tab-1">
+            @using (@Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">First Name:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rSolutionistViewModel.FirstName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Last Name:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rSolutionistViewModel.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Company:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.DropDownListFor(model => model.rSolutionistViewModel.companyId, Company.toSelectList(), "Choose Company", new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Username:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rSolutionistViewModel.username, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Password:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rSolutionistViewModel.Password, new { @class = "form-control", @type = "password" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Confirm Password:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rSolutionistViewModel.ConfirmPassword, new { @class = "form-control", @type = "password" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="role" class="col-md-1 control-label ui-sortable">Role:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.DropDownListFor(model => model.rSolutionistViewModel.roleId, webpages_Roles.toSelectList(true, hDesk), "Choose Role", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="regionId" class="col-md-1 control-label ui-sortable">Region:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.DropDownListFor(model => model.rSolutionistViewModel.regionId, Region.toSelectList(hDesk), "Choose Region", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="regionId" class="col-md-1 control-label ui-sortable">TeamViewer Id:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rSolutionistViewModel.teamViewerId, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Phone:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rSolutionistViewModel.phone, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Email:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rSolutionistViewModel.email, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Support Groups:</label>
+                    <div class="col-md-4 ui-sortable" id="groups">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="profilePictureUrl" class="col-md-1 control-label ui-sortable">Profile picture Url:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBox("attachedFile", "", new { @class = "form-control", type = "file" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Actions:</label>
+                    <div class="col-md-4 ui-sortable">
+                        <button class="btn btn-primary" name="Submit" value="RegisterSolutionist">Register</button>
+                        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="tab-pane fade@(ViewBag.Solutionist == null && ViewBag.FormStart == null ? " in active" : "")" id="nav-pills-tab-2">
+            @using (@Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">User name:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rRetailerViewModel.username, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Name:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rRetailerViewModel.Name, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">City:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rRetailerViewModel.City, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Customer Group:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.DropDownListFor(model => model.rRetailerViewModel.dealerId, Dealer.toSelectList(), "Choose C.Group", new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">WorkStation:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.DropDownListFor(model => model.rRetailerViewModel.workStationId, Workstation.toSelectList(), "Choose Workstation", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Password:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rRetailerViewModel.Password, new { @class = "form-control", @type = "password" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Confirm Password:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rRetailerViewModel.ConfirmPassword, new { @class = "form-control", @type = "password" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="adress" class="col-md-1 control-label ui-sortable">Address:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rRetailerViewModel.address, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="zipCode" class="col-md-1 control-label ui-sortable">Zip Code:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rRetailerViewModel.zipcode, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="regionId" class="col-md-1 control-label ui-sortable">Region:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.DropDownListFor(model => model.rRetailerViewModel.regionId, Region.toSelectList(hDesk), "Choose Region", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Contact Person:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.DropDownListFor(model => model.rRetailerViewModel.contactId, Contact.toSelectList(), "Choose Contact", new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Phone:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rRetailerViewModel.phone, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Email:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBoxFor(model => model.rRetailerViewModel.email, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="profilePictureUrl" class="col-md-1 control-label ui-sortable">Profile picture Url:</label>
+                    <div class="col-md-4 ui-sortable">
+                        @Html.TextBox("attachedFile", "", new { @class = "form-control", type = "file" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-md-1 control-label ui-sortable">Actions:</label>
+                    <div class="col-md-4 ui-sortable">
+                        <button class="btn btn-primary" name="Submit" value="RegisterRetailer">Register</button>
+                        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

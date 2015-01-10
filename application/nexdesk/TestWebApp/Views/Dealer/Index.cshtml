@@ -1,0 +1,31 @@
+﻿@using TestWebApp.Models
+@using PagedList
+@using PagedList.Mvc
+@{
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    ViewBag.Title = "Customer Groups";
+}
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Customer Groups</h4>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Customers</th>
+                </tr>
+                @foreach (Dealer d in ViewBag.Dealers)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(@d.name, "Details/" + @d.id)</td>
+                        <td>@d.Retailers.Count</td>
+                    </tr>
+                }
+            </table>
+            @Html.PagedListPager((IPagedList<Dealer>)ViewBag.Dealers, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { page }))
+
+        </div>
+    </div>
+</div>
