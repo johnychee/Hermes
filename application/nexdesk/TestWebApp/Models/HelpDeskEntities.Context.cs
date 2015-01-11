@@ -25,7 +25,6 @@ namespace TestWebApp.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Attachment> Attachments { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<CustomPreSlaExpirationNotificationsTable> CustomPreSlaExpirationNotificationsTables { get; set; }
@@ -41,10 +40,7 @@ namespace TestWebApp.Models
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<Solutionist> Solutionists { get; set; }
         public virtual DbSet<Status> Status { get; set; }
-        public virtual DbSet<TicketHistory> TicketHistories { get; set; }
-        public virtual DbSet<TicketPost> TicketPosts { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
-        public virtual DbSet<TicketSla> TicketSlas { get; set; }
         public virtual DbSet<TicketType> TicketTypes { get; set; }
         public virtual DbSet<TravelDestination> TravelDestinations { get; set; }
         public virtual DbSet<TravelEvent> TravelEvents { get; set; }

@@ -14,14 +14,7 @@ namespace TestWebApp.Models
     
     public partial class HistoryAction
     {
-        public HistoryAction()
-        {
-            this.TicketHistories = new HashSet<TicketHistory>();
-        }
-    
         public int id { get; set; }
         public string name { get; set; }
-    
-        public virtual ICollection<TicketHistory> TicketHistories { get; set; }
     }
 }

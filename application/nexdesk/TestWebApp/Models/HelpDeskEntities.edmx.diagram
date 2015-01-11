@@ -5,47 +5,39 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="95611dd27d2d459a8895108bea956dc8" Name="Diagram1">
-        <EntityTypeShape EntityType="nexDeskDbModel.Attachment" Width="1.5" PointX="11.25" PointY="13.25" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Company" Width="1.5" PointX="9" PointY="29.625" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Contact" Width="1.5" PointX="12" PointY="29.875" />
-        <EntityTypeShape EntityType="nexDeskDbModel.CustomPreSlaExpirationNotificationsTable" Width="1.5" PointX="10.5" PointY="26.75" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Dealer" Width="1.5" PointX="12" PointY="6.625" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Group" Width="1.5" PointX="0.75" PointY="17.5" />
-        <EntityTypeShape EntityType="nexDeskDbModel.HistoryAction" Width="1.5" PointX="6" PointY="22.625" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Notification" Width="1.5" PointX="8.25" PointY="12.75" />
-        <EntityTypeShape EntityType="nexDeskDbModel.NotificationsType" Width="1.5" PointX="6" PointY="12.625" />
-        <EntityTypeShape EntityType="nexDeskDbModel.ProductCategory" Width="1.5" PointX="1.5" PointY="24.875" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Product" Width="1.5" PointX="0.75" PointY="20.75" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Region" Width="1.5" PointX="3.75" PointY="12" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Retailer" Width="1.5" PointX="14.25" PointY="16.75" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Setting" Width="1.5" PointX="8.25" PointY="26.75" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Solutionist" Width="1.5" PointX="11.25" PointY="21.25" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Status" Width="1.5" PointX="0.75" PointY="12" />
-        <EntityTypeShape EntityType="nexDeskDbModel.TicketHistory" Width="1.5" PointX="8.25" PointY="17" />
-        <EntityTypeShape EntityType="nexDeskDbModel.TicketPost" Width="1.5" PointX="11.25" PointY="17.25" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Ticket" Width="1.5" PointX="3" PointY="15.5" />
-        <EntityTypeShape EntityType="nexDeskDbModel.TicketSla" Width="1.5" PointX="5.25" PointY="31.25" />
-        <EntityTypeShape EntityType="nexDeskDbModel.TicketType" Width="1.5" PointX="0.75" PointY="14.375" />
-        <EntityTypeShape EntityType="nexDeskDbModel.TravelDestination" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="nexDeskDbModel.TravelEvent" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="nexDeskDbModel.TravelRegion" Width="1.5" PointX="0.75" PointY="1.25" />
-        <EntityTypeShape EntityType="nexDeskDbModel.User" Width="1.5" PointX="6" PointY="15.625" />
-        <EntityTypeShape EntityType="nexDeskDbModel.webpages_Membership" Width="1.5" PointX="8.25" PointY="22.625" />
-        <EntityTypeShape EntityType="nexDeskDbModel.webpages_OAuthMembership" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="nexDeskDbModel.webpages_Roles" Width="1.5" PointX="3.75" PointY="22.125" />
-        <EntityTypeShape EntityType="nexDeskDbModel.Workstation" Width="1.5" PointX="12" PointY="9.625" />
-        <AssociationConnector Association="nexDeskDbModel.FK_Attachments_ToTickets" />
-        <AssociationConnector Association="nexDeskDbModel.FK_Attachments_ToUser" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Company" Width="1.5" PointX="6" PointY="28.5" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Contact" Width="1.5" PointX="6" PointY="16.75" />
+        <EntityTypeShape EntityType="nexDeskDbModel.CustomPreSlaExpirationNotificationsTable" Width="1.5" PointX="7.5" PointY="25.5" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Dealer" Width="1.5" PointX="6" PointY="5.5" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Group" Width="1.5" PointX="0.75" PointY="12.375" />
+        <EntityTypeShape EntityType="nexDeskDbModel.HistoryAction" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Notification" Width="1.5" PointX="8.25" PointY="11.75" />
+        <EntityTypeShape EntityType="nexDeskDbModel.NotificationsType" Width="1.5" PointX="6" PointY="2.5" />
+        <EntityTypeShape EntityType="nexDeskDbModel.ProductCategory" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Product" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Region" Width="1.5" PointX="0.75" PointY="18.375" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Retailer" Width="1.5" PointX="8.25" PointY="7.625" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Setting" Width="1.5" PointX="5.25" PointY="25.5" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Solutionist" Width="1.5" PointX="8.25" PointY="16.125" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Status" Width="1.5" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Ticket" Width="1.5" PointX="5.25" PointY="10.875" />
+        <EntityTypeShape EntityType="nexDeskDbModel.TicketType" Width="1.5" PointX="3" PointY="17.5" />
+        <EntityTypeShape EntityType="nexDeskDbModel.TravelDestination" Width="1.5" PointX="11" PointY="1" />
+        <EntityTypeShape EntityType="nexDeskDbModel.TravelEvent" Width="1.5" PointX="13.25" PointY="1" />
+        <EntityTypeShape EntityType="nexDeskDbModel.TravelRegion" Width="1.5" PointX="8.75" PointY="1.25" />
+        <EntityTypeShape EntityType="nexDeskDbModel.User" Width="1.5" PointX="3" PointY="10.75" />
+        <EntityTypeShape EntityType="nexDeskDbModel.webpages_Membership" Width="1.5" PointX="5.25" PointY="21.375" />
+        <EntityTypeShape EntityType="nexDeskDbModel.webpages_OAuthMembership" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="nexDeskDbModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="15.875" />
+        <EntityTypeShape EntityType="nexDeskDbModel.Workstation" Width="1.5" PointX="6" PointY="7.875" />
         <AssociationConnector Association="nexDeskDbModel.FK_Solutionists_ToCompanies" />
         <AssociationConnector Association="nexDeskDbModel.FK_Retailers_Contacts" />
         <AssociationConnector Association="nexDeskDbModel.FK_CustomPreSlaExpirationNotifications_to_UserSetting" />
         <AssociationConnector Association="nexDeskDbModel.FK_Retailers_Dealers" />
         <AssociationConnector Association="nexDeskDbModel.FK_Tickets_ToGroups" />
-        <AssociationConnector Association="nexDeskDbModel.FK_TicketHistories_ToHistoryActions" />
         <AssociationConnector Association="nexDeskDbModel.FK_Notifications_To_Creator" />
         <AssociationConnector Association="nexDeskDbModel.FK_Notifications_To_NotificationType" />
         <AssociationConnector Association="nexDeskDbModel.FK_Notifications_To_Owner" />
-        <AssociationConnector Association="nexDeskDbModel.FK_Notifications_To_Ticket" />
         <AssociationConnector Association="nexDeskDbModel.FK_ProductCategories_ToItself" />
         <AssociationConnector Association="nexDeskDbModel.FK_Products_ToProductCategories" />
         <AssociationConnector Association="nexDeskDbModel.FK_Tickets_ToProducts" />
@@ -55,15 +47,10 @@
         <AssociationConnector Association="nexDeskDbModel.FK_Settings_ToUsers" />
         <AssociationConnector Association="nexDeskDbModel.FK_Solutionists_ToUser" />
         <AssociationConnector Association="nexDeskDbModel.FK_Tickets_ToStatus" />
-        <AssociationConnector Association="nexDeskDbModel.FK_TicketHistories_ToTickets" />
-        <AssociationConnector Association="nexDeskDbModel.FK_TicketHistories_ToUsers" />
-        <AssociationConnector Association="nexDeskDbModel.FK_TicketPosts_ToTickets" />
-        <AssociationConnector Association="nexDeskDbModel.FK_TicketPosts_ToUsers" />
         <AssociationConnector Association="nexDeskDbModel.FK_Tickets_ToAuthor" />
         <AssociationConnector Association="nexDeskDbModel.FK_Tickets_ToCreatedBy" />
         <AssociationConnector Association="nexDeskDbModel.FK_Tickets_ToSolutionist" />
         <AssociationConnector Association="nexDeskDbModel.FK_Tickets_ToTicketTypes" />
-        <AssociationConnector Association="nexDeskDbModel.FK_TicketSla_ToTickets" />
         <AssociationConnector Association="nexDeskDbModel.FK_TravelDestinations_ToTravelRegions" />
         <AssociationConnector Association="nexDeskDbModel.FK_TravelEvents_ToTravelDestinations" />
         <AssociationConnector Association="nexDeskDbModel.FK_webpages_Membership_ToUsers" />

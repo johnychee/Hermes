@@ -102,41 +102,6 @@
                      
                         <ul class="dropdown-menu media-list pull-right animated fadeInDown">
                             <li class="dropdown-header">New notifications (@newNotifications.Count())</li>
-                            @foreach (Notification notification in Notification.GetLastFiveNew(current_user.id))
-                            {
-                                <li class="media">
-                                    @{ string link = (notification.TicketId != null) ? String.Format("/Ticket/Details/{0}", notification.TicketId) : "javascript:;"; }
-                                    <a href="@link">
-                                        @if (notification.NotificationsType.Name == NotificationType.SLA.ToString())
-                                        {
-                                            <div class="pull-left media-object bg-red"><i class="fa fa-bolt"></i></div>
-                                        }
-                                        else if (notification.NotificationsType.Name == NotificationType.Emailing.ToString())
-                                        {
-                                            <div class="pull-left media-object bg-green-lighter"><i class="fa fa-envelope"></i></div>
-                                        }
-                                        else if (notification.NotificationsType.Name == NotificationType.System.ToString())
-                                        {
-                                            <div class="pull-left media-object bg-aqua-darker"><i class="fa fa-info"></i></div>
-                                        }
-                                        else if (notification.NotificationsType.Name == NotificationType.TicketFlow.ToString())
-                                        {
-                                            <div class="pull-left media-object bg-yellow-darker"><i class="fa fa-flag"></i></div>
-                                        }
-                                        @*
-                                else if (notification.Creator.webpages_Roles.First().RoleName == "System")
-                                {
-                                    <div class="pull-left"><img src="@notification.Creator.profilePictureUrl" class="media-object" alt="" /></div>
-                                }
-                                        *@
-                                        <div class="media-body">
-                                            <h6 class="media-heading">@notification.Subject</h6>
-                                            <div class="text-muted">@notification.createdAgo</div>
-                                            <input type="hidden" name="id" value="@notification.Id" />
-                                        </div>
-                                    </a>
-                                </li>
-                            }
                             <li class="dropdown-footer text-center">
                                 @Html.ActionLink("View more", "Index", "Notification")
                             </li>

@@ -14,14 +14,6 @@ namespace TestWebApp.Models
     
     public partial class Ticket
     {
-        public Ticket()
-        {
-            this.Attachments = new HashSet<Attachment>();
-            this.Notifications = new HashSet<Notification>();
-            this.TicketHistories = new HashSet<TicketHistory>();
-            this.TicketPosts = new HashSet<TicketPost>();
-        }
-    
         public int id { get; set; }
         public string ticketId { get; set; }
         public int authorId { get; set; }
@@ -36,17 +28,12 @@ namespace TestWebApp.Models
         public Nullable<System.DateTime> completedAt { get; set; }
         public Nullable<int> typeId { get; set; }
     
-        public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual Group Group { get; set; }
-        public virtual ICollection<Notification> Notifications { get; set; }
         public virtual Product Product { get; set; }
         public virtual Status Status { get; set; }
-        public virtual ICollection<TicketHistory> TicketHistories { get; set; }
-        public virtual ICollection<TicketPost> TicketPosts { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
         public virtual TicketType TicketType { get; set; }
-        public virtual TicketSla TicketSla { get; set; }
     }
 }

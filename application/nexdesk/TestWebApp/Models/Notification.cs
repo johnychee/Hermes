@@ -21,12 +21,10 @@ namespace TestWebApp.Models
         public int CreatorId { get; set; }
         public int NotificationTypeId { get; set; }
         public System.DateTime CreatedAt { get; set; }
-        public Nullable<int> TicketId { get; set; }
         public bool Readed { get; set; }
     
         public virtual User User { get; set; }
         public virtual NotificationsType NotificationsType { get; set; }
         public virtual User User1 { get; set; }
-        public virtual Ticket Ticket { get; set; }
     }
 }

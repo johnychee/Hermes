@@ -10,11 +10,11 @@ namespace TestWebApp.Models
         private static readonly HelpDeskEntities _helpDeskEntities = new HelpDeskEntities();
 
         #region public methods
-        public static void CreateSLANotification(int ownerId, string subject, string text, int ticketId)
+        public static void CreateSLANotification(int ownerId, string subject, string text)
         {
             Notification newNotification = CreateNotification(ownerId, 
                 _helpDeskEntities.Users.First(u => u.webpages_Roles.FirstOrDefault().RoleName == "System").id,
-                 subject, text, ticketId);
+                 subject, text);
             newNotification.NotificationTypeId =
                 _helpDeskEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.SLA.ToString()).Id;
 
@@ -22,11 +22,11 @@ namespace TestWebApp.Models
             _helpDeskEntities.SaveChanges();
         }
 
-        public static void CreateSystemNotification(int ownerId, string subject, string text, int? ticketId = null)
+        public static void CreateSystemNotification(int ownerId, string subject, string text)
         {
             Notification newNotification = CreateNotification(ownerId, 
                 _helpDeskEntities.Users.First(u => u.webpages_Roles.FirstOrDefault().RoleName == "System").id,
-                 subject, text, ticketId);
+                 subject, text);
             newNotification.NotificationTypeId =
                 _helpDeskEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.System.ToString()).Id;
 
@@ -34,9 +34,9 @@ namespace TestWebApp.Models
             _helpDeskEntities.SaveChanges();
         }
 
-        public static void CreateEmailingNotification(int ownerId, int creatorId, string subject, string text, int? ticketId = null)
+        public static void CreateEmailingNotification(int ownerId, int creatorId, string subject, string text)
         {
-            Notification newNotification = CreateNotification(ownerId, creatorId, subject, text, ticketId);
+            Notification newNotification = CreateNotification(ownerId, creatorId, subject, text);
             newNotification.NotificationTypeId =
                 _helpDeskEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.Emailing.ToString()).Id;
 
@@ -44,9 +44,9 @@ namespace TestWebApp.Models
             _helpDeskEntities.SaveChanges();
         }
 
-        public static void CreateTicketFlowNotification(int ownerId, int creatorId, string subject, string text, int ticketId)
+        public static void CreateTicketFlowNotification(int ownerId, int creatorId, string subject, string text)
         {
-            Notification newNotification = CreateNotification(ownerId, creatorId, subject, text, ticketId);
+            Notification newNotification = CreateNotification(ownerId, creatorId, subject, text);
             newNotification.NotificationTypeId =
                 _helpDeskEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.TicketFlow.ToString()).Id;
 
@@ -56,7 +56,7 @@ namespace TestWebApp.Models
         #endregion
 
         #region private methods
-        private static Notification CreateNotification(int ownerId, int creatorId, string subject, string text, int? ticketId = null)
+        private static Notification CreateNotification(int ownerId, int creatorId, string subject, string text)
         {
             return new Notification()
             {
@@ -65,7 +65,6 @@ namespace TestWebApp.Models
                 Subject = subject,
                 Description = text,
                 CreatedAt = DateTime.UtcNow,
-                TicketId = ticketId
             };
         }
         #endregion

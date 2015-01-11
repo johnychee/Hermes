@@ -16,11 +16,8 @@ namespace TestWebApp.Models
     {
         public User()
         {
-            this.Attachments = new HashSet<Attachment>();
             this.Notifications = new HashSet<Notification>();
             this.Notifications1 = new HashSet<Notification>();
-            this.TicketHistories = new HashSet<TicketHistory>();
-            this.TicketPosts = new HashSet<TicketPost>();
             this.Tickets = new HashSet<Ticket>();
             this.Tickets1 = new HashSet<Ticket>();
             this.Tickets2 = new HashSet<Ticket>();
@@ -38,15 +35,12 @@ namespace TestWebApp.Models
         public bool isSystem { get; set; }
         public Nullable<bool> isPasswordConfirmed { get; set; }
     
-        public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Notification> Notifications1 { get; set; }
         public virtual Region Region { get; set; }
         public virtual Retailer Retailer { get; set; }
         public virtual Setting Setting { get; set; }
         public virtual Solutionist Solutionist { get; set; }
-        public virtual ICollection<TicketHistory> TicketHistories { get; set; }
-        public virtual ICollection<TicketPost> TicketPosts { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual ICollection<Ticket> Tickets1 { get; set; }
         public virtual ICollection<Ticket> Tickets2 { get; set; }

@@ -183,7 +183,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BlobStorageService.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\ContactPersonController.cs" />
     <Compile Include="Controllers\DealerController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
@@ -197,12 +196,8 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\TravelEventController.cs" />
-    <Compile Include="Controllers\WorkstationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Attachment.cs">
-      <DependentUpon>HelpDeskEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Company.cs">
       <DependentUpon>HelpDeskEntities.tt</DependentUpon>
@@ -283,22 +278,10 @@
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>HelpDeskEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TicketHistory.cs">
-      <DependentUpon>HelpDeskEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketPost.cs">
-      <DependentUpon>HelpDeskEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketSla.cs">
-      <DependentUpon>HelpDeskEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketSla_.cs" />
     <Compile Include="Models\Notification_.cs" />
     <Compile Include="Models\TicketType.cs">
       <DependentUpon>HelpDeskEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TicketType_.cs" />
-    <Compile Include="Models\Ticket_.cs" />
     <Compile Include="Models\TravelDestination.cs">
       <DependentUpon>HelpDeskEntities.tt</DependentUpon>
     </Compile>
@@ -2122,17 +2105,12 @@
     <Content Include="Views\ImportFiles\Index.cshtml" />
     <Content Include="Views\User\Export.cshtml" />
     <Content Include="Views\User\Import.cshtml" />
-    <Content Include="Views\Attachment\Index.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
     <Content Include="Views\Region\Create.cshtml" />
     <Content Include="Views\Region\Details.cshtml" />
     <Content Include="Views\Region\Edit.cshtml" />
-    <Content Include="Views\Workstation\Create.cshtml" />
-    <Content Include="Views\Workstation\Details.cshtml" />
-    <Content Include="Views\Workstation\Index.cshtml" />
-    <Content Include="Views\Workstation\Edit.cshtml" />
     <Content Include="Views\Dealer\Create.cshtml" />
     <Content Include="Views\Dealer\Details.cshtml" />
     <Content Include="Views\Dealer\Index.cshtml" />

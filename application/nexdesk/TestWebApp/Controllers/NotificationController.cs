@@ -28,7 +28,6 @@ namespace TestWebApp.Controllers
             {
                 Dictionary<string, string> JSONnotification = new Dictionary<string, string>();
                 JSONnotification["Id"] = notification.Id.ToString();
-                JSONnotification["ticketId"] = notification.TicketId.ToString();
                 JSONnotification["NotificationType"] = notification.NotificationsType.Name;
                 JSONnotification["Subject"] = notification.Subject;
                 JSONnotification["CreatedAgo"] = notification.createdAgo;
