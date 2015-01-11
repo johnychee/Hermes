@@ -9,7 +9,7 @@
 <ul class="nav">
     <li class="nav-header">Navigation</li>
     <li>
-        <a href="/"><i class="fa fa-newspaper-o"></i> <span>Overview</span></a>
+        <a href="/"><i class="fa fa-newspaper-o"></i> <span>Úvodní strana</span></a>
     </li>
     <li class="has-sub @(ViewContext.Controller.GetType().Name == "TicketController" ? "active" : "")">
 
@@ -20,11 +20,11 @@
         <a href="javascript:;">
             <i class="fa fa-group"></i>
             <b class="caret pull-right"></b>
-            <span>Skupiny</span>
+            <span>Pobočky</span>
         </a>
         <ul class="sub-menu">
-            <li>@Html.ActionLink("Mé skupiny", "List_My_Groups", "Group")</li>
-            <li>@Html.ActionLink("Všechny skupiny", "Index", "Group")</li>
+            <li>@Html.ActionLink("Mé pobočky", "List_My_Groups", "Group")</li>
+            <li>@Html.ActionLink("Všechny pobočky", "Index", "Group")</li>
                
         </ul>
     </li>
@@ -127,7 +127,7 @@
         <a href="javascript:;">
             <i class="fa fa-male"></i>
             <b class="caret pull-right"></b>
-            <span>Contact Persons</span>
+            <span>Důležité kontaktní osoby</span>
         </a>
         <ul class="sub-menu">
             <li>@Html.ActionLink("Všechny kontakty", "Index", "ContactPerson")</li>

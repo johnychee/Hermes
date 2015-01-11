@@ -65,7 +65,7 @@ namespace TestWebApp.Controllers
             HelpDeskEntities hDesk = new HelpDeskEntities();
             if (ModelState.IsValid)
             {
-                TravelEvent ws = new TravelEvent();
+                TravelEvent ws = hDesk.TravelEvents.FirstOrDefault(te=>te.Id == id);
                 ws.Name = model.Name;
                 ws.Description = model.Description;
                 ws.Price = model.Price;

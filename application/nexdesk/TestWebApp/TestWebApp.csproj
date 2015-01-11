@@ -195,7 +195,6 @@
     <Compile Include="Controllers\TravelRegionController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\TravelEventController.cs" />
     <Compile Include="Controllers\WorkstationController.cs" />
@@ -2101,10 +2100,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\UserDetails.cshtml" />
     <Content Include="Views\Account\SuperUserPanel.cshtml" />
-    <Content Include="Views\Ticket\Create.cshtml" />
-    <Content Include="Views\Ticket\Index.cshtml" />
-    <Content Include="Views\Ticket\Details.cshtml" />
-    <Content Include="Views\Home\IndexUser.cshtml" />
     <Content Include="Views\Home\IndexSuperUser.cshtml" />
     <Content Include="Views\Home\IndexSupport.cshtml" />
     <Content Include="Views\Account\EditorTemplates\UsersViewModel.cshtml" />
@@ -2116,7 +2111,6 @@
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\Details.cshtml" />
     <Content Include="Views\Group\Create.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
@@ -2130,10 +2124,7 @@
     <Content Include="Views\User\Import.cshtml" />
     <Content Include="Views\Attachment\Index.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
-    <Content Include="Views\Ticket\Transmit.cshtml" />
-    <Content Include="Views\Home\NexDeskDashboard.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
-    <Content Include="Views\Ticket\ChangeType.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
     <Content Include="Views\Region\Create.cshtml" />
     <Content Include="Views\Region\Details.cshtml" />
@@ -2150,12 +2141,9 @@
     <Content Include="Views\ContactPerson\Details.cshtml" />
     <Content Include="Views\ContactPerson\Edit.cshtml" />
     <Content Include="Views\ContactPerson\Index.cshtml" />
-    <Content Include="Views\Ticket\AssignToUser.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\User\_LayoutAnonymous.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
-    <Content Include="Views\Ticket\Refuse.cshtml" />
-    <Content Include="Views\Ticket\Reclaim.cshtml" />
     <Content Include="Views\TravelEvent\Index.cshtml" />
     <Content Include="Views\TravelEvent\Details.cshtml" />
     <Content Include="Views\TravelEvent\Create.cshtml" />

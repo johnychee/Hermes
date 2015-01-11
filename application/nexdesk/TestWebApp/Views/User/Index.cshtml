@@ -34,9 +34,6 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Role</th>
-                        <th>Tickets created</th>
-                        <th>Tickets accepted</th>
                         <th>Active</th>
                     </tr>
                 </thead>
@@ -47,9 +44,6 @@
                         { 
                         <tr>
                             <td>@Html.ActionLink(user.fullName, "Details", new { @id = user.id })</td>
-                            <td>@user.webpages_Roles.First().RoleName</td>
-                            <td>@user.Tickets.Count()</td>
-                            <td>@Ticket.getAccepted_byUser(user.id).Count()</td>
                             <td>@(user.webpages_Membership.IsConfirmed ? "Active" : "Inactive")</td>
                         </tr>
                         }

@@ -14,27 +14,20 @@
             <div class="widget widget-stats bg-green">
                 <div class="stats-icon"><i class="fa fa-file-o"></i></div>
                 <div class="stats-info">
-                    <h4>New Tickets</h4>
+                    <h4>Nové zájezdy</h4>
                     <p>(@ViewBag.NewIssuesCount)</p>
                 </div>
                 <div class="stats-link">
-                    <a href="@Url.Action("List_New", "Ticket")">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+                    <a href="@Url.Action("Index", "TravelEvent")">Prohlédnout nové zájezdy <i class="fa fa-arrow-circle-o-right"></i></a>
                 </div>
 
                 <ul class="list-group">
-                    @foreach (Ticket ticket in ViewBag.NewIssues)
+                    @foreach (TravelEvent travelEvent in ViewBag.NewTravelEvents)
                     {
-                        <li class="list-group-item">@Html.ActionLink(String.Format("{0} | {1} | {2}", ticket.ticketId, ticket.subject,ticket.TimeAgo(ticket.createdAt)), "Details/" + ticket.id, "Ticket")</li>
+                        <li class="list-group-item">@Html.ActionLink(String.Format("{0}", travelEvent.Name), "Details/" + travelEvent.Id, "TravelEvent")</li>
                     }
                 </ul>
-                @if (ViewBag.NewIssuesCount > 10)
-                {
-                    @Html.PagedListPager((IPagedList<Ticket>)ViewBag.NewIssues, pageNew => Url.Action("Index/", new { pageNew, pageAssigned = Request.QueryString["pageAssigned"], pageAccepted = Request.QueryString["pageAccepted"] }))
-                }
-
             </div>
-
-
         </div>
     }
 
@@ -42,64 +35,20 @@
         <div class="widget widget-stats bg-blue">
             <div class="stats-icon"><i class="fa fa-file-text-o"></i></div>
             <div class="stats-info">
-                <h4>Assigned Tickets</h4>
-                <p>(@ViewBag.AssignedToGroupCount)</p>
+                <h4>Zlevněné zájezdy</h4>
+                <p>(@ViewBag.DiscountedTravelEventsCount)</p>
             </div>
             <div class="stats-link">
-                <a href="@Url.Action("List_Assigned_To_Group", "Ticket")">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
+                <a href="@Url.Action("Index", "TravelEvent")">Prohlédnout zlevněné zájezdy <i class="fa fa-arrow-circle-o-right"></i></a>
             </div>
 
             <ul class="list-group">
-                @foreach (Ticket ticket in (IPagedList<Ticket>)ViewBag.AssignedToGroup)
+                @foreach (TravelEvent travelEvent in ViewBag.DiscountedTravelEvents)
                 {
-                    <li class="list-group-item">@Html.ActionLink(String.Format("{0} | {1} | {2}", ticket.ticketId, ticket.subject, ticket.TimeAgo(ticket.createdAt)), "Details/" + ticket.id, "Ticket")</li>
+                    <li class="list-group-item">@Html.ActionLink(String.Format("{0}", travelEvent.Name), "Details/" + travelEvent.Id, "TravelEvent")</li>
+                    break;
                 }
             </ul>
-            @if (ViewBag.AssignedToGroupCount > 10)
-            {
-                @Html.PagedListPager((IPagedList<Ticket>)ViewBag.AssignedToGroup, pageAssigned => Url.Action("Index/", new { pageAssigned, pageNew = Request.QueryString["pageNew"], pageAccepted = Request.QueryString["pageAccepted"] }))
-            }
-
-
-
-
-        </div>
-    </div>
-    @*<div class="col-md-3">
-        <div class="widget widget-stats bg-blue">
-            <div class="stats-icon"><i class="fa fa-file-text-o"></i></div>
-            <div class="stats-info">
-                <h4>Assigned Tickets To Me</h4>
-                <p>@ViewBag.countAssignedToUserIssues</p>
-            </div>
-            <div class="stats-link">
-                <a href="@Url.Action("List_Assigned_To_User", "Ticket")">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
-            </div>
-        </div>
-    </div>*@
-    <div class="col-md-4">
-        <div class="widget widget-stats bg-purple">
-            <div class="stats-icon"><i class="fa fa-file-text"></i></div>
-            <div class="stats-info">
-                <h4>Accepted Tickets</h4>
-                <p>(@ViewBag.AcceptedIssuesCount)</p>
-            </div>
-            <div class="stats-link">
-                <a href="@Url.Action("List_Accepted", "Ticket")">View Detail <i class="fa fa-arrow-circle-o-right"></i></a>
-            </div>
-
-            <ul class="list-group">
-                @foreach (Ticket ticket in (IPagedList<Ticket>)ViewBag.AcceptedIssues)
-                {
-                    <li class="list-group-item">@Html.ActionLink(String.Format("{0} | {1} | {2}", ticket.ticketId, ticket.subject, ticket.TimeAgo(ticket.createdAt)), "Details/" + ticket.id, "Ticket")</li>
-                }
-            </ul>
-            @if (ViewBag.AcceptedIssuesCount > 10)
-            {
-                @Html.PagedListPager((IPagedList<Ticket>)ViewBag.AcceptedIssues, pageAccepted => Url.Action("Index/", new { pageAccepted, pageNew = Request.QueryString["pageNew"], pageAssigned = Request.QueryString["pageAssigned"] }))
-            }
-
-
         </div>
     </div>
 </div>

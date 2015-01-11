@@ -113,14 +113,6 @@
             </div>
            }
 
-
-            <div class="form-group">
-                <label for="role" class="col-md-3 control-label ui-sortable">Role:</label>
-                <div class="col-md-9 ui-sortable">
-                    @Html.TextBox("role", userEditing.webpages_Roles.First().fullname, new { @class = "form-control", @disabled = "true" })
-                 </div>
-            </div>
-
             <div class="form-group">
                 <label for="regionId" class="col-md-3 control-label ui-sortable">Region:</label>
                 <div class="col-md-9 ui-sortable">
@@ -128,12 +120,6 @@
                  </div>
             </div>
 
-            <div class="form-group">
-                <label for="regionId" class="col-md-3 control-label ui-sortable">TeamViewer Id:</label>
-                <div class="col-md-9 ui-sortable">
-                    @Html.TextBoxFor(model => model.eSolutionistViewModel.teamViewerId, new { @Value = userEditing.Solutionist.teamviewerID,@class = "form-control" })
-                </div>
-            </div>
             <div class="form-group">
                 <label for="name" class="col-md-3 control-label ui-sortable">Phone:</label>
                 <div class="col-md-9 ui-sortable">
