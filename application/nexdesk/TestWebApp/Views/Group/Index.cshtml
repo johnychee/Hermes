@@ -3,7 +3,7 @@
 @{
     HelpDeskEntities hDesk = new HelpDeskEntities();
     User current_user = hDesk.Users.SingleOrDefault(u=>u.id == WebSecurity.CurrentUserId);
-    ViewBag.Title = "Support Groups";
+    ViewBag.Title = "Pobočky";
 
     ViewBag.Parents = new LinkedList<KeyValuePair<string, string>>();
     ViewBag.Parents.AddLast(new KeyValuePair<string, string>("List", null));
@@ -17,26 +17,15 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Support Level</th>
-                    <th>Members</th>
-                    <th>Tickets</th>
+                    <th>Jméno pobočky</th>
+                    <th>Počet uživatelů</th>
                 </tr>
             </thead>
             @foreach (Group group in Model)
             {
                 <tr>
                     <td>@Html.ActionLink(group.name, "Details", new { id = group.id })</td>
-                    <td>@group.level</td>
                     <td>@group.Users.Count</td>
-                    @if(@group.Tickets != null)
-                    { 
-                        <td>@group.Tickets.Count</td>
-                    }
-                    else
-                    {
-                        <td>None</td>
-                    }
                 </tr>
             }
         </table>

@@ -2133,7 +2133,6 @@
     <Content Include="Views\Ticket\Transmit.cshtml" />
     <Content Include="Views\Home\NexDeskDashboard.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
-    <Content Include="Views\Search\GlobalSearch.cshtml" />
     <Content Include="Views\Ticket\ChangeType.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
     <Content Include="Views\Region\Create.cshtml" />
@@ -2161,6 +2160,7 @@
     <Content Include="Views\TravelEvent\Details.cshtml" />
     <Content Include="Views\TravelEvent\Create.cshtml" />
     <Content Include="Views\TravelRegion\Index.cshtml" />
+    <Content Include="Views\Search\GlobalSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
