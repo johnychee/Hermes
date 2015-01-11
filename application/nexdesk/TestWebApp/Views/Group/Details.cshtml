@@ -57,15 +57,6 @@
                 @Html.TextBox("Level", Model.level, new { type = "number", @class = "form-control", @disabled = "true" })
             </div>
         </div>
-        if(@Model.Tickets != null)
-        { 
-            <div class="form-group">
-                <label class="col-md-1 control-label ui-sortable">Tickets:</label>
-                <div class="col-md-1 ui-sortable">
-                    @Html.ActionLink(@Model.Tickets.Count.ToString(), "List_Groups_Tickets", "Ticket", new {@group_id = @Model.id}, new { @class = "form-control", target = "_blank" })
-                </div>
-            </div>
-        }
         <div class="form-group">
             <label class="col-md-1 control-label ui-sortable">Members:</label>
             <div class="col-md-4 ui-sortable">
