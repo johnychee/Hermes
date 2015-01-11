@@ -1,0 +1,69 @@
+﻿@using System.Security.Cryptography
+@using TestWebApp.Models
+@model TestWebApp.Models.TravelEvent
+@{
+    ViewBag.Title = "Vytvoř nový zájezd";
+    List<SelectListItem> Destinace = new List<SelectListItem>();
+    foreach (TravelDestination destination in ViewBag.Destinations)
+    {
+        Destinace.Add(new SelectListItem()
+        {
+            Text = destination.Name,
+            Value = destination.Name
+        });
+    }
+}
+
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Nový zájezd</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                @using (@Html.BeginForm("Create", "TravelEvent", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+                        <label for="name" class="col-md-3 control-label ui-sortable">Jméno zájezdu:</label>
+                        <div class="col-md-9 ui-sortable">
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="wsOwner" class="col-md-3 control-label ui-sortable">Popis:</label>
+                        <div class="col-md-9 ui-sortable">
+                            @Html.TextBoxFor(model => model.Description, new {  @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="manufacturer" class="col-md-3 control-label ui-sortable">Destinace:</label>
+                        <div class="col-md-9 ui-sortable">
+                            @Html.DropDownList("destination", Destinace, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="os" class="col-md-3 control-label ui-sortable">Cena jednotlivce:</label>
+                        <div class="col-md-9 ui-sortable">
+                            @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="os" class="col-md-3 control-label ui-sortable">Kapacita zájezdu:</label>
+                        <div class="col-md-9 ui-sortable">
+                            @Html.TextBoxFor(model => model.Capacity, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Register</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -46,6 +46,9 @@ namespace TestWebApp.Models
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<TicketSla> TicketSlas { get; set; }
         public virtual DbSet<TicketType> TicketTypes { get; set; }
+        public virtual DbSet<TravelDestination> TravelDestinations { get; set; }
+        public virtual DbSet<TravelEvent> TravelEvents { get; set; }
+        public virtual DbSet<TravelRegion> TravelRegions { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<webpages_Membership> webpages_Membership { get; set; }
         public virtual DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }

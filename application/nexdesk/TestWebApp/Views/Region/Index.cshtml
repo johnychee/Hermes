@@ -14,16 +14,12 @@
              <table class="table">
                  <tr>
                      <th>Name</th>
-                    <th>Response time in minutes</th>
-                     <th>Fix time in minutes</th>
                      <th>Utc time difference</th>
                  </tr>
                  @foreach (Region region in ViewBag.Regions )
                  { 
                  <tr>
                      <td>@Html.ActionLink(@region.name,"Details/"+@region.id)</td>
-                     <td>@region.RT_minutes</td>
-                     <td>@region.FT_minutes</td>
                      <td>@region.UTCtimeShift</td>
                  </tr>
                  }

@@ -1,0 +1,31 @@
+﻿@using TestWebApp.Models
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    HelpDeskEntities hDesk = new HelpDeskEntities();
+    ViewBag.Title = "Cestovní regiony";
+}
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Zájezdy</h4>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Jméno</th>
+                    <th>Popis</th>
+                </tr>
+                @foreach (TravelRegion te in ViewBag.TravelRegions)
+                {
+                    <tr>
+                        <td>@te.Name</td>
+                        <td>@te.Description</td>
+                    </tr>
+                }
+            </table>
+            @Html.PagedListPager((IPagedList<TravelRegion>)ViewBag.TravelRegions, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { page }))
+
+        </div>
+    </div>
+</div>

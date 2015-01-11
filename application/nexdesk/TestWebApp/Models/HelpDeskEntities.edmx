@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="nexDeskDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="nexDeskDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Attachments">
           <Key>
             <PropertyRef Name="id" />
@@ -226,6 +226,34 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TravelDestinations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="TravelRegionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TravelEvents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+          <Property Name="TravelDestinationId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TravelRegions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -676,6 +704,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TravelDestinations_ToTravelRegions">
+          <End Role="TravelRegions" Type="Self.TravelRegions" Multiplicity="1" />
+          <End Role="TravelDestinations" Type="Self.TravelDestinations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelRegions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TravelDestinations">
+              <PropertyRef Name="TravelRegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TravelEvents_ToTravelDestinations">
+          <End Role="TravelDestinations" Type="Self.TravelDestinations" Multiplicity="1" />
+          <End Role="TravelEvents" Type="Self.TravelEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelDestinations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TravelEvents">
+              <PropertyRef Name="TravelDestinationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_UserId">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
@@ -735,6 +787,9 @@
           <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketSla" EntityType="Self.TicketSla" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketTypes" EntityType="Self.TicketTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TravelDestinations" EntityType="Self.TravelDestinations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TravelEvents" EntityType="Self.TravelEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TravelRegions" EntityType="Self.TravelRegions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
@@ -869,6 +924,14 @@
             <End Role="Tickets" EntitySet="Tickets" />
             <End Role="TicketSla" EntitySet="TicketSla" />
           </AssociationSet>
+          <AssociationSet Name="FK_TravelDestinations_ToTravelRegions" Association="Self.FK_TravelDestinations_ToTravelRegions">
+            <End Role="TravelRegions" EntitySet="TravelRegions" />
+            <End Role="TravelDestinations" EntitySet="TravelDestinations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelEvents_ToTravelDestinations" Association="Self.FK_TravelEvents_ToTravelDestinations">
+            <End Role="TravelDestinations" EntitySet="TravelDestinations" />
+            <End Role="TravelEvents" EntitySet="TravelEvents" />
+          </AssociationSet>
           <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
             <End Role="Users" EntitySet="Users" />
             <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
@@ -908,6 +971,9 @@
           <EntitySet Name="Tickets" EntityType="nexDeskDbModel.Ticket" />
           <EntitySet Name="TicketSlas" EntityType="nexDeskDbModel.TicketSla" />
           <EntitySet Name="TicketTypes" EntityType="nexDeskDbModel.TicketType" />
+          <EntitySet Name="TravelDestinations" EntityType="nexDeskDbModel.TravelDestination" />
+          <EntitySet Name="TravelEvents" EntityType="nexDeskDbModel.TravelEvent" />
+          <EntitySet Name="TravelRegions" EntityType="nexDeskDbModel.TravelRegion" />
           <EntitySet Name="Users" EntityType="nexDeskDbModel.User" />
           <EntitySet Name="webpages_Membership" EntityType="nexDeskDbModel.webpages_Membership" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="nexDeskDbModel.webpages_OAuthMembership" />
@@ -1032,6 +1098,14 @@
           <AssociationSet Name="FK_TicketSla_ToTickets" Association="nexDeskDbModel.FK_TicketSla_ToTickets">
             <End Role="Ticket" EntitySet="Tickets" />
             <End Role="TicketSla" EntitySet="TicketSlas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelDestinations_ToTravelRegions" Association="nexDeskDbModel.FK_TravelDestinations_ToTravelRegions">
+            <End Role="TravelRegion" EntitySet="TravelRegions" />
+            <End Role="TravelDestination" EntitySet="TravelDestinations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelEvents_ToTravelDestinations" Association="nexDeskDbModel.FK_TravelEvents_ToTravelDestinations">
+            <End Role="TravelDestination" EntitySet="TravelDestinations" />
+            <End Role="TravelEvent" EntitySet="TravelEvents" />
           </AssociationSet>
           <AssociationSet Name="FK_webpages_Membership_ToUsers" Association="nexDeskDbModel.FK_webpages_Membership_ToUsers">
             <End Role="User" EntitySet="Users" />
@@ -1307,6 +1381,38 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Tickets" Relationship="nexDeskDbModel.FK_Tickets_ToTicketTypes" FromRole="TicketType" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="TravelDestination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TravelRegionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TravelRegion" Relationship="nexDeskDbModel.FK_TravelDestinations_ToTravelRegions" FromRole="TravelDestination" ToRole="TravelRegion" />
+          <NavigationProperty Name="TravelEvents" Relationship="nexDeskDbModel.FK_TravelEvents_ToTravelDestinations" FromRole="TravelDestination" ToRole="TravelEvent" />
+        </EntityType>
+        <EntityType Name="TravelEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="TravelDestinationId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TravelDestination" Relationship="nexDeskDbModel.FK_TravelEvents_ToTravelDestinations" FromRole="TravelEvent" ToRole="TravelDestination" />
+        </EntityType>
+        <EntityType Name="TravelRegion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TravelDestinations" Relationship="nexDeskDbModel.FK_TravelDestinations_ToTravelRegions" FromRole="TravelRegion" ToRole="TravelDestination" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1743,6 +1849,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TravelDestinations_ToTravelRegions">
+          <End Type="nexDeskDbModel.TravelRegion" Role="TravelRegion" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TravelDestination" Role="TravelDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelRegion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TravelDestination">
+              <PropertyRef Name="TravelRegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TravelEvents_ToTravelDestinations">
+          <End Type="nexDeskDbModel.TravelDestination" Role="TravelDestination" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TravelEvent" Role="TravelEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelDestination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TravelEvent">
+              <PropertyRef Name="TravelDestinationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_webpages_Membership_ToUsers">
           <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
           <End Type="nexDeskDbModel.webpages_Membership" Role="webpages_Membership" Multiplicity="0..1" />
@@ -2001,6 +2131,37 @@
               <MappingFragment StoreEntitySet="TicketTypes">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TravelDestinations">
+            <EntityTypeMapping TypeName="nexDeskDbModel.TravelDestination">
+              <MappingFragment StoreEntitySet="TravelDestinations">
+                <ScalarProperty Name="TravelRegionId" ColumnName="TravelRegionId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TravelEvents">
+            <EntityTypeMapping TypeName="nexDeskDbModel.TravelEvent">
+              <MappingFragment StoreEntitySet="TravelEvents">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TravelDestinationId" ColumnName="TravelDestinationId" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TravelRegions">
+            <EntityTypeMapping TypeName="nexDeskDbModel.TravelRegion">
+              <MappingFragment StoreEntitySet="TravelRegions">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -21,18 +21,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label ui-sortable">Response time in minutes:</label>
-                <div class="col-md-4 ui-sortable">
-                    @Html.TextBox("ResponseTimeInMinutes",Model.RT_minutes, new { type = "number", @class = "form-control", @disabled = "true" })
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label ui-sortable">Fix time in minutes:</label>
-                <div class="col-md-4 ui-sortable">
-                    @Html.TextBox("FixedTimeInMinutes",Model.FT_minutes, new { type = "number", @class = "form-control", @disabled = "true" })
-                </div>
-            </div>
-            <div class="form-group">
                 <label class="col-md-2 control-label ui-sortable">Utc time difference:</label>
                 <div class="col-md-4 ui-sortable">
                     @Html.TextBox("UtcTimeDifference", Model.UTCtimeShift, new { type = "number", @class = "form-control", @disabled = "true" })

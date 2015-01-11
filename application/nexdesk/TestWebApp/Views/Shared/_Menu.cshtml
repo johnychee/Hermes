@@ -12,78 +12,6 @@
         <a href="/"><i class="fa fa-newspaper-o"></i> <span>Overview</span></a>
     </li>
     <li class="has-sub @(ViewContext.Controller.GetType().Name == "TicketController" ? "active" : "")">
-        <a href="javascript:;">
-            <i class="fa fa-file-o"></i>
-            <b class="caret pull-right"></b>
-            <span>Tickets</span>
-        </a>
-
-        <ul class="sub-menu">
-            <li>@Html.ActionLink("Create Tickets", "Create", "Ticket")</li>
-            @if(current_user.Retailer == null)
-            { 
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret pull-right"></b>
-                    Ticket Repository
-                </a>
-                <ul class="sub-menu">
-                    <li>@Html.ActionLink("All Tickets", "Index", "Ticket")</li>
-                    <li>@Html.ActionLink("Refused Tickets", "List_Refused", "Ticket")</li>
-                    <li>@Html.ActionLink("In Progress Tickets", "List_notDone", "Ticket")</li>
-                    <li>@Html.ActionLink("Solved Tickets", "List_Done", "Ticket")</li>
-                </ul>
-            </li>
-            }
-           
-            @if(Roles.IsUserInRole("Support") && current_user.webpages_Roles.FirstOrDefault(r=> r.level ==1) != null)
-            { 
-                <li>@Html.ActionLink("New Tickets", "List_New", "Ticket")</li>
-            }
-
-            @if (Roles.IsUserInRole("Support"))
-            { 
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret pull-right"></b>
-                    My Tickets
-                </a>
-                <ul class="sub-menu">
-                    <li>@Html.ActionLink("Accepted", "List_Accepted", "Ticket")</li>
-                    <li>@Html.ActionLink("Assigned to me", "List_Assigned_To_User", "Ticket")</li>
-                    <li>@Html.ActionLink("Solved by me", "List_Solved_By_Me", "Ticket")</li>
-                </ul>
-            </li>
-            }
-            @if (Roles.IsUserInRole("Support"))
-            { 
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret pull-right"></b>
-                    Groups Tickets
-                </a>
-                <ul class="sub-menu">
-                    <li>@Html.ActionLink("Assigned Tickets", "List_Assigned_To_Group", "Ticket")</li>
-                    <li>@Html.ActionLink("Accepted Tickets", "List_Assigned_To_Group_Accepted", "Ticket")</li>
-                    <li>@Html.ActionLink("Done Tickets", "List_Assigned_To_Group_Done", "Ticket")</li>
-                </ul>
-            </li>
-            }
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret pull-right"></b>
-                    Own Tickets
-                </a>
-                <ul class="sub-menu">
-                    @if(!Roles.IsUserInRole("Retailer"))
-                    { 
-                    <li>@Html.ActionLink("Created Tickets For Others", "List_Created_by", "Ticket")</li>
-                    }
-                    <li>@Html.ActionLink("My Requests", "List_Own_Created", "Ticket")</li>
-                    <li>@Html.ActionLink("My Solved Tickets", "List_My_Done", "Ticket")</li>
-                </ul>
-            </li>
-        </ul>
 
 @if (Roles.IsUserInRole("Support"))
 {
@@ -92,11 +20,11 @@
         <a href="javascript:;">
             <i class="fa fa-group"></i>
             <b class="caret pull-right"></b>
-            <span>Groups</span>
+            <span>Skupiny</span>
         </a>
         <ul class="sub-menu">
-            <li>@Html.ActionLink("My Groups", "List_My_Groups", "Group")</li>
-            <li>@Html.ActionLink("All Groups", "Index", "Group")</li>
+            <li>@Html.ActionLink("Mé skupiny", "List_My_Groups", "Group")</li>
+            <li>@Html.ActionLink("Všechny skupiny", "Index", "Group")</li>
                
         </ul>
     </li>
@@ -107,12 +35,12 @@
         <a href="javascript:;">
             <i class="fa fa-group"></i>
             <b class="caret pull-right"></b>
-            <span>Groups</span>
+            <span>Skupiny</span>
         </a>
         <ul class="sub-menu">
             
-            <li>@Html.ActionLink("Create Groups", "Create", "Group")</li>
-            <li>@Html.ActionLink("All Groups", "Index", "Group")</li>
+            <li>@Html.ActionLink("Vytvoř skupinu", "Create", "Group")</li>
+            <li>@Html.ActionLink("Všechny skupiny", "Index", "Group")</li>
                
         </ul>
     </li>
@@ -124,10 +52,10 @@
         <a href="javascript:;">
             <i class="fa fa-user"></i>
             <b class="caret pull-right"></b>
-            <span>Users</span>
+            <span>Uživatelé</span>
         </a>
         <ul class="sub-menu">
-            <li>@Html.ActionLink("All Users", "Index", "User")</li>
+            <li>@Html.ActionLink("Ostatní uživatelé", "Index", "User")</li>
         </ul>
     </li>
 }
@@ -137,11 +65,11 @@
         <a href="javascript:;">
             <i class="fa fa-user"></i>
             <b class="caret pull-right"></b>
-            <span>Users</span>
+            <span>Uživatelé</span>
         </a>
         <ul class="sub-menu">
-            <li>@Html.ActionLink("All Users", "Index", "User")</li>
-            <li>@Html.ActionLink("Create Users", "Create", "User")</li>
+            <li>@Html.ActionLink("Uživatelé", "Index", "User")</li>
+            <li>@Html.ActionLink("Vytvoř uživatele", "Create", "User")</li>
 
         </ul>
     </li>
@@ -154,11 +82,11 @@
             <a href="javascript:;">
                 <i class="fa fa-suitcase"></i>
                 <b class="caret pull-right"></b>
-                <span>Catalog</span>
+                <span>Katalog zájezdů</span>
             </a>
             <ul class="sub-menu">
-                <li>@Html.ActionLink("All Products", "Index", "Product")</li>
-                <li>@Html.ActionLink("Create Products", "Create", "Product")</li>
+                <li>@Html.ActionLink("Všechny zájezdy", "Index", "TravelEvent")</li>
+                <li>@Html.ActionLink("Vytvoř zájezd", "Create", "Product")</li>
             </ul>
         </li>
 
@@ -169,10 +97,11 @@
             <a href="javascript:;">
                 <i class="fa fa-suitcase"></i>
                 <b class="caret pull-right"></b>
-                <span>Catalog</span>
+                <span>Katalog zájezdů</span>
             </a>
             <ul class="sub-menu">
-                <li>@Html.ActionLink("All Products", "Index", "Product")</li>
+                <li>@Html.ActionLink("Všechny zájezdy", "Index", "TravelEvent")</li>
+                <li>@Html.ActionLink("Vytvoř zájezd", "Create", "TravelEvent")</li>
             </ul>
         </li>
     }
@@ -181,47 +110,19 @@
         <a href="javascript:;">
             <i class="fa fa-circle"></i>
             <b class="caret pull-right"></b>
-            <span>Regions</span>
+            <span>Regiony</span>
         </a>
         <ul class="sub-menu">
 
-            <li>@Html.ActionLink("All Regions", "Index", "Region")</li>
+            <li>@Html.ActionLink("Všechny pobočkové regiony", "Index", "Region")</li>
             @if(Roles.IsUserInRole("SuperUser"))
             { 
-            <li>@Html.ActionLink("Create Regions", "Create", "Region")</li>
+            <li>@Html.ActionLink("Vytvoř region pro pobočky", "Create", "Region")</li>
             }
-        </ul>
-    </li>
-    <li class="has-sub @(ViewContext.Controller.GetType().Name == "WorkstationController" ? "active" : "")">
-        <a href="javascript:;">
-            <i class="fa fa-laptop"></i>
-            <b class="caret pull-right"></b>
-            <span>Workstations</span>
-        </a>
-        <ul class="sub-menu">
-
-            <li>@Html.ActionLink("All Workstations", "Index", "Workstation")</li>
-            @if (Roles.IsUserInRole("SuperUser"))
-            {
-                <li>@Html.ActionLink("Create Workstations", "Create", "Workstation")</li>
-            }
+            <li>@Html.ActionLink("Všechny regiony zájezdů", "Index", "TravelRegion")</li>
         </ul>
     </li>
 
-    <li class="has-sub @(ViewContext.Controller.GetType().Name == "DealerController" ? "active" : "")">
-        <a href="javascript:;">
-            <i class="fa fa-group"></i>
-            <b class="caret pull-right"></b>
-            <span>Customer Groups</span>
-        </a>
-        <ul class="sub-menu">
-            <li>@Html.ActionLink("All C.Groups", "Index", "Dealer")</li>
-            @if (Roles.IsUserInRole("SuperUser"))
-            {
-                <li>@Html.ActionLink("Create C.Groups", "Create", "Dealer")</li>
-            }
-        </ul>
-    </li>
     <li class="has-sub @(ViewContext.Controller.GetType().Name == "ContactPersonController" ? "active" : "")">
         <a href="javascript:;">
             <i class="fa fa-male"></i>
@@ -229,24 +130,11 @@
             <span>Contact Persons</span>
         </a>
         <ul class="sub-menu">
-            <li>@Html.ActionLink("All C.Persons", "Index", "ContactPerson")</li>
+            <li>@Html.ActionLink("Všechny kontakty", "Index", "ContactPerson")</li>
             @if (Roles.IsUserInRole("SuperUser"))
             {
-                <li>@Html.ActionLink("Create C.Person", "Create", "ContactPerson")</li>
+                <li>@Html.ActionLink("Vytvoř k. osobu", "Create", "ContactPerson")</li>
             }
-        </ul>
-    </li>
-
-    <li class="has-sub @(ViewContext.Controller.GetType().Name == "KnowledgeController" ? "active" : "")">
-        <a href="javascript:;">
-            <i class="fa fa-book"></i>
-            <b class="caret pull-right"></b>
-            <span>Knowledge Base</span>
-        </a>
-        <ul class="sub-menu">
-
-            <li><a href="javascript:;">Known Issues</a></li>
-
         </ul>
     </li>
 

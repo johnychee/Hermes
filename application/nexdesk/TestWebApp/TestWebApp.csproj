@@ -192,10 +192,12 @@
     <Compile Include="Controllers\MyUrl.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\TravelRegionController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\TravelEventController.cs" />
     <Compile Include="Controllers\WorkstationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -298,6 +300,15 @@
     </Compile>
     <Compile Include="Models\TicketType_.cs" />
     <Compile Include="Models\Ticket_.cs" />
+    <Compile Include="Models\TravelDestination.cs">
+      <DependentUpon>HelpDeskEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelEvent.cs">
+      <DependentUpon>HelpDeskEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelRegion.cs">
+      <DependentUpon>HelpDeskEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>HelpDeskEntities.tt</DependentUpon>
     </Compile>
@@ -1791,6 +1802,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrapDef.min.css" />
     <Content Include="Content\Images\Create-Ticket-icon.png" />
+    <Content Include="Content\Images\HermesLogo.jpg" />
+    <Content Include="Content\Images\hermes_logo_tr.png" />
     <Content Include="Content\Images\nex_logo.png" />
     <Content Include="Content\Images\nex_logo_25pt.png" />
     <Content Include="Content\Images\nex_logo_dark.png" />
@@ -2144,6 +2157,10 @@
     <Content Include="Views\User\ResetPassword.cshtml" />
     <Content Include="Views\Ticket\Refuse.cshtml" />
     <Content Include="Views\Ticket\Reclaim.cshtml" />
+    <Content Include="Views\TravelEvent\Index.cshtml" />
+    <Content Include="Views\TravelEvent\Details.cshtml" />
+    <Content Include="Views\TravelEvent\Create.cshtml" />
+    <Content Include="Views\TravelRegion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
