@@ -275,9 +275,6 @@
       <DependentUpon>HelpDeskEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status_.cs" />
-    <Compile Include="Models\Ticket.cs">
-      <DependentUpon>HelpDeskEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Notification_.cs" />
     <Compile Include="Models\TicketType.cs">
       <DependentUpon>HelpDeskEntities.tt</DependentUpon>

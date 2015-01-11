@@ -14,14 +14,7 @@ namespace TestWebApp.Models
     
     public partial class Status
     {
-        public Status()
-        {
-            this.Tickets = new HashSet<Ticket>();
-        }
-    
         public int id { get; set; }
         public string name { get; set; }
-    
-        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

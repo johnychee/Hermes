@@ -18,9 +18,6 @@ namespace TestWebApp.Models
         {
             this.Notifications = new HashSet<Notification>();
             this.Notifications1 = new HashSet<Notification>();
-            this.Tickets = new HashSet<Ticket>();
-            this.Tickets1 = new HashSet<Ticket>();
-            this.Tickets2 = new HashSet<Ticket>();
             this.Groups = new HashSet<Group>();
             this.webpages_Roles = new HashSet<webpages_Roles>();
         }
@@ -41,9 +38,6 @@ namespace TestWebApp.Models
         public virtual Retailer Retailer { get; set; }
         public virtual Setting Setting { get; set; }
         public virtual Solutionist Solutionist { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; }
-        public virtual ICollection<Ticket> Tickets1 { get; set; }
-        public virtual ICollection<Ticket> Tickets2 { get; set; }
         public virtual webpages_Membership webpages_Membership { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }

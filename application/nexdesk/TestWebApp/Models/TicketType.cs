@@ -14,14 +14,7 @@ namespace TestWebApp.Models
     
     public partial class TicketType
     {
-        public TicketType()
-        {
-            this.Tickets = new HashSet<Ticket>();
-        }
-    
         public int id { get; set; }
         public string name { get; set; }
-    
-        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

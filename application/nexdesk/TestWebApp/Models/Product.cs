@@ -14,11 +14,6 @@ namespace TestWebApp.Models
     
     public partial class Product
     {
-        public Product()
-        {
-            this.Tickets = new HashSet<Ticket>();
-        }
-    
         public int id { get; set; }
         public int categoryId { get; set; }
         public string name { get; set; }
@@ -27,6 +22,5 @@ namespace TestWebApp.Models
         public string supplier { get; set; }
     
         public virtual ProductCategory ProductCategory { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }
