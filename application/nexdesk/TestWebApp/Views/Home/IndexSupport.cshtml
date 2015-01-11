@@ -2,7 +2,7 @@
 @using PagedList;
 @using PagedList.Mvc;
 @{
-    ViewBag.Title = "Overview";
+    ViewBag.Title = "Přehled";
     HelpDeskEntities hDesk = new HelpDeskEntities();
     User current_user = hDesk.Users.SingleOrDefault(u=>u.id == WebSecurity.CurrentUserId);
 }
