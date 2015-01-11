@@ -71,7 +71,7 @@
                         <li>
                             <p></p>
                             <p></p>
-                            <p class="alert-danger">@Html.ActionLink("Your current password is newly generated,we would recommend you to change the password because of security reasons","Edit/" +current_user.id,"User") </p>
+                            <p class="alert-danger">@Html.ActionLink("Vaše heslo je čerstvš přegenerované! Doporučuje me si ho změnit","Edit/" +current_user.id,"User") </p>
                         </li>
                     }
                     <li>
@@ -101,9 +101,9 @@
                         </a>
                      
                         <ul class="dropdown-menu media-list pull-right animated fadeInDown">
-                            <li class="dropdown-header">New notifications (@newNotifications.Count())</li>
+                            <li class="dropdown-header">Nové notifikace (@newNotifications.Count())</li>
                             <li class="dropdown-footer text-center">
-                                @Html.ActionLink("View more", "Index", "Notification")
+                                @Html.ActionLink("Zobrazit vše", "Index", "Notification")
                             </li>
                         </ul>
                         
@@ -123,12 +123,12 @@
                         </a>
                         <ul class="dropdown-menu animated fadeInLeft">
                             <li class="arrow"></li>
-                            <li><a href="@Url.Action("Edit","User",new{@id = current_user.id})">Edit Profile</a></li>
+                            <li><a href="@Url.Action("Edit","User",new{@id = current_user.id})">Editovat profil</a></li>
                             @*<li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
                     <li><a href="javascript:;">Calendar</a></li*@
-                            <li>@Html.ActionLink("Settings", "Settings", "Account")</li>
+                            <li>@Html.ActionLink("Nastavení", "Settings", "Account")</li>
                             <li class="divider"></li>
-                            <li>@Html.ActionLink("Log Out", "Logout", "Account")</li>
+                            <li>@Html.ActionLink("Odhlásit", "Logout", "Account")</li>
                         </ul>
                     </li>
                 </ul>
