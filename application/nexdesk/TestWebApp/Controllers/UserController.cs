@@ -634,9 +634,9 @@ namespace TestWebApp.Controllers
             Response.End();
         }
 
-       
+
         [AllowAnonymous]
-       //FORGOT PASWORD FUNCTION
+        //FORGOT PASWORD FUNCTION
         public ActionResult ForgotPassword()
         {
             return View();
@@ -662,8 +662,8 @@ namespace TestWebApp.Controllers
                 //get user emailid
                 HelpDeskEntities hDesk = new HelpDeskEntities();
                 var email = (from i in hDesk.Users
-                               where i.username == UserName
-                               select i.email).FirstOrDefault();
+                             where i.username == UserName
+                             select i.email).FirstOrDefault();
                 //send mail
                 try
                 {

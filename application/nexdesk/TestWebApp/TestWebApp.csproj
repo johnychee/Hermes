@@ -2123,6 +2123,7 @@
     <Content Include="Views\TravelEvent\Create.cshtml" />
     <Content Include="Views\TravelRegion\Index.cshtml" />
     <Content Include="Views\Search\GlobalSearch.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
