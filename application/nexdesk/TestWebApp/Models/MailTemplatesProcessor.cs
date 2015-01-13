@@ -13,43 +13,13 @@ namespace TestWebApp.Models
     /// </summary>
     public class MailTemplatesProcessor
     {
-        private Dictionary<string,string> dictionaryOfTicketInformations = new Dictionary<string, string>();
-
         //Constants
-        private const string TicketID = "{TicketID}";
-        private const string Type = "{Type}";
-        private const string Solutionist = "{Solutionist}";
-        private const string State = "{State}";
-        private const string Classification = "{Classification}";
-        private const string Region = "{Region}";
-        private const string LocalTime = "{LocalTime}";
-        private const string Customer = "{Customer}";
-        private const string Product = "{Product}";
-        private const string Title = "{Title}";
-        private const string Description = "{Description}";
-        private const string DetailsUrl = "{DetailsUrl}";
-        private const string HDTime = "{HDTime}";
-        private const string Group = "{Group}";
-        private const string RTRemainingHours = "{RTRemainingHours}";
-        private const string FTRemainingHours = "{FTRemainingHours}";
-        private const string OFTRemainingHours = "{OFTRemainingHours}";
-        private const string ResponseTime = "{ResponseTime}";
-        private const string UrlToAcceptDirectly = "{UrlToAcceptDirectly}";
-        private const string AcceptDirectlyAsRequestUrl = "{AcceptDirectlyAsRequestUrl}";
-        private const string AcceptDirectlyAsIncidentUrl = "{AcceptDirectlyAsIncidentUrl}";
         private const string PasswordResetLink = "{PasswordResetLink}";
         private const string NewPassword = "{NewPassword}";
 
         private const string Default = "Default";
 
         //TemplatesPaths
-        private const string TemplateTicketAcceptedPath = "~/Content/MailTemplates/TicketAccepted.xml";
-        private const string TemplateTicketAssignedToGroupPath = "~/Content/MailTemplates/AssignedToGroup.xml";
-        private const string TemplateTicketAssignedToUserPath = "~/Content/MailTemplates/AssignedToUser.xml";
-        private const string TemplateTicketSolvedPath = "~/Content/MailTemplates/TicketSolved.xml";
-        private const string TemplateTicketSolvedForCustomerPath = "~/Content/MailTemplates/TicketSolvedForCustomer.xml";
-        private const string TemplateTicketCreatedForCustomerPath = "~/Content/MailTemplates/TicketCreatedForCustomer.xml";
-        private const string TemplateComplaintFromCustomerPath = "~/Content/MailTemplates/ComplaintFromCustomer.xml";
         private const string TemplateForgotPasswordPath = "~/Content/MailTemplates/ForgotPassword.xml";
         private const string TemplateNewPasswordPath = "~/Content/MailTemplates/NewPassword.xml";
 
