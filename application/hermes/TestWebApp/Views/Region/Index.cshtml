@@ -1,0 +1,31 @@
+﻿@using TestWebApp.Models
+@using PagedList
+@using PagedList.Mvc
+@{
+ HermesDBEntities hDesk = new HermesDBEntities();
+ ViewBag.Title = "Regiony";
+}
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Regions</h4>
+    </div>
+    <div class="panel-body">
+         <div class="table-responsive">
+             <table class="table">
+                 <tr>
+                     <th>Name</th>
+                     <th>Utc time difference</th>
+                 </tr>
+                 @foreach (Region region in ViewBag.Regions )
+                 { 
+                 <tr>
+                     <td>@Html.ActionLink(@region.name,"Details/"+@region.id)</td>
+                     <td>@region.UTCtimeShift</td>
+                 </tr>
+                 }
+             </table>
+             @Html.PagedListPager((IPagedList<Region>)ViewBag.Regions, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { page }))
+
+         </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+﻿@using TestWebApp.Models;
+@model User
+@{
+    ViewBag.Title = "User Details";
+    HermesDBEntities hDesk = new HermesDBEntities();
+    User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
+    ViewBag.Parents = new LinkedList<KeyValuePair<string, string>>();
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("Users", "/User"));
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("Details", null));
+    
+    List<Group> groups = Model.Groups.ToList();
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">@Model.username</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tr>
+                <th>Profile picture:</th>
+                @if(@Model.profilePictureUrl != null)
+                { 
+                     <td><img src="@Model.profilePictureUrl" width="100" class="avatar img-thumbnail" alt="avatar"></td>
+                }
+                else
+                {
+                    <td><img src="~/assets/img/user-default.png" width="100" class="avatar img-thumbnail" alt="avatar"></td>
+                }
+            </tr>
+            <tr>
+                <th>Username:</th>
+                <td>@Model.username</td>
+            </tr>
+            @if(@Model.isSolutionist)//if the business role of the User logged in is the Solutionist,will show this
+            { 
+                <tr>
+                    <th>Name:</th>
+                    <td>@Model.Solutionist.FirstName @Model.Solutionist.LastName</td>
+                </tr>
+            }
+            <tr>
+                <th>Region:</th>
+                <td>@Model.Region.name</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>@Model.email</td>
+            </tr>
+            <tr>
+                <th>Phone:</th>
+                <td>@Model.phone</td>
+            </tr>
+
+            <tr>
+                <th>State:</th>
+                @if (@Model.webpages_Membership.IsConfirmed == true)
+                {
+                    <td>Active</td>
+                }
+                else
+                {
+                    <td>Inactive</td>
+                }
+            </tr>
+
+            @if(@Model.Groups.Count > 0)//if the supporter is currently in at least 1group,well show this row
+            { 
+                <tr>
+                    <th>Support Groups:</th>
+                    <td>
+                        @foreach(Group group in Model.Groups)
+                        {
+                            @group.name <br />
+                        }
+                    </td>
+                </tr>
+            }
+                <tr>
+                    <th>Actions:</th>
+                    <td colspan="2">
+                        @if (current_user.webpages_Roles.SingleOrDefault(r=>r.RoleName == "SuperUser") !=null)
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { @id = Model.id }, new { @class = "btn btn-primary" }) <span></span>
+                            @Html.ActionLink(Model.webpages_Membership.IsConfirmed ? "Set Inactive" : "Set Active", "Destroy", new { @id = Model.id }, new { @class = "btn btn-danger" }) <span></span>
+                        }
+                        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+                    </td>
+                </tr>
+        </table>
+    </div>
+</div>

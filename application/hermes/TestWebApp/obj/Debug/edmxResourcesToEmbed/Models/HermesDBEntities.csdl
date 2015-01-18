@@ -1,0 +1,663 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HermesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HermesDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Companies" EntityType="HermesDBModel.Company" />
+    <EntitySet Name="Contacts" EntityType="HermesDBModel.Contact" />
+    <EntitySet Name="CustomPreSlaExpirationNotificationsTables" EntityType="HermesDBModel.CustomPreSlaExpirationNotificationsTable" />
+    <EntitySet Name="Dealers" EntityType="HermesDBModel.Dealer" />
+    <EntitySet Name="Groups" EntityType="HermesDBModel.Group" />
+    <EntitySet Name="HistoryActions" EntityType="HermesDBModel.HistoryAction" />
+    <EntitySet Name="Notifications" EntityType="HermesDBModel.Notification" />
+    <EntitySet Name="NotificationsTypes" EntityType="HermesDBModel.NotificationsType" />
+    <EntitySet Name="ProductCategories" EntityType="HermesDBModel.ProductCategory" />
+    <EntitySet Name="Products" EntityType="HermesDBModel.Product" />
+    <EntitySet Name="Regions" EntityType="HermesDBModel.Region" />
+    <EntitySet Name="Reports" EntityType="HermesDBModel.Report" />
+    <EntitySet Name="Retailers" EntityType="HermesDBModel.Retailer" />
+    <EntitySet Name="Settings" EntityType="HermesDBModel.Setting" />
+    <EntitySet Name="Solutionists" EntityType="HermesDBModel.Solutionist" />
+    <EntitySet Name="Status" EntityType="HermesDBModel.Status" />
+    <EntitySet Name="TicketTypes" EntityType="HermesDBModel.TicketType" />
+    <EntitySet Name="TravelContracts" EntityType="HermesDBModel.TravelContract" />
+    <EntitySet Name="TravelDestinations" EntityType="HermesDBModel.TravelDestination" />
+    <EntitySet Name="TravelEvents" EntityType="HermesDBModel.TravelEvent" />
+    <EntitySet Name="TravelRegions" EntityType="HermesDBModel.TravelRegion" />
+    <EntitySet Name="Users" EntityType="HermesDBModel.User" />
+    <EntitySet Name="webpages_Membership" EntityType="HermesDBModel.webpages_Membership" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="HermesDBModel.webpages_OAuthMembership" />
+    <EntitySet Name="webpages_Roles" EntityType="HermesDBModel.webpages_Roles" />
+    <EntitySet Name="Workstations" EntityType="HermesDBModel.Workstation" />
+    <AssociationSet Name="FK_Solutionists_ToCompanies" Association="HermesDBModel.FK_Solutionists_ToCompanies">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Solutionist" EntitySet="Solutionists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Retailers_Contacts" Association="HermesDBModel.FK_Retailers_Contacts">
+      <End Role="Contact" EntitySet="Contacts" />
+      <End Role="Retailer" EntitySet="Retailers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomPreSlaExpirationNotifications_to_UserSetting" Association="HermesDBModel.FK_CustomPreSlaExpirationNotifications_to_UserSetting">
+      <End Role="Setting" EntitySet="Settings" />
+      <End Role="CustomPreSlaExpirationNotificationsTable" EntitySet="CustomPreSlaExpirationNotificationsTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Retailers_Dealers" Association="HermesDBModel.FK_Retailers_Dealers">
+      <End Role="Dealer" EntitySet="Dealers" />
+      <End Role="Retailer" EntitySet="Retailers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reports_ToGroups" Association="HermesDBModel.FK_Reports_ToGroups">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="Report" EntitySet="Reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelContracts_ToGroups" Association="HermesDBModel.FK_TravelContracts_ToGroups">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="TravelContract" EntitySet="TravelContracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_To_Creator" Association="HermesDBModel.FK_Notifications_To_Creator">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_To_NotificationType" Association="HermesDBModel.FK_Notifications_To_NotificationType">
+      <End Role="NotificationsType" EntitySet="NotificationsTypes" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_To_Owner" Association="HermesDBModel.FK_Notifications_To_Owner">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCategories_ToItself" Association="HermesDBModel.FK_ProductCategories_ToItself">
+      <End Role="ProductCategory" EntitySet="ProductCategories" />
+      <End Role="ProductCategory1" EntitySet="ProductCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_ToProductCategories" Association="HermesDBModel.FK_Products_ToProductCategories">
+      <End Role="ProductCategory" EntitySet="ProductCategories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_ToRegions" Association="HermesDBModel.FK_Users_ToRegions">
+      <End Role="Region" EntitySet="Regions" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Retailers_Users" Association="HermesDBModel.FK_Retailers_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Retailer" EntitySet="Retailers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Retailers_Workstations" Association="HermesDBModel.FK_Retailers_Workstations">
+      <End Role="Workstation" EntitySet="Workstations" />
+      <End Role="Retailer" EntitySet="Retailers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Settings_ToUsers" Association="HermesDBModel.FK_Settings_ToUsers">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Setting" EntitySet="Settings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Solutionists_ToUser" Association="HermesDBModel.FK_Solutionists_ToUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Solutionist" EntitySet="Solutionists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelContracts_ToTravelEvents" Association="HermesDBModel.FK_TravelContracts_ToTravelEvents">
+      <End Role="TravelEvent" EntitySet="TravelEvents" />
+      <End Role="TravelContract" EntitySet="TravelContracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelDestinations_ToTravelRegions" Association="HermesDBModel.FK_TravelDestinations_ToTravelRegions">
+      <End Role="TravelRegion" EntitySet="TravelRegions" />
+      <End Role="TravelDestination" EntitySet="TravelDestinations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelEvents_ToTravelDestinations" Association="HermesDBModel.FK_TravelEvents_ToTravelDestinations">
+      <End Role="TravelDestination" EntitySet="TravelDestinations" />
+      <End Role="TravelEvent" EntitySet="TravelEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_webpages_Membership_ToUsers" Association="HermesDBModel.FK_webpages_Membership_ToUsers">
+      <End Role="User" EntitySet="Users" />
+      <End Role="webpages_Membership" EntitySet="webpages_Membership" />
+    </AssociationSet>
+    <AssociationSet Name="Groups_Users" Association="HermesDBModel.Groups_Users">
+      <End Role="Group" EntitySet="Groups" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="webpages_UsersInRoles" Association="HermesDBModel.webpages_UsersInRoles">
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Solutionists" Relationship="HermesDBModel.FK_Solutionists_ToCompanies" FromRole="Company" ToRole="Solutionist" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Retailers" Relationship="HermesDBModel.FK_Retailers_Contacts" FromRole="Contact" ToRole="Retailer" />
+  </EntityType>
+  <EntityType Name="CustomPreSlaExpirationNotificationsTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userSettingsId" Type="Int32" Nullable="false" />
+    <Property Name="minutesBeforeSlaExpires" Type="Int32" Nullable="false" />
+    <Property Name="notificationTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Setting" Relationship="HermesDBModel.FK_CustomPreSlaExpirationNotifications_to_UserSetting" FromRole="CustomPreSlaExpirationNotificationsTable" ToRole="Setting" />
+  </EntityType>
+  <EntityType Name="Dealer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Retailers" Relationship="HermesDBModel.FK_Retailers_Dealers" FromRole="Dealer" ToRole="Retailer" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="level" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Reports" Relationship="HermesDBModel.FK_Reports_ToGroups" FromRole="Group" ToRole="Report" />
+    <NavigationProperty Name="TravelContracts" Relationship="HermesDBModel.FK_TravelContracts_ToGroups" FromRole="Group" ToRole="TravelContract" />
+    <NavigationProperty Name="Users" Relationship="HermesDBModel.Groups_Users" FromRole="Group" ToRole="User" />
+  </EntityType>
+  <EntityType Name="HistoryAction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerId" Type="Int32" Nullable="false" />
+    <Property Name="CreatorId" Type="Int32" Nullable="false" />
+    <Property Name="NotificationTypeId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Readed" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="HermesDBModel.FK_Notifications_To_Creator" FromRole="Notification" ToRole="User" />
+    <NavigationProperty Name="NotificationsType" Relationship="HermesDBModel.FK_Notifications_To_NotificationType" FromRole="Notification" ToRole="NotificationsType" />
+    <NavigationProperty Name="User1" Relationship="HermesDBModel.FK_Notifications_To_Owner" FromRole="Notification" ToRole="User" />
+  </EntityType>
+  <EntityType Name="NotificationsType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Notifications" Relationship="HermesDBModel.FK_Notifications_To_NotificationType" FromRole="NotificationsType" ToRole="Notification" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="topId" Type="Int32" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductCategories1" Relationship="HermesDBModel.FK_ProductCategories_ToItself" FromRole="ProductCategory" ToRole="ProductCategory1" />
+    <NavigationProperty Name="ProductCategory1" Relationship="HermesDBModel.FK_ProductCategories_ToItself" FromRole="ProductCategory1" ToRole="ProductCategory" />
+    <NavigationProperty Name="Products" Relationship="HermesDBModel.FK_Products_ToProductCategories" FromRole="ProductCategory" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryId" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="garant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductCategory" Relationship="HermesDBModel.FK_Products_ToProductCategories" FromRole="Product" ToRole="ProductCategory" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RT_minutes" Type="Int32" Nullable="false" />
+    <Property Name="FT_minutes" Type="Int32" Nullable="false" />
+    <Property Name="UTCtimeShift" Type="Double" Nullable="false" />
+    <Property Name="timeZoneId" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="HermesDBModel.FK_Users_ToRegions" FromRole="Region" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GeneratedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="AmountOfMoneyForPeriod" Type="Int32" Nullable="false" />
+    <Property Name="PeriodFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PeriodTo" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Group" Relationship="HermesDBModel.FK_Reports_ToGroups" FromRole="Report" ToRole="Group" />
+  </EntityType>
+  <EntityType Name="Retailer">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="dealerId" Type="Int32" />
+    <Property Name="wsId" Type="Int32" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="adress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="zipcode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="contactId" Type="Int32" />
+    <NavigationProperty Name="Contact" Relationship="HermesDBModel.FK_Retailers_Contacts" FromRole="Retailer" ToRole="Contact" />
+    <NavigationProperty Name="Dealer" Relationship="HermesDBModel.FK_Retailers_Dealers" FromRole="Retailer" ToRole="Dealer" />
+    <NavigationProperty Name="User" Relationship="HermesDBModel.FK_Retailers_Users" FromRole="Retailer" ToRole="User" />
+    <NavigationProperty Name="Workstation" Relationship="HermesDBModel.FK_Retailers_Workstations" FromRole="Retailer" ToRole="Workstation" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="emailNotification" Type="Boolean" Nullable="false" />
+    <Property Name="regularEmailsNotification" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CustomPreSlaExpirationNotificationsTables" Relationship="HermesDBModel.FK_CustomPreSlaExpirationNotifications_to_UserSetting" FromRole="Setting" ToRole="CustomPreSlaExpirationNotificationsTable" />
+    <NavigationProperty Name="User" Relationship="HermesDBModel.FK_Settings_ToUsers" FromRole="Setting" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Solutionist">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="companyId" Type="Int32" />
+    <Property Name="teamviewerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Company" Relationship="HermesDBModel.FK_Solutionists_ToCompanies" FromRole="Solutionist" ToRole="Company" />
+    <NavigationProperty Name="User" Relationship="HermesDBModel.FK_Solutionists_ToUser" FromRole="Solutionist" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TicketType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TravelContract">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TravelEventId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Adress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NameOfClient" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Group" Relationship="HermesDBModel.FK_TravelContracts_ToGroups" FromRole="TravelContract" ToRole="Group" />
+    <NavigationProperty Name="TravelEvent" Relationship="HermesDBModel.FK_TravelContracts_ToTravelEvents" FromRole="TravelContract" ToRole="TravelEvent" />
+  </EntityType>
+  <EntityType Name="TravelDestination">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TravelRegionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TravelRegion" Relationship="HermesDBModel.FK_TravelDestinations_ToTravelRegions" FromRole="TravelDestination" ToRole="TravelRegion" />
+    <NavigationProperty Name="TravelEvents" Relationship="HermesDBModel.FK_TravelEvents_ToTravelDestinations" FromRole="TravelDestination" ToRole="TravelEvent" />
+  </EntityType>
+  <EntityType Name="TravelEvent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Capacity" Type="Int32" Nullable="false" />
+    <Property Name="TravelDestinationId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TravelContracts" Relationship="HermesDBModel.FK_TravelContracts_ToTravelEvents" FromRole="TravelEvent" ToRole="TravelContract" />
+    <NavigationProperty Name="TravelDestination" Relationship="HermesDBModel.FK_TravelEvents_ToTravelDestinations" FromRole="TravelEvent" ToRole="TravelDestination" />
+  </EntityType>
+  <EntityType Name="TravelRegion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="TravelDestinations" Relationship="HermesDBModel.FK_TravelDestinations_ToTravelRegions" FromRole="TravelRegion" ToRole="TravelDestination" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="regionId" Type="Int32" Nullable="false" />
+    <Property Name="profilePictureUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="isSolutionist" Type="Boolean" Nullable="false" />
+    <Property Name="isSystem" Type="Boolean" Nullable="false" />
+    <Property Name="isPasswordConfirmed" Type="Boolean" />
+    <NavigationProperty Name="Notifications" Relationship="HermesDBModel.FK_Notifications_To_Creator" FromRole="User" ToRole="Notification" />
+    <NavigationProperty Name="Notifications1" Relationship="HermesDBModel.FK_Notifications_To_Owner" FromRole="User" ToRole="Notification" />
+    <NavigationProperty Name="Region" Relationship="HermesDBModel.FK_Users_ToRegions" FromRole="User" ToRole="Region" />
+    <NavigationProperty Name="Retailer" Relationship="HermesDBModel.FK_Retailers_Users" FromRole="User" ToRole="Retailer" />
+    <NavigationProperty Name="Setting" Relationship="HermesDBModel.FK_Settings_ToUsers" FromRole="User" ToRole="Setting" />
+    <NavigationProperty Name="Solutionist" Relationship="HermesDBModel.FK_Solutionists_ToUser" FromRole="User" ToRole="Solutionist" />
+    <NavigationProperty Name="webpages_Membership" Relationship="HermesDBModel.FK_webpages_Membership_ToUsers" FromRole="User" ToRole="webpages_Membership" />
+    <NavigationProperty Name="Groups" Relationship="HermesDBModel.Groups_Users" FromRole="User" ToRole="Group" />
+    <NavigationProperty Name="webpages_Roles" Relationship="HermesDBModel.webpages_UsersInRoles" FromRole="User" ToRole="webpages_Roles" />
+  </EntityType>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="User" Relationship="HermesDBModel.FK_webpages_Membership_ToUsers" FromRole="webpages_Membership" ToRole="User" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="level" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="HermesDBModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Workstation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="wsName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="wsOwner" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="wsManufacturer" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="osType" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Retailers" Relationship="HermesDBModel.FK_Retailers_Workstations" FromRole="Workstation" ToRole="Retailer" />
+  </EntityType>
+  <Association Name="FK_Solutionists_ToCompanies">
+    <End Type="HermesDBModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="HermesDBModel.Solutionist" Role="Solutionist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Solutionist">
+        <PropertyRef Name="companyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Retailers_Contacts">
+    <End Type="HermesDBModel.Contact" Role="Contact" Multiplicity="0..1" />
+    <End Type="HermesDBModel.Retailer" Role="Retailer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contact">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Retailer">
+        <PropertyRef Name="contactId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomPreSlaExpirationNotifications_to_UserSetting">
+    <End Type="HermesDBModel.Setting" Role="Setting" Multiplicity="1" />
+    <End Type="HermesDBModel.CustomPreSlaExpirationNotificationsTable" Role="CustomPreSlaExpirationNotificationsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Setting">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="CustomPreSlaExpirationNotificationsTable">
+        <PropertyRef Name="userSettingsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Retailers_Dealers">
+    <End Type="HermesDBModel.Dealer" Role="Dealer" Multiplicity="0..1" />
+    <End Type="HermesDBModel.Retailer" Role="Retailer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dealer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Retailer">
+        <PropertyRef Name="dealerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reports_ToGroups">
+    <End Type="HermesDBModel.Group" Role="Group" Multiplicity="1" />
+    <End Type="HermesDBModel.Report" Role="Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelContracts_ToGroups">
+    <End Type="HermesDBModel.Group" Role="Group" Multiplicity="1" />
+    <End Type="HermesDBModel.TravelContract" Role="TravelContract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TravelContract">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_To_Creator">
+    <End Type="HermesDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="HermesDBModel.Notification" Role="Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="CreatorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_To_NotificationType">
+    <End Type="HermesDBModel.NotificationsType" Role="NotificationsType" Multiplicity="1" />
+    <End Type="HermesDBModel.Notification" Role="Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotificationsType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="NotificationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_To_Owner">
+    <End Type="HermesDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="HermesDBModel.Notification" Role="Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="OwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCategories_ToItself">
+    <End Type="HermesDBModel.ProductCategory" Role="ProductCategory" Multiplicity="0..1" />
+    <End Type="HermesDBModel.ProductCategory" Role="ProductCategory1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ProductCategory1">
+        <PropertyRef Name="topId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_ToProductCategories">
+    <End Type="HermesDBModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
+    <End Type="HermesDBModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_ToRegions">
+    <End Type="HermesDBModel.Region" Role="Region" Multiplicity="1" />
+    <End Type="HermesDBModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="regionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Retailers_Users">
+    <End Type="HermesDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="HermesDBModel.Retailer" Role="Retailer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Retailer">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Retailers_Workstations">
+    <End Type="HermesDBModel.Workstation" Role="Workstation" Multiplicity="0..1" />
+    <End Type="HermesDBModel.Retailer" Role="Retailer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Workstation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Retailer">
+        <PropertyRef Name="wsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Settings_ToUsers">
+    <End Type="HermesDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="HermesDBModel.Setting" Role="Setting" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Setting">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Solutionists_ToUser">
+    <End Type="HermesDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="HermesDBModel.Solutionist" Role="Solutionist" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Solutionist">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelContracts_ToTravelEvents">
+    <End Type="HermesDBModel.TravelEvent" Role="TravelEvent" Multiplicity="1" />
+    <End Type="HermesDBModel.TravelContract" Role="TravelContract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TravelEvent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TravelContract">
+        <PropertyRef Name="TravelEventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelDestinations_ToTravelRegions">
+    <End Type="HermesDBModel.TravelRegion" Role="TravelRegion" Multiplicity="1" />
+    <End Type="HermesDBModel.TravelDestination" Role="TravelDestination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TravelRegion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TravelDestination">
+        <PropertyRef Name="TravelRegionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelEvents_ToTravelDestinations">
+    <End Type="HermesDBModel.TravelDestination" Role="TravelDestination" Multiplicity="1" />
+    <End Type="HermesDBModel.TravelEvent" Role="TravelEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TravelDestination">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TravelEvent">
+        <PropertyRef Name="TravelDestinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_webpages_Membership_ToUsers">
+    <End Type="HermesDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="HermesDBModel.webpages_Membership" Role="webpages_Membership" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="webpages_Membership">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Groups_Users">
+    <End Type="HermesDBModel.Group" Role="Group" Multiplicity="*" />
+    <End Type="HermesDBModel.User" Role="User" Multiplicity="*" />
+  </Association>
+  <Association Name="webpages_UsersInRoles">
+    <End Type="HermesDBModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+    <End Type="HermesDBModel.User" Role="User" Multiplicity="*" />
+  </Association>
+</Schema>
