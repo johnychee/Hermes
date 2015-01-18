@@ -88,3 +88,4 @@ C:\work\repositories\Hermes\application\hermes\TestWebApp\bin\zh-Hans\System.Spa
 C:\work\repositories\Hermes\application\hermes\TestWebApp\bin\zh-Hant\System.Spatial.resources.dll
 C:\work\repositories\Hermes\application\hermes\TestWebApp\obj\Debug\TestWebApp.dll
 C:\work\repositories\Hermes\application\hermes\TestWebApp\obj\Debug\TestWebApp.pdb
+C:\work\repositories\Hermes\application\hermes\TestWebApp\obj\Debug\Hermes.csprojResolveAssemblyReference.cache
