@@ -1,0 +1,56 @@
+﻿@using TestWebApp.Models
+@model Register
+@{
+    ViewBag.Title = "Register";
+    List<SelectListItem>roles = new List<SelectListItem>(){
+        new SelectListItem(){
+            Text = "SuperUser",
+            Value = "SuperUser"
+        },
+        new SelectListItem(){
+            Text = "User",
+            Value = "User"
+        },
+         new SelectListItem(){
+            Text = "SupportLevel1",
+            Value = "SupportLevel1"
+        },
+         new SelectListItem(){
+            Text = "SupportLevel2",
+            Value = "SupportLevel2"
+        },
+         new SelectListItem(){
+            Text = "SupportLevel3",
+            Value = "SupportLevel3"
+        },
+         new SelectListItem(){
+            Text = "SupportLevel4",
+            Value = "SupportLevel4"
+        }
+    };
+}
+
+<h2>New account registering</h2>
+@using (@Html.BeginForm())
+{ 
+     @Html.AntiForgeryToken()
+    <label>User name: </label>
+    @Html.TextBoxFor(m => m.username, new { @class="form-control"})
+    <br />
+    <label>Password: </label>
+    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+    <br />
+      <label>Password: </label>
+    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+    <br />
+    <label>Role: </label>
+    @Html.DropDownList("Role", roles, new { @class="form-control"})
+     <br />
+    <label>Phone: </label>
+    @Html.TextBoxFor(m => m.phone, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-primary">Register</button>
+    
+    <br/>
+    @Html.ValidationSummary()
+}
