@@ -149,15 +149,15 @@
         </ul>
     </li>
     
-    <li class="has-sub @(ViewContext.Controller.GetType().Name == "ContactPersonController" ? "active" : "")">
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "MonitoringController" ? "active" : "")">
         <a href="javascript:;">
             <i class="fa fa-trello"></i>
             <b class="caret pull-right"></b>
             <span>Monitoring</span>
         </a>
         <ul class="sub-menu">
-            <li>@Html.ActionLink("Vygenerované reporty", "Index", "ContactPerson")</li>
-            <li>@Html.ActionLink("Vytvořit nový report", "Create", "ContactPerson")</li>
+            <li>@Html.ActionLink("Vygenerované reporty", "Index", "Monitoring")</li>
+            <li>@Html.ActionLink("Vytvořit nový report", "Create", "Monitoring")</li>
         </ul>
     </li>
 

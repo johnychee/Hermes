@@ -36,6 +36,7 @@ namespace TestWebApp.Models
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Retailer> Retailers { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<Solutionist> Solutionists { get; set; }

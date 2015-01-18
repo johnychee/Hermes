@@ -17,7 +17,7 @@ namespace TestWebApp.Controllers
         public ActionResult Index()
         {
             HermesDBEntities hDesk = new HermesDBEntities();
-            ViewBag.MonitoringReports = hDesk.TravelEvents;
+            ViewBag.Reports = hDesk.Reports;
             return View();
         }
 
@@ -25,7 +25,7 @@ namespace TestWebApp.Controllers
         public ActionResult Create()
         {
             HermesDBEntities hDesk = new HermesDBEntities();
-            ViewBag.Events = hDesk.TravelEvents;
+            ViewBag.Reports = hDesk.Reports;
             return View();
         }
         

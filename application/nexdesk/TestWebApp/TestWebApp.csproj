@@ -262,6 +262,9 @@
     </Compile>
     <Compile Include="Models\Region_.cs" />
     <Compile Include="Models\Register.cs" />
+    <Compile Include="Models\Report.cs">
+      <DependentUpon>HermesDBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Retailer.cs">
       <DependentUpon>HermesDBEntities.tt</DependentUpon>
     </Compile>
@@ -2112,6 +2115,7 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\TravelContract\Create.cshtml" />
     <Content Include="Views\Monitoring\Index.cshtml" />
+    <Content Include="Views\Monitoring\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
