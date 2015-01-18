@@ -157,6 +157,17 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="TravelContract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TravelEventId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NameOfClient" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TravelDestinations">
           <Key>
             <PropertyRef Name="Id" />
@@ -442,6 +453,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TravelContracts_ToGroups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="TravelContract" Type="Self.TravelContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TravelContract">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TravelContracts_ToTravelEvents">
+          <End Role="TravelEvents" Type="Self.TravelEvents" Multiplicity="1" />
+          <End Role="TravelContract" Type="Self.TravelContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelEvents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TravelContract">
+              <PropertyRef Name="TravelEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TravelDestinations_ToTravelRegions">
           <End Role="TravelRegions" Type="Self.TravelRegions" Multiplicity="1" />
           <End Role="TravelDestinations" Type="Self.TravelDestinations" Multiplicity="*" />
@@ -520,6 +555,7 @@
           <EntitySet Name="Solutionists" EntityType="Self.Solutionists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TicketTypes" EntityType="Self.TicketTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TravelContract" EntityType="Self.TravelContract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TravelDestinations" EntityType="Self.TravelDestinations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TravelEvents" EntityType="Self.TravelEvents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TravelRegions" EntityType="Self.TravelRegions" Schema="dbo" store:Type="Tables" />
@@ -593,6 +629,14 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Solutionists" EntitySet="Solutionists" />
           </AssociationSet>
+          <AssociationSet Name="FK_TravelContracts_ToGroups" Association="Self.FK_TravelContracts_ToGroups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="TravelContract" EntitySet="TravelContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelContracts_ToTravelEvents" Association="Self.FK_TravelContracts_ToTravelEvents">
+            <End Role="TravelEvents" EntitySet="TravelEvents" />
+            <End Role="TravelContract" EntitySet="TravelContract" />
+          </AssociationSet>
           <AssociationSet Name="FK_TravelDestinations_ToTravelRegions" Association="Self.FK_TravelDestinations_ToTravelRegions">
             <End Role="TravelRegions" EntitySet="TravelRegions" />
             <End Role="TravelDestinations" EntitySet="TravelDestinations" />
@@ -635,6 +679,7 @@
           <EntitySet Name="Solutionists" EntityType="nexDeskDbModel.Solutionist" />
           <EntitySet Name="Status" EntityType="nexDeskDbModel.Status" />
           <EntitySet Name="TicketTypes" EntityType="nexDeskDbModel.TicketType" />
+          <EntitySet Name="TravelContracts" EntityType="nexDeskDbModel.TravelContract" />
           <EntitySet Name="TravelDestinations" EntityType="nexDeskDbModel.TravelDestination" />
           <EntitySet Name="TravelEvents" EntityType="nexDeskDbModel.TravelEvent" />
           <EntitySet Name="TravelRegions" EntityType="nexDeskDbModel.TravelRegion" />
@@ -658,6 +703,10 @@
           <AssociationSet Name="FK_Retailers_Dealers" Association="nexDeskDbModel.FK_Retailers_Dealers">
             <End Role="Dealer" EntitySet="Dealers" />
             <End Role="Retailer" EntitySet="Retailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelContracts_ToGroups" Association="nexDeskDbModel.FK_TravelContracts_ToGroups">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="TravelContract" EntitySet="TravelContracts" />
           </AssociationSet>
           <AssociationSet Name="FK_Notifications_To_Creator" Association="nexDeskDbModel.FK_Notifications_To_Creator">
             <End Role="User" EntitySet="Users" />
@@ -698,6 +747,10 @@
           <AssociationSet Name="FK_Solutionists_ToUser" Association="nexDeskDbModel.FK_Solutionists_ToUser">
             <End Role="User" EntitySet="Users" />
             <End Role="Solutionist" EntitySet="Solutionists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelContracts_ToTravelEvents" Association="nexDeskDbModel.FK_TravelContracts_ToTravelEvents">
+            <End Role="TravelEvent" EntitySet="TravelEvents" />
+            <End Role="TravelContract" EntitySet="TravelContracts" />
           </AssociationSet>
           <AssociationSet Name="FK_TravelDestinations_ToTravelRegions" Association="nexDeskDbModel.FK_TravelDestinations_ToTravelRegions">
             <End Role="TravelRegion" EntitySet="TravelRegions" />
@@ -765,6 +818,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="level" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="TravelContracts" Relationship="nexDeskDbModel.FK_TravelContracts_ToGroups" FromRole="Group" ToRole="TravelContract" />
           <NavigationProperty Name="Users" Relationship="nexDeskDbModel.Groups_Users" FromRole="Group" ToRole="User" />
         </EntityType>
         <EntityType Name="HistoryAction">
@@ -886,6 +940,19 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="TravelContract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TravelEventId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Adress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NameOfClient" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="nexDeskDbModel.FK_TravelContracts_ToGroups" FromRole="TravelContract" ToRole="Group" />
+          <NavigationProperty Name="TravelEvent" Relationship="nexDeskDbModel.FK_TravelContracts_ToTravelEvents" FromRole="TravelContract" ToRole="TravelEvent" />
+        </EntityType>
         <EntityType Name="TravelDestination">
           <Key>
             <PropertyRef Name="Id" />
@@ -907,6 +974,7 @@
           <Property Name="Capacity" Type="Int32" Nullable="false" />
           <Property Name="TravelDestinationId" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TravelContracts" Relationship="nexDeskDbModel.FK_TravelContracts_ToTravelEvents" FromRole="TravelEvent" ToRole="TravelContract" />
           <NavigationProperty Name="TravelDestination" Relationship="nexDeskDbModel.FK_TravelEvents_ToTravelDestinations" FromRole="TravelEvent" ToRole="TravelDestination" />
         </EntityType>
         <EntityType Name="TravelRegion">
@@ -1035,6 +1103,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TravelContracts_ToGroups">
+          <End Type="nexDeskDbModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TravelContract" Role="TravelContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TravelContract">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Notifications_To_Creator">
           <End Type="nexDeskDbModel.User" Role="User" Multiplicity="1" />
           <End Type="nexDeskDbModel.Notification" Role="Notification" Multiplicity="*" />
@@ -1152,6 +1232,18 @@
             </Principal>
             <Dependent Role="Solutionist">
               <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TravelContracts_ToTravelEvents">
+          <End Type="nexDeskDbModel.TravelEvent" Role="TravelEvent" Multiplicity="1" />
+          <End Type="nexDeskDbModel.TravelContract" Role="TravelContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelEvent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TravelContract">
+              <PropertyRef Name="TravelEventId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1362,6 +1454,18 @@
               <MappingFragment StoreEntitySet="TicketTypes">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TravelContracts">
+            <EntityTypeMapping TypeName="nexDeskDbModel.TravelContract">
+              <MappingFragment StoreEntitySet="TravelContract">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="NameOfClient" ColumnName="NameOfClient" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TravelEventId" ColumnName="TravelEventId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

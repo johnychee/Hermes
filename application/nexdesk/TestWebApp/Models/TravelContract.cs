@@ -12,21 +12,16 @@ namespace TestWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TravelEvent
+    public partial class TravelContract
     {
-        public TravelEvent()
-        {
-            this.TravelContracts = new HashSet<TravelContract>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int Capacity { get; set; }
-        public int TravelDestinationId { get; set; }
-        public int Price { get; set; }
+        public int TravelEventId { get; set; }
+        public int Quantity { get; set; }
+        public string Adress { get; set; }
+        public string NameOfClient { get; set; }
+        public int GroupId { get; set; }
     
-        public virtual ICollection<TravelContract> TravelContracts { get; set; }
-        public virtual TravelDestination TravelDestination { get; set; }
+        public virtual Group Group { get; set; }
+        public virtual TravelEvent TravelEvent { get; set; }
     }
 }

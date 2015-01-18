@@ -16,6 +16,7 @@ namespace TestWebApp.Models
     {
         public Group()
         {
+            this.TravelContracts = new HashSet<TravelContract>();
             this.Users = new HashSet<User>();
         }
     
@@ -23,6 +24,7 @@ namespace TestWebApp.Models
         public string name { get; set; }
         public byte level { get; set; }
     
+        public virtual ICollection<TravelContract> TravelContracts { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }
 }

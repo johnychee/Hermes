@@ -191,6 +191,7 @@
     <Compile Include="Controllers\MyUrl.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\TravelContractController.cs" />
     <Compile Include="Controllers\TravelRegionController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -277,6 +278,9 @@
     <Compile Include="Models\Status_.cs" />
     <Compile Include="Models\Notification_.cs" />
     <Compile Include="Models\TicketType.cs">
+      <DependentUpon>HelpDeskEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelContract.cs">
       <DependentUpon>HelpDeskEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TravelDestination.cs">
@@ -1782,11 +1786,6 @@
     <Content Include="Content\Images\Create-Ticket-icon.png" />
     <Content Include="Content\Images\HermesLogo.jpg" />
     <Content Include="Content\Images\hermes_logo_tr.png" />
-    <Content Include="Content\Images\nex_logo.png" />
-    <Content Include="Content\Images\nex_logo_25pt.png" />
-    <Content Include="Content\Images\nex_logo_dark.png" />
-    <Content Include="Content\Images\nex_logo_dark_25pt.png" />
-    <Content Include="Content\Images\nex_logo_show.png" />
     <Content Include="Content\Images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\Images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\Images\ui-bg_flat_10_000000_40x100.png" />
@@ -1806,20 +1805,6 @@
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\MailTemplates\NewPassword.xml" />
     <Content Include="Content\MailTemplates\ForgotPassword.xml" />
-    <Content Include="Content\MailTemplates\AssignedToGroup.xml" />
-    <Content Include="Content\MailTemplates\AssignedToUser.xml" />
-    <Content Include="Content\MailTemplates\ComplaintFromCustomer.xml" />
-    <Content Include="Content\MailTemplates\KompletTemplate.txt" />
-    <Content Include="Content\MailTemplates\NewEvent.xml" />
-    <Content Include="Content\MailTemplates\NewTicketCreated.xml" />
-    <Content Include="Content\MailTemplates\SlaExpiredForSolutionist.xml" />
-    <Content Include="Content\MailTemplates\SlaViolationOFT.xml" />
-    <Content Include="Content\MailTemplates\SlaViolationRFT.xml" />
-    <Content Include="Content\MailTemplates\SlaViolationRT.xml" />
-    <Content Include="Content\MailTemplates\TicketAccepted.xml" />
-    <Content Include="Content\MailTemplates\TicketCreatedForCustomer.xml" />
-    <Content Include="Content\MailTemplates\TicketSolved.xml" />
-    <Content Include="Content\MailTemplates\TicketSolvedForCustomer.xml" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -2124,6 +2109,7 @@
     <Content Include="Views\TravelRegion\Index.cshtml" />
     <Content Include="Views\Search\GlobalSearch.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\TravelContract\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
