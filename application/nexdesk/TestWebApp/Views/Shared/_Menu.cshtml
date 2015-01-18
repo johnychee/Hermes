@@ -105,6 +105,17 @@
             </ul>
         </li>
     }
+    
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "TravelContractController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-file"></i>
+            <b class="caret pull-right"></b>
+            <span>Rezervace</span>
+        </a>
+        <ul class="sub-menu">
+            <li>@Html.ActionLink("Vytvoř rezervaci", "Create", "TravelContract")</li>
+        </ul>
+    </li>
 
     <li class="has-sub @(ViewContext.Controller.GetType().Name == "RegionController" ? "active" : "")">
         <a href="javascript:;">
@@ -140,7 +151,7 @@
     
     <li class="has-sub @(ViewContext.Controller.GetType().Name == "ContactPersonController" ? "active" : "")">
         <a href="javascript:;">
-            <i class="fa fa-newspaper-o"></i>
+            <i class="fa fa-trello"></i>
             <b class="caret pull-right"></b>
             <span>Monitoring</span>
         </a>
