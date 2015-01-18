@@ -14,7 +14,7 @@ namespace TestWebApp.Controllers
         {
             ViewBag.Message = msg;
 
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             IEnumerable<Product> products = hDesk.Products;
 
             return View(products);
@@ -32,7 +32,7 @@ namespace TestWebApp.Controllers
         public ActionResult Create(Product model, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
 
             try
             {
@@ -60,7 +60,7 @@ namespace TestWebApp.Controllers
         public ActionResult Details(int id, string msg = null)
         {
             ViewBag.Message = msg;
-            Product product = (new HelpDeskEntities()).Products.Single(p => p.id == id);
+            Product product = (new HermesDBEntities()).Products.Single(p => p.id == id);
             return View(product);
         }
 
@@ -68,7 +68,7 @@ namespace TestWebApp.Controllers
         public ActionResult Edit(int id, string msg = null)
         {
             ViewBag.Message = msg;
-            Product product = (new HelpDeskEntities()).Products.Single(p => p.id == id);
+            Product product = (new HermesDBEntities()).Products.Single(p => p.id == id);
             return View(product);
         }
 
@@ -77,7 +77,7 @@ namespace TestWebApp.Controllers
         public ActionResult Edit(int id, Product model, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             try
             {
                 if (ModelState.IsValid)
@@ -107,7 +107,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult Destroy(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             try
             {
                 hDesk.Products.Remove(hDesk.Products.Single(p => p.id == id));
@@ -122,7 +122,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult AssignProducts()
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             List<ProductsViewModel> model = new List<ProductsViewModel>();
             foreach (Product product in hDesk.Products)
             {
@@ -138,7 +138,7 @@ namespace TestWebApp.Controllers
      
         public JsonResult Get(string term)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             List<string> products = hDesk.Products.Where(p => p.name.StartsWith(term)).Select(y => y.name).ToList();
             return Json(products, JsonRequestBehavior.AllowGet);
         }

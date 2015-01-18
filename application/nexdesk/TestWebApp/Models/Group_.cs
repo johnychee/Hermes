@@ -24,9 +24,9 @@ namespace TestWebApp.Models
             set { this.level = value; }
         }
 
-        public static List<SelectListItem> all_toSelectList(int? level = null, int? userId = null, HelpDeskEntities hDesk = null)
+        public static List<SelectListItem> all_toSelectList(int? level = null, int? userId = null, HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
 
             List<SelectListItem> groups = new List<SelectListItem>();
             foreach(Group group in hDesk.Groups.Where(g => (level == null || g.level == level) &&
@@ -39,9 +39,9 @@ namespace TestWebApp.Models
             return groups;
         }
 
-        public static IEnumerable<Group> getWithName_onUserLvl(string name, int userId, bool isFullName, HelpDeskEntities hDesk = null)
+        public static IEnumerable<Group> getWithName_onUserLvl(string name, int userId, bool isFullName, HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
 
             // všechny groupy daného jména
             if (userId == 0)

@@ -14,7 +14,7 @@ namespace TestWebApp.Controllers
     {
         public ActionResult Index(int?page ,string msg=null)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             ViewBag.Message = msg;
             ViewBag.Contacts = hDesk.Contacts.OrderBy(c => c.lastName + c.firstName).ToPagedList(page ?? 1, 10);
             return View();
@@ -30,7 +30,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult Create(Contact model)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             if (ModelState.IsValid)
             {
                 Contact contact = new Contact()
@@ -55,7 +55,7 @@ namespace TestWebApp.Controllers
         public ActionResult Details(int id,string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Contact contact = hDesk.Contacts.SingleOrDefault(c => c.id == id);
             if(contact == null)
                 return RedirectToAction("NotFound" ,"Errors");
@@ -65,7 +65,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult Edit(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Contact contact = hDesk.Contacts.SingleOrDefault(c => c.id == id);
             if (contact == null)
                 return RedirectToAction("NotFound", "Errors");
@@ -81,7 +81,7 @@ namespace TestWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                HelpDeskEntities hDesk = new HelpDeskEntities();
+                HermesDBEntities hDesk = new HermesDBEntities();
                 Contact contact = hDesk.Contacts.SingleOrDefault(c => c.id == model.id);
                 contact.firstName = model.fName_;
                 contact.lastName = model.lName_;
@@ -101,7 +101,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult Delete(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Contact contact = hDesk.Contacts.SingleOrDefault(c => c.id == id);
              if (contact == null)
                 return RedirectToAction("NotFound", "Errors");

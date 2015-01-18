@@ -14,7 +14,7 @@ namespace TestWebApp.Controllers
         public ActionResult Index(int? page, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             ViewBag.TravelEvents = hDesk.TravelEvents.OrderBy(w => w.Name).ToPagedList(page ?? 1, 10);
             return View();
         }
@@ -22,7 +22,7 @@ namespace TestWebApp.Controllers
         public ActionResult Details(int id, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             TravelEvent ws = hDesk.TravelEvents.SingleOrDefault(w => w.Id == id);
             return View(ws);
         }
@@ -30,7 +30,7 @@ namespace TestWebApp.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             ViewBag.Destinations = hDesk.TravelDestinations;
             return View();
         }
@@ -39,7 +39,7 @@ namespace TestWebApp.Controllers
         [Authorize]
         public ActionResult Create(TravelEvent model, string destination)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             if (ModelState.IsValid)
             {
                 TravelEvent ws = new TravelEvent();
@@ -62,7 +62,7 @@ namespace TestWebApp.Controllers
         [Authorize]
         public ActionResult Edit(int id,TravelEvent model)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             if (ModelState.IsValid)
             {
                 TravelEvent ws = hDesk.TravelEvents.FirstOrDefault(te=>te.Id == id);
@@ -83,7 +83,7 @@ namespace TestWebApp.Controllers
         [Authorize]
         public ActionResult Delete(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             TravelEvent re = hDesk.TravelEvents.SingleOrDefault(w => w.Id == id);
             if (re != null)
             {

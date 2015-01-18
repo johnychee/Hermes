@@ -37,7 +37,7 @@
     @using TestWebApp.Models
     @{
      
-            User current_user = (new HelpDeskEntities()).Users.Single(u => WebSecurity.CurrentUserId == u.id);
+            User current_user = (new HermesDBEntities()).Users.Single(u => WebSecurity.CurrentUserId == u.id);
     
 
     }

@@ -87,14 +87,14 @@ namespace TestWebApp.Controllers
         }
         public ActionResult UserDetails(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             User u = hDesk.Users.Single(x => x.id == id);
             return View(u);
         }
         [Authorize(Roles = "SuperUser")]
         public ActionResult SuperUserPanel()
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             return View(hDesk);
         }
 
@@ -103,7 +103,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult FindUser(string UserName)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             if (hDesk.Users.SingleOrDefault(x => x.username == UserName) != null)
             {
                 User u = hDesk.Users.Single(x => x.username == UserName);
@@ -125,7 +125,7 @@ namespace TestWebApp.Controllers
         [HttpPost]
         public ActionResult AddGroup(string AddGroup,string GroupLevel,IEnumerable<UsersViewModel> usersViewModel,string GroupName)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             List<UsersViewModel> model = new List<UsersViewModel>();
             if (GroupLevel != null)
             TempData["GroupLevel"] = GroupLevel;

@@ -86,7 +86,7 @@ namespace TestWebApp.Models
         }
         public static List<SelectListItem> toSelectList(User user = null)
         {
-            HelpDeskEntities hdesk = new HelpDeskEntities();
+            HermesDBEntities hdesk = new HermesDBEntities();
             List<SelectListItem> contacts = new List<SelectListItem>();
             foreach (Contact contact in hdesk.Contacts)
             {

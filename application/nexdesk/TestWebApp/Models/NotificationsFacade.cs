@@ -7,51 +7,51 @@ namespace TestWebApp.Models
 {
     public static class NotificationsFacade
     {
-        private static readonly HelpDeskEntities _helpDeskEntities = new HelpDeskEntities();
+        private static readonly HermesDBEntities _HermesDBEntities = new HermesDBEntities();
 
         #region public methods
         public static void CreateSLANotification(int ownerId, string subject, string text)
         {
             Notification newNotification = CreateNotification(ownerId, 
-                _helpDeskEntities.Users.First(u => u.webpages_Roles.FirstOrDefault().RoleName == "System").id,
+                _HermesDBEntities.Users.First(u => u.webpages_Roles.FirstOrDefault().RoleName == "System").id,
                  subject, text);
             newNotification.NotificationTypeId =
-                _helpDeskEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.SLA.ToString()).Id;
+                _HermesDBEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.SLA.ToString()).Id;
 
-            _helpDeskEntities.Notifications.Add(newNotification);
-            _helpDeskEntities.SaveChanges();
+            _HermesDBEntities.Notifications.Add(newNotification);
+            _HermesDBEntities.SaveChanges();
         }
 
         public static void CreateSystemNotification(int ownerId, string subject, string text)
         {
             Notification newNotification = CreateNotification(ownerId, 
-                _helpDeskEntities.Users.First(u => u.webpages_Roles.FirstOrDefault().RoleName == "System").id,
+                _HermesDBEntities.Users.First(u => u.webpages_Roles.FirstOrDefault().RoleName == "System").id,
                  subject, text);
             newNotification.NotificationTypeId =
-                _helpDeskEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.System.ToString()).Id;
+                _HermesDBEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.System.ToString()).Id;
 
-            _helpDeskEntities.Notifications.Add(newNotification);
-            _helpDeskEntities.SaveChanges();
+            _HermesDBEntities.Notifications.Add(newNotification);
+            _HermesDBEntities.SaveChanges();
         }
 
         public static void CreateEmailingNotification(int ownerId, int creatorId, string subject, string text)
         {
             Notification newNotification = CreateNotification(ownerId, creatorId, subject, text);
             newNotification.NotificationTypeId =
-                _helpDeskEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.Emailing.ToString()).Id;
+                _HermesDBEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.Emailing.ToString()).Id;
 
-            _helpDeskEntities.Notifications.Add(newNotification);
-            _helpDeskEntities.SaveChanges();
+            _HermesDBEntities.Notifications.Add(newNotification);
+            _HermesDBEntities.SaveChanges();
         }
 
         public static void CreateTicketFlowNotification(int ownerId, int creatorId, string subject, string text)
         {
             Notification newNotification = CreateNotification(ownerId, creatorId, subject, text);
             newNotification.NotificationTypeId =
-                _helpDeskEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.TicketFlow.ToString()).Id;
+                _HermesDBEntities.NotificationsTypes.SingleOrDefault(t => t.Name == NotificationType.TicketFlow.ToString()).Id;
 
-            _helpDeskEntities.Notifications.Add(newNotification);
-            _helpDeskEntities.SaveChanges();
+            _HermesDBEntities.Notifications.Add(newNotification);
+            _HermesDBEntities.SaveChanges();
         }
         #endregion
 

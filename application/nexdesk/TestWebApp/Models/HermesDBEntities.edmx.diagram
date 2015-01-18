@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7902384ee27c46f493d85978840f1e78" Name="Diagram1">
+        <EntityTypeShape EntityType="HermesDBModel.Company" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Contact" Width="1.5" PointX="9" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.CustomPreSlaExpirationNotificationsTable" Width="1.5" PointX="10.5" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Dealer" Width="1.5" PointX="9" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Group" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.HistoryAction" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Notification" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.NotificationsType" Width="1.5" PointX="6" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.ProductCategory" Width="1.5" PointX="10.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Product" Width="1.5" PointX="13" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Region" Width="1.5" PointX="3.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Retailer" Width="1.5" PointX="11.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Setting" Width="1.5" PointX="8.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Solutionist" Width="1.5" PointX="8.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Status" Width="1.5" PointX="3.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.TicketType" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.TravelContract" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.TravelDestination" Width="1.5" PointX="1.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.TravelEvent" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.TravelRegion" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.User" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.webpages_Membership" Width="1.5" PointX="8.25" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.webpages_OAuthMembership" Width="1.5" PointX="5.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.webpages_Roles" Width="1.5" PointX="3.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HermesDBModel.Workstation" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="HermesDBModel.FK_Solutionists_ToCompanies" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Retailers_Contacts" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_CustomPreSlaExpirationNotifications_to_UserSetting" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Retailers_Dealers" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_TravelContracts_ToGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Notifications_To_Creator" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Notifications_To_NotificationType" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Notifications_To_Owner" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_ProductCategories_ToItself" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Products_ToProductCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Users_ToRegions" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Retailers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Retailers_Workstations" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Settings_ToUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_Solutionists_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_TravelContracts_ToTravelEvents" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_TravelDestinations_ToTravelRegions" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_TravelEvents_ToTravelDestinations" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.FK_webpages_Membership_ToUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.Groups_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="HermesDBModel.webpages_UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

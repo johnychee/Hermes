@@ -14,7 +14,7 @@ namespace TestWebApp.Controllers
         public ActionResult Index(int? page,string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             ViewBag.TravelRegions = hDesk.TravelRegions.OrderBy(r => r.Name).ToPagedList(page ?? 1, 10);
             return View();
         }

@@ -25,31 +25,31 @@ namespace TestWebApp.Models
             get { return this.isSolutionist ? this.Solutionist.FirstName + " " + this.Solutionist.LastName : this.Retailer.name; }
         }
 
-        public static IQueryable<User> getNonsystemUser(HelpDeskEntities hDesk = null)
+        public static IQueryable<User> getNonsystemUser(HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
 
             return hDesk.Users
                 .Where(u => !u.webpages_Roles.Any(r => r.RoleName == "System"))
                 .orderByName();
         }
 
-        public static User findByFullname(string fullname, HelpDeskEntities hDesk = null)
+        public static User findByFullname(string fullname, HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
 
             return hDesk.Users.SingleOrDefault(u => (u.isSolutionist && u.Solutionist.FirstName + " " + u.Solutionist.LastName == fullname) || u.Retailer.name == fullname);
         }
 
-        public static User current_user(HelpDeskEntities hDesk = null)
+        public static User current_user(HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
 
             return hDesk.Users.Single(u => u.id == WebSecurity.CurrentUserId);
         }
-        public static IQueryable<User> inRole(string roleName, int level, HelpDeskEntities hDesk = null)
+        public static IQueryable<User> inRole(string roleName, int level, HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
 
             //return hDesk.Users.SqlQuery("SELECT [dbo].[User].* FROM [dbo].[User] JOIN [dbo].[webpages_UsersInRoles] ON [dbo].[User].[UserId] = [dbo].[webpages_UsersInRoles].[UserId] JOIN [dbo].[webpages_Roles] ON [dbo].[webpages_UsersInRoles].[RoleId] = [dbo].[webpages_Roles].[RoleId] WHERE [dbo].[webpages_Roles].[RoleName] = @p0;", roleName);
             return hDesk.Users.Where
@@ -62,15 +62,15 @@ namespace TestWebApp.Models
             
         }
 
-        public static IQueryable<User> GetRetailers(HelpDeskEntities hDesk = null)
+        public static IQueryable<User> GetRetailers(HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
             return hDesk.Users.Where(u => u.Retailer != null);
         }
 
-        public static IQueryable<User> GetCustomerGroupRetailers(int id, HelpDeskEntities hDesk = null)
+        public static IQueryable<User> GetCustomerGroupRetailers(int id, HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
             return hDesk.Users.Where(u => u.Retailer != null && u.Retailer.dealerId == id);
         }
     }

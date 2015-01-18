@@ -16,7 +16,7 @@ namespace TestWebApp.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             ViewBag.Events = hDesk.TravelEvents;
             return View();
         }
@@ -25,7 +25,7 @@ namespace TestWebApp.Controllers
         [Authorize]
         public ActionResult Create(TravelContract model, string eventName)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
             if (ModelState.IsValid)
             {

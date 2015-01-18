@@ -2,7 +2,7 @@
 @model IEnumerable<ProductsViewModel>
 @{
     ViewBag.Title = "AssignProducts";
-    HelpDeskEntities hDesk = new HelpDeskEntities();
+    HermesDBEntities hDesk = new HermesDBEntities();
     List<SelectListItem> groups = new List<SelectListItem>();
     foreach (SupportGroup sg in hDesk.SupportGroups)
     {

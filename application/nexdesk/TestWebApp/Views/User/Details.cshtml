@@ -2,7 +2,7 @@
 @model User
 @{
     ViewBag.Title = "User Details";
-    HelpDeskEntities hDesk = new HelpDeskEntities();
+    HermesDBEntities hDesk = new HermesDBEntities();
     User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
     ViewBag.Parents = new LinkedList<KeyValuePair<string, string>>();
     ViewBag.Parents.AddLast(new KeyValuePair<string, string>("Users", "/User"));

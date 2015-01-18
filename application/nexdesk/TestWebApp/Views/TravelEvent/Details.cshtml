@@ -3,7 +3,7 @@
 @model TravelEvent
 @{
     ViewBag.Title = "Detail zájezdu";
-    HelpDeskEntities hDesk = new HelpDeskEntities();
+    HermesDBEntities hDesk = new HermesDBEntities();
     User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
 }
 

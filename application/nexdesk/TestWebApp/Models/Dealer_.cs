@@ -21,7 +21,7 @@ namespace TestWebApp.Models
 
         public static List<SelectListItem> toSelectList(User user = null)
         {
-            HelpDeskEntities hdesk = new HelpDeskEntities();
+            HermesDBEntities hdesk = new HermesDBEntities();
             List<SelectListItem> dealers = new List<SelectListItem>();
             
             foreach (Dealer dealer in hdesk.Dealers)

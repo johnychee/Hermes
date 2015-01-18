@@ -1,7 +1,7 @@
 ﻿@using TestWebApp.Models;
 @model List<Group>
 @{
-    HelpDeskEntities hDesk = new HelpDeskEntities();
+    HermesDBEntities hDesk = new HermesDBEntities();
     User current_user = hDesk.Users.SingleOrDefault(u=>u.id == WebSecurity.CurrentUserId);
     ViewBag.Title = "Pobočky";
 

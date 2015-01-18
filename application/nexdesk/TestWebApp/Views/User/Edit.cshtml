@@ -2,7 +2,7 @@
 @using TestWebApp.Views.User.UserViewModel
 @model EditViewModel
 @{
-    HelpDeskEntities hDesk = new HelpDeskEntities();
+    HermesDBEntities hDesk = new HermesDBEntities();
     //find user we r editing from Viewbag
     int userId = Convert.ToInt32(ViewBag.userId);
     User userEditing = hDesk.Users.SingleOrDefault(u => u.id == userId);

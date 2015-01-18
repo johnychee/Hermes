@@ -14,7 +14,7 @@ namespace TestWebApp.Controllers
         public ActionResult Index(string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             return View(hDesk.Groups.ToList());
         }
 
@@ -30,7 +30,7 @@ namespace TestWebApp.Controllers
         public ActionResult Create(Group model, string msg = null) //DO group model!!!!!
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
 
             try
             {
@@ -56,7 +56,7 @@ namespace TestWebApp.Controllers
         public ActionResult Details(int id, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Group group = hDesk.Groups.SingleOrDefault(g => g.id == id);
             if(group == null)
             {
@@ -69,7 +69,7 @@ namespace TestWebApp.Controllers
         public ActionResult Details(int id, FormCollection fc, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             var group = hDesk.Groups.Single(g => g.id == id);
 
             try
@@ -106,7 +106,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult Remove(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Group group = hDesk.Groups.Single(g => g.id == id);
             List<User> users = group.Users.ToList();
             foreach (User user in users)
@@ -130,7 +130,7 @@ namespace TestWebApp.Controllers
         }
         public JsonResult getFiltered(int level = 0)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             var groups = hDesk.Groups
                 .Where(g => level == 0 || g.level == level)
                 .OrderBy(g => g.name)
@@ -140,7 +140,7 @@ namespace TestWebApp.Controllers
 
         public ActionResult List_My_Groups()
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
             return View("Index",current_user.Groups.ToList());
         }

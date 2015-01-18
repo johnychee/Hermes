@@ -14,7 +14,7 @@ namespace TestWebApp.Controllers
         public ActionResult Index(int? page, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             ViewBag.Dealers = hDesk.Dealers.OrderBy(d => d.name).ToPagedList(page ?? 1, 10);
             return View();
         }
@@ -31,7 +31,7 @@ namespace TestWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                HelpDeskEntities hDesk = new HelpDeskEntities();
+                HermesDBEntities hDesk = new HermesDBEntities();
                 foreach (string key in fc)
                 {
                     if (key.StartsWith("customer_"))
@@ -54,7 +54,7 @@ namespace TestWebApp.Controllers
 
         public ActionResult Details(int id,string msg = null)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             ViewBag.Message = msg;
             Dealer deal = hDesk.Dealers.SingleOrDefault(d => d.id == id);
             return View(deal);
@@ -63,7 +63,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles="SuperUser")]
         public ActionResult Edit(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Dealer deal = hDesk.Dealers.SingleOrDefault(d => d.id == id);
             return View(deal);
         }
@@ -71,7 +71,7 @@ namespace TestWebApp.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Dealer model, FormCollection fc)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Dealer dealer = hDesk.Dealers.SingleOrDefault(d => d.id == id);
             if (dealer != null)
             {
@@ -98,7 +98,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles="SuperUser")]
         public ActionResult Delete(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Dealer deal = hDesk.Dealers.SingleOrDefault(d => d.id == id);
 
             if (deal != null)

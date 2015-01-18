@@ -3,7 +3,7 @@
 @model Group
 @{
     ViewBag.Title = "Support Group Details";
-    HelpDeskEntities hDesk = new HelpDeskEntities();
+    HermesDBEntities hDesk = new HermesDBEntities();
     User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
 }
 <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />

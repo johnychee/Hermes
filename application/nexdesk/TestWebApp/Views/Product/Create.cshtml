@@ -7,7 +7,7 @@
     ViewBag.Parents.AddLast(new KeyValuePair<string, string>("List", "/Product"));
     ViewBag.Parents.AddLast(new KeyValuePair<string, string>("New", null));
     
-    HelpDeskEntities hDesk = new HelpDeskEntities();
+    HermesDBEntities hDesk = new HermesDBEntities();
     List<SelectListItem> categories = new List<SelectListItem>();
     foreach(ProductCategory category in hDesk.ProductCategories)
     {

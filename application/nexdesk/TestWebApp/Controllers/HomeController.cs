@@ -18,7 +18,7 @@ namespace TestWebApp.Controllers
             // show each user his own index
             if (User.Identity.IsAuthenticated)
             {
-                HelpDeskEntities hDesk = new HelpDeskEntities();
+                HermesDBEntities hDesk = new HermesDBEntities();
                 var current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
                 if (current_user.webpages_Roles.FirstOrDefault(r => r.RoleName == "SuperUser") != null)
                 {

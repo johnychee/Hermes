@@ -13,10 +13,10 @@ namespace TestWebApp.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HelpDeskEntities : DbContext
+    public partial class HermesDBEntities : DbContext
     {
-        public HelpDeskEntities()
-            : base("name=HelpDeskEntities")
+        public HermesDBEntities()
+            : base("name=HermesDBEntities")
         {
         }
     

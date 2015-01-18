@@ -47,16 +47,16 @@ namespace TestWebApp.Models
             }
         }
 
-        public static IEnumerable<Notification> GetLastFiveNew(int userId ,HelpDeskEntities hDesk = null)
+        public static IEnumerable<Notification> GetLastFiveNew(int userId ,HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
 
             return hDesk.Notifications.Where(t => t.Readed == false && t.OwnerId == userId).OrderByDescending(t=>t.CreatedAt).Take(5).ToList();
         }
 
-        public static IEnumerable<Notification> GetNew(int userId, bool newFirst = true, HelpDeskEntities hDesk = null)
+        public static IEnumerable<Notification> GetNew(int userId, bool newFirst = true, HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
             
             if (newFirst)
                 return hDesk.Notifications.Where(t => t.Readed == false && t.OwnerId == userId).OrderByDescending(t => t.CreatedAt).ToList();
@@ -64,16 +64,16 @@ namespace TestWebApp.Models
                 return hDesk.Notifications.Where(t => t.Readed == false && t.OwnerId == userId).OrderBy(t => t.CreatedAt).ToList();
         }
 
-        public static IEnumerable<Notification> GetAllsortedByCreatedAt(int userId, HelpDeskEntities hDesk = null)
+        public static IEnumerable<Notification> GetAllsortedByCreatedAt(int userId, HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
 
             IEnumerable<Notification> newNotifications = hDesk.Notifications.Where(t => t.OwnerId == userId).ToList().OrderBy(t => t.CreatedAt).Reverse();
             return newNotifications;
         }
-        public static void setAllReaded(int userId, HelpDeskEntities hDesk = null)
+        public static void setAllReaded(int userId, HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
 
             foreach(Notification notif in hDesk.Notifications.Where(n => n.OwnerId == userId))
             {

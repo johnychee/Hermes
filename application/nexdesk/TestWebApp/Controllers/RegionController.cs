@@ -14,7 +14,7 @@ namespace TestWebApp.Controllers
         public ActionResult Index(int? page,string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             ViewBag.Regions = hDesk.Regions.OrderBy(r => r.name).ToPagedList(page ?? 1, 10);
             return View();
         }
@@ -31,7 +31,7 @@ namespace TestWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                HelpDeskEntities hDesk = new HelpDeskEntities();
+                HermesDBEntities hDesk = new HermesDBEntities();
 
                 TimeZoneInfo timeZone = TimeZoneInfo.GetSystemTimeZones().SingleOrDefault(t => t.Id == model.timeZoneId);
                 Region newRegion = model;
@@ -51,7 +51,7 @@ namespace TestWebApp.Controllers
         public ActionResult Details(int id, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Region region = hDesk.Regions.SingleOrDefault(r => r.id == id);
             return View(region);
         }
@@ -59,7 +59,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles="SuperUser")]
         public ActionResult Edit(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Region region = hDesk.Regions.SingleOrDefault(r => r.id == id);
             return View(region);
         }
@@ -68,7 +68,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult Edit(int id, Region model)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Region region = hDesk.Regions.SingleOrDefault(r => r.id == id);
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult Remove(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             Region region = hDesk.Regions.SingleOrDefault(r => r.id == id);
             hDesk.Regions.Remove(region);
             hDesk.SaveChanges();

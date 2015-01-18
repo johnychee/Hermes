@@ -47,9 +47,9 @@ namespace TestWebApp.Models
         }
 
 
-        public static List<SelectListItem> toSelectList(HelpDeskEntities hDesk = null, User user = null)
+        public static List<SelectListItem> toSelectList(HermesDBEntities hDesk = null, User user = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
             List<SelectListItem> regions = new List<SelectListItem>();
             foreach (Region region in hDesk.Regions)
             {
@@ -78,9 +78,9 @@ namespace TestWebApp.Models
             return tZones;//and finally return it :-)
         }
 
-        public static IEnumerable<Region> all(HelpDeskEntities hDesk = null)
+        public static IEnumerable<Region> all(HermesDBEntities hDesk = null)
         {
-            hDesk = hDesk ?? new HelpDeskEntities();
+            hDesk = hDesk ?? new HermesDBEntities();
             return hDesk.Regions;
         }
     }

@@ -31,7 +31,7 @@ namespace TestWebApp.Controllers
         public ActionResult Index(int? page,string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             ViewBag.Users = hDesk.Users.orderByName().ToPagedList(page ?? 1, 10);
             return View();
         }
@@ -57,7 +57,7 @@ namespace TestWebApp.Controllers
         public ActionResult Create(RegisterViewModel model,string Submit, HttpPostedFileBase attachedFile, FormCollection fc, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             BlobStorageService bss = new BlobStorageService();
             bool isOkToUpload = false;
 
@@ -221,7 +221,7 @@ namespace TestWebApp.Controllers
         public ActionResult Details(int id, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             User user = hDesk.Users.Single(u => u.id == id);
 
             return View(user);
@@ -230,7 +230,7 @@ namespace TestWebApp.Controllers
         public ActionResult Edit(int id, string msg = null)
         {
             ViewBag.Message = msg;
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
             //if the logged user is not a SuperUSer or hes/her id is not equal to id in the url,then return error
             if (current_user.id != id && current_user.webpages_Roles.First().RoleName != "SuperUser")
@@ -244,7 +244,7 @@ namespace TestWebApp.Controllers
         [HttpPost]
         public ActionResult Edit(int id, EditViewModel model,string Submit,FormCollection fc, HttpPostedFileBase attachedFile, string msg = null)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             User current_user = hDesk.Users.SingleOrDefault(u=>u.id == WebSecurity.CurrentUserId);
             User user = hDesk.Users.Single(u => u.id == id); //get the USer we need to edit
             ViewBag.Message = msg;
@@ -439,7 +439,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult Destroy(int id)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
 
             // inverse IsConfirmed
             webpages_Membership membership = hDesk.webpages_Membership.Single(m => m.UserId == id);
@@ -450,7 +450,7 @@ namespace TestWebApp.Controllers
         }
         public JsonResult Get(string term)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             List<string> users = 
                 hDesk.Users
                     .Where(u => (u.isSolutionist && (u.Solutionist.FirstName.Contains(term) || u.Solutionist.LastName.Contains(term))) || u.Retailer.name.Contains(term))
@@ -459,13 +459,13 @@ namespace TestWebApp.Controllers
         }
         public JsonResult Exists(string username)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             bool valid = hDesk.Users.SingleOrDefault(u => u.username == username) != null;
             return Json(valid, JsonRequestBehavior.AllowGet);
         }
         public JsonResult getFiltered(int? Region = null, bool? UserType = null) // retailer - true, solutionist - false
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             var users =
                 TestWebApp.Models.User.getNonsystemUser(hDesk)
                     .Where(u => (Region == null || u.regionId == Region) && (UserType == null || u.isSolutionist == UserType))
@@ -475,7 +475,7 @@ namespace TestWebApp.Controllers
         }
         public JsonResult getFilteredRetailers(int? region = null)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             var retailers = hDesk.Retailers
                 .Where(r => (region == null || r.User.regionId == region))
                 .OrderBy(r => r.name)
@@ -516,7 +516,7 @@ namespace TestWebApp.Controllers
                     }
                     users = csv.GetRecords<UserCSV>().ToList(); //read the csv and send it to our List of userCSV.
                     //now we need to add to db 
-                    HelpDeskEntities hDesk = new HelpDeskEntities();
+                    HermesDBEntities hDesk = new HermesDBEntities();
                     int line = 0;
                     foreach (UserCSV user in users)
                     { //##################### VALIDATING USERS IN CSV ###################
@@ -613,13 +613,13 @@ namespace TestWebApp.Controllers
         [Authorize(Roles = "SuperUser")]
         public ActionResult Export()
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             return View(hDesk.Users);
         }
         [Authorize(Roles = "SuperUser")]
         public void ExportToCSV()
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             StringWriter sWriter = new StringWriter();
             sWriter.WriteLine("UserId,UserName,FirstName,LastName,Mobile,Email,SupportLevel");
             Response.ClearContent();
@@ -660,7 +660,7 @@ namespace TestWebApp.Controllers
                 //create url with above token
                 var resetLink = "<a href='" + Url.Action("ResetPassword", "User", new { un = UserName, rt = token }, "http") + "'>Follow this link</a>";
                 //get user emailid
-                HelpDeskEntities hDesk = new HelpDeskEntities();
+                HermesDBEntities hDesk = new HermesDBEntities();
                 var email = (from i in hDesk.Users
                              where i.username == UserName
                              select i.email).FirstOrDefault();
@@ -684,7 +684,7 @@ namespace TestWebApp.Controllers
         [Authorize(Roles="SuperUser")]
         public ActionResult GeneratePassToken(string UserName)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();
+            HermesDBEntities hDesk = new HermesDBEntities();
             //check user existance
             var user = Membership.GetUser(UserName);
             User userEditing = hDesk.Users.SingleOrDefault(u => u.username == UserName);
@@ -731,7 +731,7 @@ namespace TestWebApp.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string un, string rt)
         {
-            HelpDeskEntities hDesk = new HelpDeskEntities();            //TODO: Check the un and rt matching and then perform following
+            HermesDBEntities hDesk = new HermesDBEntities();            //TODO: Check the un and rt matching and then perform following
             //get userid of received username
             var userid = (from i in hDesk.Users
                           where i.username == un
