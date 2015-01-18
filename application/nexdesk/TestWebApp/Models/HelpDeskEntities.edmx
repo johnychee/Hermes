@@ -167,6 +167,7 @@
           <Property Name="Adress" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="NameOfClient" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TravelDestinations">
           <Key>
@@ -950,6 +951,7 @@
           <Property Name="Adress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NameOfClient" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Group" Relationship="nexDeskDbModel.FK_TravelContracts_ToGroups" FromRole="TravelContract" ToRole="Group" />
           <NavigationProperty Name="TravelEvent" Relationship="nexDeskDbModel.FK_TravelContracts_ToTravelEvents" FromRole="TravelContract" ToRole="TravelEvent" />
         </EntityType>
@@ -1460,6 +1462,7 @@
           <EntitySetMapping Name="TravelContracts">
             <EntityTypeMapping TypeName="nexDeskDbModel.TravelContract">
               <MappingFragment StoreEntitySet="TravelContract">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="NameOfClient" ColumnName="NameOfClient" />
                 <ScalarProperty Name="Adress" ColumnName="Adress" />

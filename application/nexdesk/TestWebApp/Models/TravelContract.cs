@@ -20,6 +20,7 @@ namespace TestWebApp.Models
         public string Adress { get; set; }
         public string NameOfClient { get; set; }
         public int GroupId { get; set; }
+        public System.DateTime CreatedAt { get; set; }
     
         public virtual Group Group { get; set; }
         public virtual TravelEvent TravelEvent { get; set; }

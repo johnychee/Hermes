@@ -137,6 +137,18 @@
             }
         </ul>
     </li>
+    
+    <li class="has-sub @(ViewContext.Controller.GetType().Name == "ContactPersonController" ? "active" : "")">
+        <a href="javascript:;">
+            <i class="fa fa-newspaper-o"></i>
+            <b class="caret pull-right"></b>
+            <span>Monitoring</span>
+        </a>
+        <ul class="sub-menu">
+            <li>@Html.ActionLink("Vygenerované reporty", "Index", "ContactPerson")</li>
+            <li>@Html.ActionLink("Vytvořit nový report", "Create", "ContactPerson")</li>
+        </ul>
+    </li>
 
     <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
 </ul>

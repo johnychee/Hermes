@@ -191,6 +191,7 @@
     <Compile Include="Controllers\MyUrl.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\MonitoringController.cs" />
     <Compile Include="Controllers\TravelContractController.cs" />
     <Compile Include="Controllers\TravelRegionController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
@@ -2110,6 +2111,7 @@
     <Content Include="Views\Search\GlobalSearch.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\TravelContract\Create.cshtml" />
+    <Content Include="Views\Monitoring\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

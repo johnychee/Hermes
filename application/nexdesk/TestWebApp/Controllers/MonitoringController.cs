@@ -11,8 +11,16 @@ using WebMatrix.WebData;
 namespace TestWebApp.Controllers
 {
     [Authorize]
-    public class TravelContractController : Controller
+    public class MonitoringController : Controller
     {
+        [Authorize]
+        public ActionResult Index()
+        {
+            HelpDeskEntities hDesk = new HelpDeskEntities();
+            ViewBag.MonitoringReports = hDesk.TravelEvents;
+            return View();
+        }
+
         [Authorize]
         public ActionResult Create()
         {
@@ -35,7 +43,6 @@ namespace TestWebApp.Controllers
                 te.Quantity = model.Quantity;
                 te.TravelEvent = hDesk.TravelEvents.FirstOrDefault(td => td.Name == eventName);
                 te.Group = current_user.Groups.First();
-                te.CreatedAt = DateTime.Now;
                 hDesk.TravelContracts.Add(te);
                 hDesk.SaveChanges();
                 return RedirectToAction("Index", "TravelEvent", new { msg = "Rezervace vytvořena" }); 
