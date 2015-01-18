@@ -1,0 +1,37 @@
+﻿@using TestWebApp.Models;
+@model List<Group>
+@{
+    HermesDBEntities hDesk = new HermesDBEntities();
+    User current_user = hDesk.Users.SingleOrDefault(u=>u.id == WebSecurity.CurrentUserId);
+    ViewBag.Title = "Pobočky";
+
+    ViewBag.Parents = new LinkedList<KeyValuePair<string, string>>();
+    ViewBag.Parents.AddLast(new KeyValuePair<string, string>("List", null));
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">List</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Jméno pobočky</th>
+                    <th>Počet uživatelů</th>
+                </tr>
+            </thead>
+            @foreach (Group group in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(group.name, "Details", new { id = group.id })</td>
+                    <td>@group.Users.Count</td>
+                </tr>
+            }
+        </table>
+        @if(current_user.webpages_Roles.SingleOrDefault(r=>r.RoleName == "SuperUser")!=null)
+        {
+            @Html.ActionLink("New", "Create", null, new { @class = "btn btn-primary" })
+        }
+    </div>
+</div>

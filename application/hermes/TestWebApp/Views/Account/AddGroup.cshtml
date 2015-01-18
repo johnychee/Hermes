@@ -1,0 +1,44 @@
+﻿@using TestWebApp.Models
+@model IEnumerable<UsersViewModel>
+@{
+    ViewBag.Title = "AddGroup";
+    List<SelectListItem> sppLevels = new List<SelectListItem>()
+    {
+        new SelectListItem{Text="SupportLevel1",Value="1"},
+        new SelectListItem{Text="SupportLevel2",Value="2"},
+        new SelectListItem{Text="SupportLevel3",Value="3"},
+        new SelectListItem{Text="SupportLevel4",Value="4"}
+    };
+}
+<div class="row">
+    <div class="col-md-6">
+        <h2>Choose Support Level: </h2>
+        <br />
+        @using (@Html.BeginForm())
+        {
+            @Html.DropDownList("GroupLevel", sppLevels);
+            <br />
+            <br />
+    <button class="btn btn-success" name="AddGroup" value="ChooseSupportLvl">OK</button>
+        }
+        <br />
+        <h5 class="alert-danger">@ViewBag.Error1</h5>
+        <h5 class="alert-danger">@ViewBag.Error2</h5>
+        <h5 class="alert-success">@ViewBag.Success</h5>
+
+    </div>
+        <div class="col-md-6">
+            <h2>Choose supporters:</h2>
+            @using (@Html.BeginForm())
+            {
+                @Html.EditorForModel();
+                <label>-------------------------------------</label>
+            <h2>Group Name:</h2>
+                <br />
+                @Html.TextBox("GroupName", "", new { @class = "form-control" });
+                <br />
+                 <input type="submit" value="Create Group" name="AddGroup" class="btn btn-success"/>
+            }
+        </div>
+</div>
+

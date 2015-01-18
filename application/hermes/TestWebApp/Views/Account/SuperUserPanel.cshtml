@@ -1,0 +1,76 @@
+﻿@using TestWebApp.Models
+@model HermesDBEntities
+@{
+    ViewBag.Title = "SuperUserPanel";
+}
+@{
+    List<SelectListItem> users = new List<SelectListItem>();
+    foreach (User u in @Model.Users)
+    {
+        if (u.UserName.ToLower() == WebSecurity.CurrentUserName.ToLower())
+        {
+            continue;
+        }
+        SelectListItem sli = new SelectListItem();
+        sli.Text = u.UserName;
+        sli.Value = u.UserName;
+        users.Add(sli);
+    }
+    List<SelectListItem> roles = new List<SelectListItem>();
+    foreach (webpages_Roles role in @Model.webpages_Roles)
+    {
+        SelectListItem sl = new SelectListItem();
+        sl.Text = role.RoleName;
+        sl.Value = role.RoleName;
+        roles.Add(sl);
+    }
+
+}
+<h2>SuperUser Panel</h2>
+<ul>
+    <li>@Html.ActionLink("Make a new account", "Register", "Account")</li>
+    <li>@Html.ActionLink("Make a new group of supporters", "AddGroup", "Account")</li>
+    <li>@Html.ActionLink("Product manager", "Index", "Product")</li>
+    <li>@Html.ActionLink("Assign products for groups", "AssignProducts", "Product")</li>
+
+</ul>
+<br />
+<label>Find User:</label>
+<br/>
+@using(Html.BeginForm("FindUser","Account"))
+{ 
+    <label>User name: </label>
+    @Html.TextBox("UserName")
+    <br/>
+    <button class="btn btn-primary">Find</button>
+}
+<br/>
+@if (ViewData["UserName"] != null)
+{
+    string s = ViewData["UserName"].ToString();
+    User u = @Model.Users.Single(x => x.UserName == s);
+    //@Html.ActionLink(u.UserName, "UserDetails/" + u.UserName);
+    <label>@Html.ActionLink(u.UserName, "UserDetails/" + u.UserId)</label>
+}
+else
+{ 
+    <label>@ViewBag.Error</label>
+}
+
+
+<br />
+<br />
+@*<h4>Assign role for users: </h4>
+@using(@Html.BeginForm())
+{
+    <label>User:</label>
+    @Html.DropDownList("User", users, "Select User")
+    <br />
+    <label>Role:</label>
+    @Html.DropDownList("Role", roles, "Select Role")
+    <br/>
+    <button class="btn btn-primary">Assign</button> 
+    <br/>
+    <br/>
+    @ViewBag.Status
+}*@
