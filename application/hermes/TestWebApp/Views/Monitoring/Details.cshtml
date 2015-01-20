@@ -2,44 +2,94 @@
 @using System.Collections;
 @model Report
 @{
-    ViewBag.Title = "Region Details";
+    ViewBag.Title = "";
     HermesDBEntities hDesk = new HermesDBEntities();
     User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
     string ContractsCount = ViewBag.ReportContractsCount;
 }
 <div class="row">
-    <div class="panel panel-inverse">
-        <div class="panel-heading">
-            <h4 class="panel-title">Details</h4>
+    <div class="invoice">
+        <div class="invoice-company">
+            <span class="pull-right hidden-print">
+                <a href="javascript:;" class="btn btn-sm btn-success m-b-10"><i class="fa fa-download m-r-5"></i> Exportovat do PDF</a>
+                <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> Vytisknout</a>
+            </span>
+            @String.Format("RP-{0}", Model.Id)
         </div>
-        <div class="panel-body">
-            <div class="form-group">
-                <label for="name" class="col-md-2 control-label ui-sortable">Týka se pobočky:</label>
-                <div class="col-md-4 ui-sortable">
-                    @Html.TextBox("Name", Model.Group.name, new { @class = "form-control", @disabled = "true" })
-                </div>
+        <div class="invoice-header">
+            <div class="invoice-from">
+                <small>pobočka</small>
+                <address class="m-t-5 m-b-5">
+                    <strong>@Model.Group.name</strong><br>
+                    Adresa ulice<br>
+                    Město, PSČ<br>
+                    Phone: (+420) 456-789-320<br>
+                    Fax: (123) 456-7890
+                </address>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label ui-sortable">Celkový příjem pobočky:</label>
-                <div class="col-md-4 ui-sortable">
-                    @Html.TextBox("Amount", Model.AmountOfMoneyForPeriod, new { @class = "form-control", @disabled = "true" })
-                </div>
+            <div class="invoice-to">
+                <small>společnost</small>
+                <address class="m-t-5 m-b-5">
+                    <strong>Blue Travel</strong><br>
+                    Adresa ulice<br>
+                    Město, PSČ<br>
+                    Telefon: (+420) 456-789-560<br>
+                    Fax: (123) 456-7890
+                </address>
             </div>
+            <div class="invoice-date">
+                <small>Od / Do</small>
+                <div class="date m-t-5">@Model.PeriodFrom.ToShortDateString() - @Model.PeriodTo.ToShortDateString()</div>
+                <div class="invoice-detail">Celkově uzavřených kontraktů: @ContractsCount</div>
+            </div>
+        </div>
+        <div class="invoice-content">
+            <div class="table-responsive">
+                <table class="table table-invoice">
+                    <thead>
+                        <tr>
+                            <th>Jméno zájezdu</th>
+                            <th>Cena</th>
+                            <th>Počet lidí</th>
+                            <th>Celková cena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (TravelContract travelContract in Model.Group.TravelContracts.Where(tc => tc.CreatedAt >= Model.PeriodFrom && tc.CreatedAt <= Model.PeriodTo))
+                        {
+                            <tr>
+                                <td>
+                                    @travelContract.TravelEvent.Name<br>
+                                </td>
+                                <td>@travelContract.TravelEvent.Price</td>
+                                <td>@travelContract.Quantity</td>
+                                <td>@(travelContract.TravelEvent.Price * travelContract.Quantity)</td>
+                            </tr>
 
-            <div class="form-group">
-                <label class="col-md-2 control-label ui-sortable">Období:</label>
-                <div class="col-md-4 ui-sortable">
-                    @Html.TextBox("Period", String.Format("{0} - {1}", Model.PeriodFrom, Model.PeriodTo), new { @class = "form-control", @disabled = "true" })
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="invoice-price">
+                <div class="invoice-price-left">
+                    <div class="invoice-price-row">
+                        <div class="sub-price">
+                            <small>Příjmy</small>
+                            @Model.AmountOfMoneyForPeriod
+                        </div>
+                        <div class="sub-price">
+                            <i class="fa fa-minus"></i>
+                        </div>
+                        <div class="sub-price">
+                            <small>Pokuty (0%)</small>
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="invoice-price-right">
+                    <small>SUM</small> @Model.AmountOfMoneyForPeriod,- CZK
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-md-2 control-label ui-sortable">Uzavřených kontraktů:</label>
-                <div class="col-md-4 ui-sortable">
-                    @Html.TextBox("ContractsCount", ContractsCount, new { @class = "form-control", @disabled = "true" })
-                </div>
-            </div>
-
             <div class="form-group">
                 <div class="col-md-4 ui-sortable">
                     @Html.ActionLink("Zpět", "Index", null, new { @class = "btn btn-default" })
@@ -47,6 +97,11 @@
             </div>
         </div>
     </div>
+    <!-- end invoice -->
+</div>
+<br/>
+<br/>
+
     <div class="row">
         <div class="col-md-6 ui-sortable">
             <div class="panel panel-inverse">
@@ -139,4 +194,3 @@
           </div>
         </div>
     </div>
-</div>
