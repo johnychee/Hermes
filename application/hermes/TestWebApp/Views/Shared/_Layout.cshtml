@@ -90,21 +90,43 @@
                         }
                         <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
                             <i class="fa fa-bell-o"></i>
-                            @if (newNotifications.Any())
-                            {
-                                <span class="label">@newNotifications.Count()</span>
-                            }
-                            else
-                            {
-                                <span class="label">0</span>
-                            }
+                                <span class="label">3</span>
                         </a>
                      
                         <ul class="dropdown-menu media-list pull-right animated fadeInDown">
-                            <li class="dropdown-header">Nové notifikace (@newNotifications.Count())</li>
-                            <li class="dropdown-footer text-center">
-                                @Html.ActionLink("Zobrazit vše", "Index", "Notification")
+
+                            <li class="dropdown-header">Notifikace (3)</li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="pull-left media-object bg-red"><i class="fa fa-bug"></i></div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">Smlouva nebyla uhrazena</h6>
+                                        <div class="text-muted">Před 3 minutami</div>
+                                    </div>
+                                </a>
                             </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="pull-left media-object bg-green"><i class="fa fa-plus"></i></div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"> Nový zájezd v katalogu</h6>
+                                        <div class="text-muted">Před 1 hodinou</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="pull-left media-object bg-blue"><i class="fa fa-envelope"></i></div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"> Nová zpráva od Igora</h6>
+                                        <div class="text-muted">Před 2 hodinami</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-footer text-center">
+                                <a href="javascript:;">Všechny notifikace</a>
+                            </li>
+
                         </ul>
                         
                     </li>

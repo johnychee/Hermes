@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="wsOwner" class="col-md-3 control-label ui-sortable">Popis:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.Description, new {  @class = "form-control" })
+                            @Html.TextAreaFor(model => model.Description, new {  @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger" })
                         </div>
                     </div>

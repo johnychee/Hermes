@@ -1,0 +1,142 @@
+﻿@using TestWebApp.Models;
+@using System.Collections;
+@model Report
+@{
+    ViewBag.Title = "Region Details";
+    HermesDBEntities hDesk = new HermesDBEntities();
+    User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
+    string ContractsCount = ViewBag.ReportContractsCount;
+}
+<div class="row">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Details</h4>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="name" class="col-md-2 control-label ui-sortable">Týka se pobočky:</label>
+                <div class="col-md-4 ui-sortable">
+                    @Html.TextBox("Name", Model.Group.name, new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label ui-sortable">Celkový příjem pobočky:</label>
+                <div class="col-md-4 ui-sortable">
+                    @Html.TextBox("Amount", Model.AmountOfMoneyForPeriod, new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label ui-sortable">Období:</label>
+                <div class="col-md-4 ui-sortable">
+                    @Html.TextBox("Period", String.Format("{0} - {1}", Model.PeriodFrom, Model.PeriodTo), new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label ui-sortable">Uzavřených kontraktů:</label>
+                <div class="col-md-4 ui-sortable">
+                    @Html.TextBox("ContractsCount", ContractsCount, new { @class = "form-control", @disabled = "true" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4 ui-sortable">
+                    @Html.ActionLink("Zpět", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 ui-sortable">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    </div>
+                    <h4 class="panel-title">Graf příjmů pobočky</h4>
+                </div>
+                <div class="panel-body">
+                    <div style="padding: 0px; position: relative;" id="interactive-chart" class="height-sm">
+                        <canvas height="300" width="777" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 777px; height: 300px;" class="flot-base"></canvas>
+                        <div style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);" class="flot-text">
+                            <div style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;" class="flot-x-axis flot-x1-axis xAxis x1Axis">
+                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 97px; top: 283px; left: 22px; text-align: center;">0</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 97px; top: 283px; left: 136px; text-align: center;">2</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 97px; top: 283px; left: 250px; text-align: center;">4</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 97px; top: 283px; left: 364px; text-align: center;">6</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 97px; top: 283px; left: 477px; text-align: center;">8</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 97px; top: 283px; left: 588px; text-align: center;">10</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 97px; top: 283px; left: 702px; text-align: center;">12</div>
+                            </div>
+                            <div style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;" class="flot-y-axis flot-y1-axis yAxis y1Axis">
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 270px; left: 14px; text-align: right;">0</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 217px; left: 7px; text-align: right;">20</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 164px; left: 7px; text-align: right;">40</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 110px; left: 7px; text-align: right;">60</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 57px; left: 7px; text-align: right;">80</div>
+                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 4px; left: 1px; text-align: right;">100</div>
+                            </div>
+                        </div><canvas height="300" width="777" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 777px; height: 300px;" class="flot-overlay"></canvas>
+                        <div class="legend">
+                            <div style="position: absolute; width: 87px; height: 45px; top: 12px; right: 12px; background-color: rgb(255, 255, 255); opacity: 0.85;"> </div>
+                            <table style="position:absolute;top:12px;right:12px;;font-size:smaller;color:#545454">
+                                <tbody>
+                                    <tr>
+                                        <td class="legendColorBox">
+                                            <div style="border:1px solid #ddd;padding:1px">
+                                                <div style="width:4px;height:0;border:5px solid #727cb6;overflow:hidden"></div>
+                                            </div>
+                                        </td>
+                                        <td class="legendLabel">Příjmy pobočky</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="legendColorBox">
+                                            <div style="border:1px solid #ddd;padding:1px">
+                                                <div style="width:4px;height:0;border:5px solid #00acac;overflow:hidden"></div>
+                                            </div>
+                                        </td>
+                                        <td class="legendLabel">Unikátní zákazníci</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ui-sortable">
+        <div class="panel panel-inverse">
+
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Graf příjmů ve srovnání s ostatními pobačkami</h4>
+            </div>
+            <div class="panel-body">
+                <h4 class="text-center">Čtvrtletní výnosy ve dvou letech</h4>
+                <div style="position: relative;" id="morris-area-chart" class="height-sm">
+                    <svg style="overflow: hidden; position: relative; top: -0.599976px;" xmlns="http://www.w3.org/2000/svg" width="777" version="1.1" height="300"><desc>Created with RaphaÃ«l 2.1.2</desc><defs></defs><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="261" x="53.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">0</tspan></text><path stroke-width="0.5" d="M66,261H752" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="202" x="53.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">7,500</tspan></text><path stroke-width="0.5" d="M66,202H752" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="143" x="53.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">15,000</tspan></text><path stroke-width="0.5" d="M66,143H752" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="84.00000000000003" x="53.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4.000000000000028">22,500</tspan></text><path stroke-width="0.5" d="M66,84.00000000000003H752" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="25.00000000000003" x="53.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4.000000000000028">30,000</tspan></text><path stroke-width="0.5" d="M66,25.00000000000003H752" stroke="#aaaaaa" fill="none" style=""></path><text transform="matrix(1,0,0,1,0,7)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="273.5" x="625.3308693230722" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2012</tspan></text><text transform="matrix(1,0,0,1,0,7)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="273.5" x="321.0748822844413" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2011</tspan></text><path fill-opacity="1" d="M66,219.20440000000002C85.16361196901423,214.87773333333337,123.49083590704268,205.898010396376,142.6544478760569,201.89773333333335C161.82674294972406,197.89564372970935,200.17133309705838,192.67112181500872,219.34362817072554,187.19493333333332C238.31621183737533,181.7757884816754,276.2613791706749,159.933400575374,295.2339628373247,158.31640000000002C313.9894688876513,156.71790057537402,351.5004809883044,173.15687837569655,370.25598703863096,174.33293333333336C389.41959900764516,175.53457837569653,427.74682294567367,167.02694796526993,446.91043491468787,167.8272C466.082729988355,168.6278146319366,504.4273201356893,194.94187015706805,523.5996152093564,180.7364C542.5721988760063,166.67890349040138,580.5173662093058,61.63270252536814,599.4899498759556,54.77533333333335C618.4538504379525,47.92110252536814,656.3816515619462,115.83526057845594,675.3455521239431,125.89000000000001C694.5091640929573,136.0506272451226,732.8363880309857,133.2001,752,135.6368L752,261L66,261Z" stroke="none" fill="#3a4248" style="fill-opacity: 1;"></path><path stroke-width="3" d="M66,219.20440000000002C85.16361196901423,214.87773333333337,123.49083590704268,205.898010396376,142.6544478760569,201.89773333333335C161.82674294972406,197.89564372970935,200.17133309705838,192.67112181500872,219.34362817072554,187.19493333333332C238.31621183737533,181.7757884816754,276.2613791706749,159.933400575374,295.2339628373247,158.31640000000002C313.9894688876513,156.71790057537402,351.5004809883044,173.15687837569655,370.25598703863096,174.33293333333336C389.41959900764516,175.53457837569653,427.74682294567367,167.02694796526993,446.91043491468787,167.8272C466.082729988355,168.6278146319366,504.4273201356893,194.94187015706805,523.5996152093564,180.7364C542.5721988760063,166.67890349040138,580.5173662093058,61.63270252536814,599.4899498759556,54.77533333333335C618.4538504379525,47.92110252536814,656.3816515619462,115.83526057845594,675.3455521239431,125.89000000000001C694.5091640929573,136.0506272451226,732.8363880309857,133.2001,752,135.6368" stroke="#2d353c" fill="none" style=""></path><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="219.20440000000002" cx="66"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="201.89773333333335" cx="142.6544478760569"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="187.19493333333332" cx="219.34362817072554"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="158.31640000000002" cx="295.2339628373247"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="174.33293333333336" cx="370.25598703863096"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="167.8272" cx="446.91043491468787"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="180.7364" cx="523.5996152093564"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="54.77533333333335" cx="599.4899498759556"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="125.89000000000001" cx="675.3455521239431"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#2d353c" r="2" cy="135.6368" cx="752"></circle><path fill-opacity="1" d="M66,240.02746666666667C85.16361196901423,235.29566666666668,123.49083590704268,225.2440778784447,142.6544478760569,221.10026666666667C161.82674294972406,216.9545778784447,200.17133309705838,209.1350666666667,219.34362817072554,206.86946666666668C238.31621183737533,204.6274666666667,276.2613791706749,204.8925774069812,295.2339628373247,203.06986666666666C313.9894688876513,201.26801074031454,351.5004809883044,194.89937769635904,370.25598703863096,192.3712C389.41959900764516,189.78801102969237,427.74682294567367,182.51724094375237,446.91043491468787,182.6244C466.082729988355,182.73160761041905,504.4273201356893,204.17807818499128,523.5996152093564,193.22866666666667C542.5721988760063,182.3933115183246,580.5173662093058,101.90993682764937,599.4899498759556,95.48533333333336C618.4538504379525,89.06367016098271,656.3816515619462,135.09903065360967,675.3455521239431,141.8436C694.5091640929573,148.65919732027632,732.8363880309857,147.7554,752,149.726L752,261L66,261Z" stroke="none" fill="#e4b46e" style="fill-opacity: 1;"></path><path stroke-width="3" d="M66,240.02746666666667C85.16361196901423,235.29566666666668,123.49083590704268,225.2440778784447,142.6544478760569,221.10026666666667C161.82674294972406,216.9545778784447,200.17133309705838,209.1350666666667,219.34362817072554,206.86946666666668C238.31621183737533,204.6274666666667,276.2613791706749,204.8925774069812,295.2339628373247,203.06986666666666C313.9894688876513,201.26801074031454,351.5004809883044,194.89937769635904,370.25598703863096,192.3712C389.41959900764516,189.78801102969237,427.74682294567367,182.51724094375237,446.91043491468787,182.6244C466.082729988355,182.73160761041905,504.4273201356893,204.17807818499128,523.5996152093564,193.22866666666667C542.5721988760063,182.3933115183246,580.5173662093058,101.90993682764937,599.4899498759556,95.48533333333336C618.4538504379525,89.06367016098271,656.3816515619462,135.09903065360967,675.3455521239431,141.8436C694.5091640929573,148.65919732027632,732.8363880309857,147.7554,752,149.726" stroke="#f59c1a" fill="none" style=""></path><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="240.02746666666667" cx="66"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="221.10026666666667" cx="142.6544478760569"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="206.86946666666668" cx="219.34362817072554"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="203.06986666666666" cx="295.2339628373247"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="192.3712" cx="370.25598703863096"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="182.6244" cx="446.91043491468787"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="193.22866666666667" cx="523.5996152093564"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="95.48533333333336" cx="599.4899498759556"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="141.8436" cx="675.3455521239431"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#f59c1a" r="2" cy="149.726" cx="752"></circle><path fill-opacity="1" d="M66,240.02746666666667C85.16361196901423,239.8072,123.49083590704268,241.35446642506605,142.6544478760569,239.1464C161.82674294972406,236.93733309173274,200.17133309705838,223.3365417102967,219.34362817072554,222.35893333333334C238.31621183737533,221.39150837696334,276.2613791706749,233.24337192174914,295.2339628373247,231.36626666666666C313.9894688876513,229.5106385884158,351.5004809883044,209.2791435768262,370.25598703863096,207.428C389.41959900764516,205.53657691015954,427.74682294567367,214.43960989052474,446.91043491468787,216.39600000000002C466.082729988355,218.3532765571914,504.4273201356893,232.37735986038396,523.5996152093564,223.08266666666668C542.5721988760063,213.8847931937173,580.5173662093058,148.19627048905167,599.4899498759556,142.42573333333334C618.4538504379525,136.65783715571834,656.3816515619462,170.4328223791088,675.3455521239431,176.92893333333336C694.5091640929573,183.49345571244214,732.8363880309857,190.23343333333335,752,194.66826666666668L752,261L66,261Z" stroke="none" fill="#f4b8b6" style="fill-opacity: 1;"></path><path stroke-width="3" d="M66,240.02746666666667C85.16361196901423,239.8072,123.49083590704268,241.35446642506605,142.6544478760569,239.1464C161.82674294972406,236.93733309173274,200.17133309705838,223.3365417102967,219.34362817072554,222.35893333333334C238.31621183737533,221.39150837696334,276.2613791706749,233.24337192174914,295.2339628373247,231.36626666666666C313.9894688876513,229.5106385884158,351.5004809883044,209.2791435768262,370.25598703863096,207.428C389.41959900764516,205.53657691015954,427.74682294567367,214.43960989052474,446.91043491468787,216.39600000000002C466.082729988355,218.3532765571914,504.4273201356893,232.37735986038396,523.5996152093564,223.08266666666668C542.5721988760063,213.8847931937173,580.5173662093058,148.19627048905167,599.4899498759556,142.42573333333334C618.4538504379525,136.65783715571834,656.3816515619462,170.4328223791088,675.3455521239431,176.92893333333336C694.5091640929573,183.49345571244214,732.8363880309857,190.23343333333335,752,194.66826666666668" stroke="#ff5b57" fill="none" style=""></path><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="240.02746666666667" cx="66"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="239.1464" cx="142.6544478760569"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="222.35893333333334" cx="219.34362817072554"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="231.36626666666666" cx="295.2339628373247"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="207.428" cx="370.25598703863096"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="216.39600000000002" cx="446.91043491468787"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="223.08266666666668" cx="523.5996152093564"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="142.42573333333334" cx="599.4899498759556"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="176.92893333333336" cx="675.3455521239431"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#ff5b57" r="2" cy="194.66826666666668" cx="752"></circle></svg><div style="display: none; left: 9px; top: 136px;" class="morris-hover morris-default-style">
+                        <div class="morris-hover-row-label">2010 Q1</div><div class="morris-hover-point" style="color: #ff5b57">
+                            iPhone:
+                            2,666
+                        </div><div class="morris-hover-point" style="color: #f59c1a">
+                            iPad:
+                            -
+                        </div><div class="morris-hover-point" style="color: #2d353c">
+                            iPod Touch:
+                            2,647
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

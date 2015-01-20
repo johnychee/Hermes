@@ -13,15 +13,17 @@
         <div class="table-responsive">
             <table class="table">
                 <tr>
+                    <th>Evidenční číslo reportu:</th>
                     <th>Jméno skupiny</th>
-                    <th>Vygenerován</th>
+                    <th>Vygenerován dne</th>
                     <th>Od</th>
                     <th>Do</th>
-                    <th>Obnos peněz</th>
+                    <th>Příjem pobočky</th>
                 </tr>
                 @foreach (Report report in ViewBag.Reports)
                 {
                     <tr>
+                        <td>@Html.ActionLink(@String.Format("RP-{0}",report.Id), "Details/" + @report.Id)</td>
                         <td>@report.Group.name</td>
                         <td>@report.GeneratedAt</td>
                         <td>@report.PeriodFrom</td>
