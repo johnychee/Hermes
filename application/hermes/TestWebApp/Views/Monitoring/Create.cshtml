@@ -3,8 +3,9 @@
 @model TestWebApp.Models.Report
 @{
     ViewBag.Title = "Vytvoř nový zájezd";
+    HermesDBEntities hDesk = new HermesDBEntities();
     List<SelectListItem> Groups = new List<SelectListItem>();
-    foreach (Group group in ViewBag.Groups)
+    foreach (Group group in hDesk.Groups)
     {
         Groups.Add(new SelectListItem()
         {
@@ -32,22 +33,22 @@
                     <div class="form-group">
                         <label for="Name" class="col-md-3 control-label ui-sortable">Od:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.PeriodFrom, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.PeriodFrom, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.PeriodFrom_, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PeriodFrom_, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Adress" class="col-md-3 control-label ui-sortable">Do:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.PeriodTo, new {  @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.PeriodTo, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.PeriodTo_, new {  @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PeriodTo_, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="Event" class="col-md-3 control-label ui-sortable">Vyberte Pobočku:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.DropDownList("groupName", Groups, new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.groupName, Groups, new { @class = "form-control" })
                         </div>
                     </div>
                     <button class="btn btn-primary">Vygenerovat</button>

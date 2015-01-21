@@ -24,37 +24,40 @@ namespace TestWebApp.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            HermesDBEntities hDesk = new HermesDBEntities();
-            ViewBag.Groups = hDesk.Groups;
             return View();
         }
         
         [HttpPost]
         [Authorize]
-        public ActionResult Create(Report model, string groupName)
+        public ActionResult Create(Report model)
         {
             HermesDBEntities hDesk = new HermesDBEntities();
             User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
-            Group group = hDesk.Groups.FirstOrDefault(g => g.name == groupName);
-
-            IEnumerable<TravelContract> contractsForPeriod = group.TravelContracts.Where(tc => tc.CreatedAt >= model.PeriodFrom && tc.CreatedAt <= model.PeriodTo);
-
-            Report report = new Report();
-            report.GeneratedAt = DateTime.Now;
-            report.Group = group;
-            report.PeriodFrom = model.PeriodFrom;
-            report.PeriodTo = model.PeriodTo;
-            report.AmountOfMoneyForPeriod = 522;
-
-            int amount = 0;
-            foreach (TravelContract travelContract in contractsForPeriod)
+            if (ModelState.IsValid)
             {
-                amount += travelContract.TravelEvent.Price*travelContract.Quantity;
+                Group group = hDesk.Groups.FirstOrDefault(g => g.name == model.groupName);
+
+                IEnumerable<TravelContract> contractsForPeriod = group.TravelContracts.Where(tc => tc.CreatedAt >= model.PeriodFrom && tc.CreatedAt <= model.PeriodTo);
+
+                Report report = new Report();
+                report.GeneratedAt = DateTime.Now;
+                report.Group = group;
+                report.PeriodFrom = model.PeriodFrom;
+                report.PeriodTo = model.PeriodTo;
+                report.AmountOfMoneyForPeriod = 522;
+
+                int amount = 0;
+                foreach (TravelContract travelContract in contractsForPeriod)
+                {
+                    amount += travelContract.TravelEvent.Price * travelContract.Quantity;
+                }
+                report.AmountOfMoneyForPeriod = amount;
+                hDesk.Reports.Add(report);
+                hDesk.SaveChanges();
+                return RedirectToAction("Index", new { msg = "Report úspěšně vygenerován" });
             }
-            report.AmountOfMoneyForPeriod = amount;
-            hDesk.Reports.Add(report);
-            hDesk.SaveChanges();
-            return RedirectToAction("Index", new { msg = "Report úspěšně vygenerován" });
+            ViewBag.IsNotValid = true;
+            return View(model);
         }
 
         public ActionResult Details(int id, string msg = null)

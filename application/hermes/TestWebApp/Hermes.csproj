@@ -265,6 +265,7 @@
     <Compile Include="Models\Report.cs">
       <DependentUpon>HermesDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Report_.cs" />
     <Compile Include="Models\Retailer.cs">
       <DependentUpon>HermesDBEntities.tt</DependentUpon>
     </Compile>
