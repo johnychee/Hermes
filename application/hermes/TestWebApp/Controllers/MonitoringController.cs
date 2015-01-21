@@ -42,6 +42,7 @@ namespace TestWebApp.Controllers
                 Report report = new Report();
                 report.GeneratedAt = DateTime.Now;
                 report.Group = group;
+                report.groupName = model.groupName;
                 report.PeriodFrom = model.PeriodFrom;
                 report.PeriodTo = model.PeriodTo;
                 report.AmountOfMoneyForPeriod = 522;

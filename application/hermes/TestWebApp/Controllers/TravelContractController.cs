@@ -31,6 +31,7 @@ namespace TestWebApp.Controllers
                 te.NameOfClient = model.NameOfClient;
                 te.Adress = model.Adress;
                 te.Quantity = model.Quantity;
+                te.eventName = model.eventName;
                 te.TravelEvent = hDesk.TravelEvents.FirstOrDefault(td => td.Name == model.eventName);
                 te.Group = current_user.Groups.First();
                 te.CreatedAt = DateTime.Now;
