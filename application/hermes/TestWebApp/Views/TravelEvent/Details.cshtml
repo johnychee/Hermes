@@ -43,8 +43,6 @@
                 <label class="col-md-1 control-label ui-sortable">Actions:</label>
                 <div class="col-md-4 ui-sortable">
 
-                    @Html.ActionLink("Uprav zájezd", "Edit", new { @id = Model.Id }, new { @class = "btn btn-primary" })<span></span>
-                    @Html.ActionLink("Smaž zájezd", "Delete", new { @id = Model.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Jste si jistý?');" })
                     @Html.ActionLink("Rezervuj", "Create", "TravelContract", null, new { @class = "btn btn-primary" })
                 </div>
             </div>
