@@ -2,59 +2,94 @@
 @using System.Collections;
 @model Group
 @{
-    ViewBag.Title = "Support Group Details";
+    ViewBag.Title = "";
     HermesDBEntities hDesk = new HermesDBEntities();
     User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
 }
-<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
-<link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-ui.min.js"></script>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-@*<script type="text/javascript">
-    // list controll
-    function addRemoveAction(selector, productName) {
-        $(selector).click(function () {
-            $('#tr-' + productName).remove();
-            return false;
-        });
-    }
-    $(function () {
-        $('#new-product tr').each(function (index) {
-            var productName = $(this).find('input[type=hidden]').val();
-            addRemoveAction('#tr-' + productName + ' div.btn', productName);
-        });
-        $('#btn-add').click(function () {
-            var productName = $('#txtProducts').val();
-            $('#txtProducts').val("");
-            $('#new-product').append('<tr id="tr-' + productName + '"><td>' + productName + '</td><td><div class="btn btn-danger">Remove</div><input type="hidden" name="product_' + productName + '" value="' + productName + '"></td></tr>');
-            addRemoveAction('#tr-' + productName + ' div.btn', productName);
-            return false;
-        });
-    });
-    //Autocomplete jquery.
-    $(function () {
-        $("#txtProducts").autocomplete({
-            source: '@Url.Action("Get", "Product")'
-        });
-    });
-</script>*@
+
+
+    <div class="invoice">
+        <div class="invoice-company">
+            Blue travel, inc.
+        </div>
+        <div class="invoice-header">
+            <div class="invoice-from">
+                <small>pobočka</small>
+                <address class="m-t-5 m-b-5">
+                    <strong>@Model.name</strong><br>
+                    Ulice<br>
+                    Město, PSČ<br>
+                    Telefon: (+420) 565-789-450<br>
+                    Fax: (123) 456-7890
+                </address>
+            </div>
+            <div class="invoice-to">
+                <small>to</small>
+                <address class="m-t-5 m-b-5">
+                    <strong>Blue travel</strong><br>
+                    Street Address<br>
+                    City, Zip Code<br>
+                    Phone: (123) 456-7890<br>
+                    Fax: (123) 456-7890
+                </address>
+            </div>
+            <div class="invoice-date">
+                <small>Zřízena</small>
+                <div class="date m-t-5">3. Března, 2012</div>
+                <div class="invoice-detail">
+                    číslo: 0000123DSS<br>
+                    Pobočka
+                </div>
+            </div>
+        </div>
+        <div class="invoice-content">
+            <div class="table-responsive">
+                <table class="table table-invoice">
+                    <thead>
+                        <tr>
+                            <th>Jméno uživatele</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (User u in Model.Users)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(u.fullName, "Details/" + u.id, "User", null, new { @target = "_blank" })<br>
+                                    <small>Zaměstnanec společnosti blue travel s.r.o.</small>
+                                </td>
+                                <td>@u.email</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="invoice-footer text-muted">
+            <p class="text-center m-b-5">
+                BLUE TRAVEL
+            </p>
+            <p class="text-center">
+                <span class="m-r-10"><i class="fa fa-globe"></i> bluetravel.net</span>
+                <span class="m-r-10"><i class="fa fa-phone"></i> T:256-456-421</span>
+                <span class="m-r-10"><i class="fa fa-envelope"></i> info@bluetravel.cz</span>
+            </p>
+        </div>
+    </div>
+    <!-- end invoice -->
+<!--
 <div class="panel panel-inverse">
     <div class="panel-heading">
         <h4 class="panel-title">Details</h4>
     </div>
     <div class="panel-body">
-    @using (@Html.BeginForm("Details", "Group", FormMethod.Post, new { @class = "form-horizontal" }))
-    {
+
         <div class="form-group">
             <label for="name" class="col-md-1 control-label ui-sortable">Name:</label>
             <div class="col-md-2 ui-sortable">
                 @Html.TextBox("Name", Model.name, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-1 control-label ui-sortable">Level:</label>
-            <div class="col-md-2 ui-sortable">
-                @Html.TextBox("Level", Model.level, new { type = "number", @class = "form-control", @disabled = "true" })
             </div>
         </div>
         <div class="form-group">
@@ -86,6 +121,6 @@
                 @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
-    }
-</div>
+    </div>
  </div>
+    -->

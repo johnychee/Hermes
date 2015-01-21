@@ -1,15 +1,15 @@
 ﻿@using System.Security.Cryptography
 @using TestWebApp.Models
-@model TestWebApp.Models.TravelContract
+@model TestWebApp.Models.Report
 @{
     ViewBag.Title = "Vytvoř nový zájezd";
-    List<SelectListItem> Events = new List<SelectListItem>();
-    foreach (TravelEvent eventItem in ViewBag.Events)
+    List<SelectListItem> Groups = new List<SelectListItem>();
+    foreach (Group group in ViewBag.Groups)
     {
-        Events.Add(new SelectListItem()
+        Groups.Add(new SelectListItem()
         {
-            Text = eventItem.Name,
-            Value = eventItem.Name
+            Text = group.name,
+            Value = group.name
         });
     }
 }
@@ -17,43 +17,35 @@
 
 <div class="panel panel-inverse">
     <div class="panel-heading">
-        <h4 class="panel-title">Nová rezervace</h4>
+        <h4 class="panel-title">Vygenerujte nový report</h4>
     </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
-                @using (@Html.BeginForm("Create", "TravelContract", FormMethod.Post, new { @class = "form-horizontal" }))
+                @using (@Html.BeginForm("Create", "Monitoring", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
                     <div class="form-group">
-                        <label for="Name" class="col-md-3 control-label ui-sortable">Klientovo jméno:</label>
+                        <label for="Name" class="col-md-3 control-label ui-sortable">Od:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.NameOfClient, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.NameOfClient, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.PeriodFrom, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PeriodFrom, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Adress" class="col-md-3 control-label ui-sortable">Adresa:</label>
+                        <label for="Adress" class="col-md-3 control-label ui-sortable">Do:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.Adress, new {  @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Adress, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.PeriodTo, new {  @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PeriodTo, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="Count" class="col-md-3 control-label ui-sortable">Počet lidí:</label>
+                        <label for="Event" class="col-md-3 control-label ui-sortable">Vyberte Pobočku:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.Quantity, new {  @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                            @Html.DropDownList("groupName", Groups, new { @class = "form-control" })
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="Event" class="col-md-3 control-label ui-sortable">Vyberte zájezd:</label>
-                        <div class="col-md-9 ui-sortable">
-                            @Html.DropDownList("eventName", Events, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <button class="btn btn-primary">Vytvoř rezervaci</button>
+                    <button class="btn btn-primary">Vygenerovat</button>
                 }
             </div>
         </div>
