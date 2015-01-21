@@ -288,6 +288,7 @@
     <Compile Include="Models\TravelContract.cs">
       <DependentUpon>HermesDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TravelContract_.cs" />
     <Compile Include="Models\TravelDestination.cs">
       <DependentUpon>HermesDBEntities.tt</DependentUpon>
     </Compile>

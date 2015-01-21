@@ -16,14 +16,12 @@ namespace TestWebApp.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            HermesDBEntities hDesk = new HermesDBEntities();
-            ViewBag.Events = hDesk.TravelEvents;
             return View();
         }
         
         [HttpPost]
         [Authorize]
-        public ActionResult Create(TravelContract model, string eventName)
+        public ActionResult Create(TravelContract model)
         {
             HermesDBEntities hDesk = new HermesDBEntities();
             User current_user = hDesk.Users.SingleOrDefault(u => u.id == WebSecurity.CurrentUserId);
@@ -33,7 +31,7 @@ namespace TestWebApp.Controllers
                 te.NameOfClient = model.NameOfClient;
                 te.Adress = model.Adress;
                 te.Quantity = model.Quantity;
-                te.TravelEvent = hDesk.TravelEvents.FirstOrDefault(td => td.Name == eventName);
+                te.TravelEvent = hDesk.TravelEvents.FirstOrDefault(td => td.Name == model.eventName);
                 te.Group = current_user.Groups.First();
                 te.CreatedAt = DateTime.Now;
                 hDesk.TravelContracts.Add(te);

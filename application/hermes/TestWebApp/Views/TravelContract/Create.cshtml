@@ -3,8 +3,9 @@
 @model TestWebApp.Models.TravelContract
 @{
     ViewBag.Title = "Vytvoř nový zájezd";
+    HermesDBEntities hDesk = new HermesDBEntities();
     List<SelectListItem> Events = new List<SelectListItem>();
-    foreach (TravelEvent eventItem in ViewBag.Events)
+    foreach (TravelEvent eventItem in hDesk.TravelEvents)
     {
         Events.Add(new SelectListItem()
         {
@@ -27,14 +28,14 @@
                     <div class="form-group">
                         <label for="Name" class="col-md-3 control-label ui-sortable">Klientovo jméno:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.NameOfClient, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.NameOfClient_, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.NameOfClient, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Adress" class="col-md-3 control-label ui-sortable">Adresa:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.Adress, new {  @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Adress_, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Adress, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -42,7 +43,7 @@
                     <div class="form-group">
                         <label for="Count" class="col-md-3 control-label ui-sortable">Počet lidí:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.Quantity, new {  @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Quantity_, new {  @class = "form-control", @type = "number" })
                             @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -50,7 +51,7 @@
                     <div class="form-group">
                         <label for="Event" class="col-md-3 control-label ui-sortable">Vyberte zájezd:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.DropDownList("eventName", Events, new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.eventName, Events, new { @class = "form-control" })
                         </div>
                     </div>
                     <button class="btn btn-primary">Vytvoř rezervaci</button>
