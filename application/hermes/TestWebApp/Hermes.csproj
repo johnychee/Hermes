@@ -878,6 +878,8 @@
     <Content Include="assets\plugins\DataTables-1.10.2\js\jquery.dataTables.js" />
     <Content Include="assets\plugins\DataTables-1.10.2\js\jquery.dataTables.min.js" />
     <Content Include="assets\plugins\DataTables-1.10.2\js\TableTools.js" />
+    <Content Include="assets\plugins\datetimepicker\jquery.datetimepicker.css" />
+    <Content Include="assets\plugins\datetimepicker\jquery.datetimepicker.js" />
     <Content Include="assets\plugins\easy-pie-chart-2.1.4\demo\angular.html" />
     <Content Include="assets\plugins\easy-pie-chart-2.1.4\demo\excanvas.compiled.js" />
     <Content Include="assets\plugins\easy-pie-chart-2.1.4\demo\img\easy-pie-chart.png" />
