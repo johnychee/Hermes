@@ -35,7 +35,7 @@ namespace TestWebApp.Controllers
                 te.Group = current_user.Groups.First();
                 te.CreatedAt = DateTime.Now;
                 hDesk.TravelContracts.Add(te);
-                hDesk.SaveChanges();
+                //hDesk.SaveChanges();
                 return RedirectToAction("Index", "TravelEvent", new { msg = "Rezervace vytvořena" }); 
             }
             else

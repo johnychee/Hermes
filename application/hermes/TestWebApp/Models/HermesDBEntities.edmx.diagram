@@ -5,23 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7902384ee27c46f493d85978840f1e78" Name="Diagram1">
-        <EntityTypeShape EntityType="HermesDBModel.Company" Width="1.5" PointX="6" PointY="29.125" />
-        <EntityTypeShape EntityType="HermesDBModel.Contact" Width="1.5" PointX="6" PointY="5.125" />
-        <EntityTypeShape EntityType="HermesDBModel.CustomPreSlaExpirationNotificationsTable" Width="1.5" PointX="7.5" PointY="17.875" />
-        <EntityTypeShape EntityType="HermesDBModel.Dealer" Width="1.5" PointX="6" PointY="21.125" />
+        <EntityTypeShape EntityType="HermesDBModel.Company" Width="1.5" PointX="3" PointY="17.125" />
+        <EntityTypeShape EntityType="HermesDBModel.Contact" Width="1.5" PointX="6" PointY="20.375" />
+        <EntityTypeShape EntityType="HermesDBModel.CustomPreSlaExpirationNotificationsTable" Width="1.5" PointX="7.5" PointY="8.875" />
+        <EntityTypeShape EntityType="HermesDBModel.Dealer" Width="1.5" PointX="6" PointY="6.125" />
         <EntityTypeShape EntityType="HermesDBModel.Group" Width="1.5" PointX="0.75" PointY="12.75" />
         <EntityTypeShape EntityType="HermesDBModel.HistoryAction" Width="1.5" PointX="8.75" PointY="4.75" />
-        <EntityTypeShape EntityType="HermesDBModel.Notification" Width="1.5" PointX="5.25" PointY="8.375" />
-        <EntityTypeShape EntityType="HermesDBModel.NotificationsType" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="HermesDBModel.Notification" Width="1.5" PointX="8.25" PointY="16.375" />
+        <EntityTypeShape EntityType="HermesDBModel.NotificationsType" Width="1.5" PointX="6" PointY="29.125" />
         <EntityTypeShape EntityType="HermesDBModel.ProductCategory" Width="1.5" PointX="8.75" PointY="1" />
         <EntityTypeShape EntityType="HermesDBModel.Product" Width="1.5" PointX="11" PointY="1" />
         <EntityTypeShape EntityType="HermesDBModel.Region" Width="1.5" PointX="0.75" PointY="9.375" />
         <EntityTypeShape EntityType="HermesDBModel.Report" Width="1.5" PointX="3" PointY="23" />
-        <EntityTypeShape EntityType="HermesDBModel.Retailer" Width="1.5" PointX="8.25" PointY="8.25" />
-        <EntityTypeShape EntityType="HermesDBModel.Setting" Width="1.5" PointX="5.25" PointY="17.875" />
-        <EntityTypeShape EntityType="HermesDBModel.Solutionist" Width="1.5" PointX="8.25" PointY="12.75" />
-        <EntityTypeShape EntityType="HermesDBModel.Status" Width="1.5" PointX="10.75" PointY="4.75" />
-        <EntityTypeShape EntityType="HermesDBModel.TicketType" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="HermesDBModel.Retailer" Width="1.5" PointX="8.25" PointY="12.25" />
+        <EntityTypeShape EntityType="HermesDBModel.Setting" Width="1.5" PointX="5.25" PointY="8.875" />
+        <EntityTypeShape EntityType="HermesDBModel.Solutionist" Width="1.5" PointX="5.25" PointY="16.75" />
+        <EntityTypeShape EntityType="HermesDBModel.Status" Width="1.5" PointX="9.75" PointY="7.75" />
+        <EntityTypeShape EntityType="HermesDBModel.TicketType" Width="1.5" PointX="10.75" PointY="4.75" />
         <EntityTypeShape EntityType="HermesDBModel.TravelContract" Width="1.5" PointX="6" PointY="12.5" />
         <EntityTypeShape EntityType="HermesDBModel.TravelDestination" Width="1.5" PointX="1.5" PointY="4.75" />
         <EntityTypeShape EntityType="HermesDBModel.TravelEvent" Width="1.5" PointX="3.75" PointY="4.625" />
@@ -30,7 +30,7 @@
         <EntityTypeShape EntityType="HermesDBModel.webpages_Membership" Width="1.5" PointX="5.25" PointY="24.625" />
         <EntityTypeShape EntityType="HermesDBModel.webpages_OAuthMembership" Width="1.5" PointX="10.75" PointY="10.75" />
         <EntityTypeShape EntityType="HermesDBModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="16.5" />
-        <EntityTypeShape EntityType="HermesDBModel.Workstation" Width="1.5" PointX="6" PointY="1.125" />
+        <EntityTypeShape EntityType="HermesDBModel.Workstation" Width="1.5" PointX="6" PointY="2.5" />
         <AssociationConnector Association="HermesDBModel.FK_Solutionists_ToCompanies" />
         <AssociationConnector Association="HermesDBModel.FK_Retailers_Contacts" />
         <AssociationConnector Association="HermesDBModel.FK_CustomPreSlaExpirationNotifications_to_UserSetting" />
