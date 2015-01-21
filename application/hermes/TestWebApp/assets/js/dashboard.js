@@ -120,14 +120,14 @@ var handleInteractiveChart = function () {
         $.plot($("#interactive-chart"), [
                 {
                     data: data1, 
-                    label: "Page Views", 
+                    label: "Příjmy pobočky", 
                     color: blue,
                     lines: { show: true, fill:false, lineWidth: 2 },
                     points: { show: true, radius: 3, fillColor: '#fff' },
                     shadowSize: 0
                 }, {
                     data: data2,
-                    label: 'Visitors',
+                    label: 'Unikátní zákazníci',
                     color: green,
                     lines: { show: true, fill:false, lineWidth: 2 },
                     points: { show: true, radius: 3, fillColor: '#fff' },
