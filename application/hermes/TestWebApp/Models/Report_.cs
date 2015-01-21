@@ -9,7 +9,7 @@ namespace TestWebApp.Models
     public partial class Report
     {
         [Required]
-        [Display(Name = "Period from")]
+        [Display(Name = "Vlastnost Od")]
         public DateTime PeriodFrom_
         {
             get { return PeriodFrom; }
@@ -18,7 +18,7 @@ namespace TestWebApp.Models
 
 
         [Required]
-        [Display(Name = "Period to")]
+        [Display(Name = "Vlastnost Do")]
         public DateTime PeriodTo_
         {
             get { return PeriodTo; }
@@ -26,7 +26,7 @@ namespace TestWebApp.Models
         }
 
         [Required]
-        [Display(Name = "Group name")]
+        [Display(Name = "Jméno skupiny")]
         public string groupName { get; set; }
     }
 }

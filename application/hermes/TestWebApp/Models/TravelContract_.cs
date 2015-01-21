@@ -9,7 +9,7 @@ namespace TestWebApp.Models
     public partial class TravelContract
     {
         [Required]
-        [Display(Name = "Name of Client")]
+        [Display(Name = "Jméno klienta")]
         public string NameOfClient_
         {
             get { return NameOfClient; }
@@ -17,7 +17,7 @@ namespace TestWebApp.Models
         }
 
         [Required]
-        [Display(Name = "Adress")]
+        [Display(Name = "Adresa")]
         public string Adress_
         {
             get { return Adress; }
@@ -25,7 +25,7 @@ namespace TestWebApp.Models
         }
 
         [Required]
-        [Display(Name = "Quantity")]
+        [Display(Name = "Počet lidí")]
         [Range(0, 1000)]
         public int Quantity_
         {
@@ -34,7 +34,7 @@ namespace TestWebApp.Models
         }
 
         [Required]
-        [Display(Name = "Event")]
+        [Display(Name = "Zájezd")]
         public string eventName { get; set; }
     }
 }

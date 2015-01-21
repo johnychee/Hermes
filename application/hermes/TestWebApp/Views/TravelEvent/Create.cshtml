@@ -27,15 +27,15 @@
                     <div class="form-group">
                         <label for="name" class="col-md-3 control-label ui-sortable">Jméno zájezdu:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.Name_, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name_, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="wsOwner" class="col-md-3 control-label ui-sortable">Popis:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextAreaFor(model => model.Description, new {  @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger" })
+                            @Html.TextAreaFor(model => model.Description_, new {  @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Description_, "", new {@class = "text-danger" })
                         </div>
                     </div>
 
@@ -49,16 +49,16 @@
                     <div class="form-group">
                         <label for="os" class="col-md-3 control-label ui-sortable">Cena jednotlivce:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.Price_, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Price_, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="os" class="col-md-3 control-label ui-sortable">Kapacita zájezdu:</label>
                         <div class="col-md-9 ui-sortable">
-                            @Html.TextBoxFor(model => model.Capacity, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.Capacity_, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Capacity_, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <button class="btn btn-primary">Vytvoř</button>

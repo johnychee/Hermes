@@ -52,11 +52,9 @@ namespace TestWebApp.Controllers
                 hDesk.SaveChanges();
                 return RedirectToAction("Index", new { msg = "Zájezd byl vytvořen" });
             }
-            else
-            {
-                ViewBag.IsNotValid = true;
-                return View(model);
-            }
+            ViewBag.Destinations = hDesk.TravelDestinations;
+            ViewBag.IsNotValid = true;
+            return View(model);
         }
 
         [Authorize]
