@@ -27,7 +27,6 @@ namespace TestWebApp.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "SuperUser")]
         public ActionResult Create(Contact model)
         {
             HermesDBEntities hDesk = new HermesDBEntities();
